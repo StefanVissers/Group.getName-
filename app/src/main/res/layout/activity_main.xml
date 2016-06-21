@@ -39,7 +39,6 @@
         android:layout_height="wrap_content"
         android:text="onClickButton"
         android:id="@+id/button3"
-        android:onClick="buttonOnClick"
         android:layout_marginTop="62dp"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true" />

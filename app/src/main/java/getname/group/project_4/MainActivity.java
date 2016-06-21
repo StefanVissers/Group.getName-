@@ -19,8 +19,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button toMainViewButton = (Button)findViewById(R.id.button4);
-        //toMainViewButton.setOnClickListener(new ToMainViewButtonListener(this));
+        Button toMainViewButton = (Button)findViewById(R.id.button3);
+        toMainViewButton.setOnClickListener(new ToMainViewButtonListener(this));
 
         Log.d(msg, " The onCreate() event");
     }

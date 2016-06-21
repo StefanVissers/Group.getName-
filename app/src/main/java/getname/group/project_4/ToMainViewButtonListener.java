@@ -7,7 +7,7 @@ import android.view.View;
 /**
  * Created by stefan on 21-Jun-16.
  */
-public class ToMainViewButtonListener implements View.OnClickListener {
+public class ToMainViewButtonListener extends MainActivity implements View.OnClickListener {
     private final Context mContext;
 
     ToMainViewButtonListener(Context mContext){
@@ -16,6 +16,11 @@ public class ToMainViewButtonListener implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        Log.d("Button : ", "ViaAnotherClass");
+        switch (v.getId()){
+            case R.id.button3:
+                Log.d("Button : ", "ViaAnotherClass");
+            break;
+        }
+
     }
 }
