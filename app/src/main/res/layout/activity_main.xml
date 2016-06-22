@@ -9,12 +9,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="getname.group.project_4.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:id="@+id/textView" />
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,8 +33,27 @@
         android:layout_height="wrap_content"
         android:text="onClickButton"
         android:id="@+id/button3"
-        android:layout_marginTop="62dp"
-        android:layout_below="@+id/textView"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="To Graph 1"
+        android:id="@+id/buttonToGraph1"
+        android:onClick="toGraphOne"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="To Graph 2"
+        android:id="@+id/buttonToGraphTwo"
+        android:onClick="toGraphTwo"
+        android:layout_below="@+id/buttonToGraph1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

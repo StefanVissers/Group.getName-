@@ -6,12 +6,10 @@
     android:layout_height="match_parent"
     tools:context="getname.group.project_4.SecondActivity">
 
-
     <Button
-        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="To Main Menu"
         android:id="@+id/toMainMenu"
-        android:onClick="toMainMenu" />
+        android:onClick="toMainMenu"/>
 </LinearLayout>
