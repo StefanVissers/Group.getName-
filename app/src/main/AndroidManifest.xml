@@ -17,7 +17,6 @@
         </activity>
         <activity android:name=".activities.SecondActivity"></activity>
         <activity android:name=".activities.ThirdActivity"></activity>
-        <activity android:name=".activities.ChartActivity"></activity>
         <activity android:name=".activities.ChartMenuActivity"></activity>
         <activity android:name=".activities.NoteActivity"></activity>
         <activity android:name=".activities.CalenderActivity"></activity>

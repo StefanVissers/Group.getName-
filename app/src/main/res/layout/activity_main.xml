@@ -11,6 +11,7 @@
     tools:context=".activities.MainActivity">
 
     <Button
+        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:text="To Chart Menu"
         android:id="@+id/chartmenubutton"

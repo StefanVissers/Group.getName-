@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.View;
 
 public abstract class ActivityExtender extends AppCompatActivity{
+
+
     public void changeActivity(View view) {
         Intent intent = new Intent();
         boolean gotDestinationIntent = false;
