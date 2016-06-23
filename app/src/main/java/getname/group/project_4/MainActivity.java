@@ -19,8 +19,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Button toMainViewButton = (Button)findViewById(R.id.button4);
-        //toMainViewButton.setOnClickListener(new ToMainViewButtonListener(this));
+        Button toMainViewButton = (Button)findViewById(R.id.toMainMenu);
+//        toMainViewButton.setOnClickListener(new ToMainViewButtonListener(this));
 
         Log.d(msg, " The onCreate() event");
     }
@@ -63,11 +63,16 @@ public class MainActivity extends AppCompatActivity {
         stopService(new Intent(getBaseContext(), MyService.class));
     }
 
-    public void buttonOnClick(View view){
+    public void toGraphOne(View view){
         setContentView(R.layout.secondary_activity);
         Log.d(msg, "To Secondary View");
     }
-    public void onButtonClick(View view){
+
+    public void toGraphTwo(View view){
+        setContentView(R.layout.third_activity);
+        Log.d(msg, "To Third View");
+    }
+    public void toMainMenu(View view){
         setContentView(R.layout.activity_main);
         Log.d(msg, "To Main View");
     }

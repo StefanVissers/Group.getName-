@@ -17,7 +17,7 @@ public class ToMainViewButtonListener extends MainActivity implements View.OnCli
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.button3:
+            case R.id.toMainMenu:
                 Log.d("Button : ", "ViaAnotherClass");
             break;
         }
