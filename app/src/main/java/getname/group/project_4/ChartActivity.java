@@ -1,10 +1,9 @@
 package getname.group.project_4;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-public class ChartActivity extends ActivityExtender{
+public class ChartActivity extends ActivityExtender {
     private Chart chart;
 
     @Override

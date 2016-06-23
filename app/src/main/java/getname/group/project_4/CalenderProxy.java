@@ -4,13 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
 
 import java.util.Calendar;
 
-/**
- * Created by jacob on 23-6-2016.
- */
+
 public class CalenderProxy extends AppCompatActivity {
     String msg = "Android : ";
 
