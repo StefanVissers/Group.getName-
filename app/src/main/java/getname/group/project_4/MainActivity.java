@@ -3,9 +3,10 @@ package getname.group.project_4;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends ActivityExtender {
 
 
     @Override
@@ -14,19 +15,50 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void toGraphOne(View view){
-        Intent intent = new Intent(this, SecondActivity.class);
-        startActivity(intent);
+    public void changeActivity(View view) {
+        Intent intent = new Intent();
+        boolean gotDestinationIntent = false;
+
+        String tag = view.getTag().toString();
+        int destination = Integer.parseInt(tag.split(",")[0]);
+
+        if (destination == 1) {
+            gotDestinationIntent = true;
+            intent = new Intent(this, SecondActivity.class);
+        } else if (destination == 2) {
+            gotDestinationIntent = true;
+            intent = new Intent(this, ThirdActivity.class);
+        } else if (destination == 3) {
+            gotDestinationIntent = true;
+            intent = new Intent(this, CalenderActivity.class);
+        }
+
+        if (!gotDestinationIntent) {
+            Log.d("[Main.changeActivity()]", "Didn't get destination intent");
+            intent = new Intent();
+            startActivity(intent);
+        } else {
+            Log.d("[Main.changeActivity()]", "Got destination intent");
+            startActivity(intent);
+        }
+
+
     }
 
-    public void toGraphTwo(View view){
-        Intent intent = new Intent(this, ThirdActivity.class);
-        startActivity(intent);
-    }
-    public void toCalender(View view){
-        Intent intent = new Intent(this, CalenderProxy.class);
-        startActivity(intent);
-    }
+
+//    public void toGraphOne(View view){
+//        Intent intent = new Intent(this, SecondActivity.class);
+//        startActivity(intent);
+//    }
+//
+//    public void toGraphTwo(View view){
+//        Intent intent = new Intent(this, ThirdActivity.class);
+//        startActivity(intent);
+//    }
+//    public void toCalender(View view){
+//        Intent intent = new Intent(this, CalenderProxy.class);
+//        startActivity(intent);
+//    }
 
 }
 

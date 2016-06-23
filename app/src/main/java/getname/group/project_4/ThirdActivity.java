@@ -10,7 +10,7 @@ import android.widget.RelativeLayout;
 /**
  * Created by stefan on 22-Jun-16.
  */
-public class ThirdActivity extends AppCompatActivity {
+public class ThirdActivity extends ActivityExtender {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

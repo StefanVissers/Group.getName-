@@ -12,7 +12,7 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
-public class SecondActivity extends AppCompatActivity {
+public class SecondActivity extends ActivityExtender {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
