@@ -1,4 +1,4 @@
-package getname.group.project_4;
+package getname.group.project_4.activities;
 
 
 import android.content.Intent;
@@ -16,7 +16,7 @@ public abstract class ActivityExtender extends AppCompatActivity{
          */
 
         String[] tag = view.getTag().toString().split(",");
-        Activities destination = Activities.valueOf(tag[0]);
+        Activities destination = Activities.valueOf(tag[0].toUpperCase());
 
         switch (destination) {
             case MAIN:
@@ -25,7 +25,7 @@ public abstract class ActivityExtender extends AppCompatActivity{
                 break;
             case CHARTMENU:
                 gotDestinationIntent = true;
-                intent = new Intent(this, ChartActivity.class);
+                intent = new Intent(this, ChartMenuActivity.class);
                 break;
             case CHART1:
                 gotDestinationIntent = true;

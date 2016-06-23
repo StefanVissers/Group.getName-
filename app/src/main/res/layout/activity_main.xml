@@ -7,14 +7,14 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="getname.group.project_4.MainActivity">
+    tools:context=".activities.MainActivity">
 
     <Button
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="To Graph Menu"
-        android:id="@+id/graphmenubutton"
-        android:tag="4"
+        android:text="To Chart Menu"
+        android:id="@+id/chartmenubutton"
+        android:tag="@string/activities_chartmenu"
         android:onClick="changeActivity"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"

@@ -1,13 +1,16 @@
-package getname.group.project_4;
+package getname.group.project_4.activities;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.RelativeLayout;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
+
+import getname.group.project_4.R;
 
 public class SecondActivity extends ActivityExtender {
 
@@ -17,9 +20,12 @@ public class SecondActivity extends ActivityExtender {
         Intent intent = getIntent();
 
         super.onCreate(savedInstanceState);
+
+        Log.e("[Second]", "Creating Second");
+
         setContentView(R.layout.secondary_activity);
 
-        GraphView graph = (GraphView) findViewById(R.id.graph);
+        GraphView graph = (GraphView) findViewById(R.id.chart);
         LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {
                 new DataPoint(0, 1),
                 new DataPoint(1, 1.5),

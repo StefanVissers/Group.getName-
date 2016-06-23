@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/second_activity"
-    tools:context="getname.group.project_4.SecondActivity">
+    tools:context=".activities.SecondActivity">
 
     <com.jjoe64.graphview.GraphView
         android:layout_width="match_parent"

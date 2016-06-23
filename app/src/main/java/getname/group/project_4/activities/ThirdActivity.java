@@ -1,8 +1,11 @@
-package getname.group.project_4;
+package getname.group.project_4.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.RelativeLayout;
+
+import getname.group.project_4.R;
 
 public class ThirdActivity extends ActivityExtender {
 
@@ -12,6 +15,9 @@ public class ThirdActivity extends ActivityExtender {
         Intent intent = getIntent();
 
         super.onCreate(savedInstanceState);
+
+        Log.e("[Thrid]", "Creating Third");
+
         setContentView(R.layout.third_activity);
 
         RelativeLayout layout = (RelativeLayout) findViewById(R.id.third_activity);

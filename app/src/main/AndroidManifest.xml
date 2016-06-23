@@ -8,16 +8,19 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SecondActivity"></activity>
-        <activity android:name=".ThirdActivity"></activity>
-        <activity android:name=".CalenderActivity"></activity>
+        <activity android:name=".activities.SecondActivity"></activity>
+        <activity android:name=".activities.ThirdActivity"></activity>
+        <activity android:name=".activities.ChartActivity"></activity>
+        <activity android:name=".activities.ChartMenuActivity"></activity>
+        <activity android:name=".activities.NoteActivity"></activity>
+        <activity android:name=".activities.CalenderActivity"></activity>
     </application>
 
     <uses-sdk android:minSdkVersion="14" />
