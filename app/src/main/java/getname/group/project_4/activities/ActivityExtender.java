@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
+import getname.group.project_4.MainActivity;
+
 public abstract class ActivityExtender extends AppCompatActivity{
 
 
