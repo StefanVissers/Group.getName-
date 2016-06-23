@@ -1,7 +1,6 @@
 package getname.group.project_4;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -31,7 +30,11 @@ public class MainActivity extends ActivityExtender {
         } else if (destination == 3) {
             gotDestinationIntent = true;
             intent = new Intent(this, CalenderActivity.class);
+        } else if (destination == 4){
+            gotDestinationIntent = true;
+            intent = new Intent(this, ChartMenuActivity.class);
         }
+
 
         if (!gotDestinationIntent) {
             Log.d("[Main.changeActivity()]", "Didn't get destination intent");
@@ -41,24 +44,6 @@ public class MainActivity extends ActivityExtender {
             Log.d("[Main.changeActivity()]", "Got destination intent");
             startActivity(intent);
         }
-
-
     }
-
-
-//    public void toGraphOne(View view){
-//        Intent intent = new Intent(this, SecondActivity.class);
-//        startActivity(intent);
-//    }
-//
-//    public void toGraphTwo(View view){
-//        Intent intent = new Intent(this, ThirdActivity.class);
-//        startActivity(intent);
-//    }
-//    public void toCalender(View view){
-//        Intent intent = new Intent(this, CalenderProxy.class);
-//        startActivity(intent);
-//    }
-
 }
 
