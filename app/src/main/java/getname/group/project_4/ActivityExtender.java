@@ -4,7 +4,6 @@ package getname.group.project_4;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.util.Xml;
 import android.view.View;
 
 public abstract class ActivityExtender extends AppCompatActivity{
