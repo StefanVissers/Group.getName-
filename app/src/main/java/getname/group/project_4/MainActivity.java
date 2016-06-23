@@ -23,6 +23,12 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ThirdActivity.class);
         startActivity(intent);
     }
+
+    public void toGraphThree(View view){
+        Intent intent = new Intent(this, BarChart.class);
+        startActivity(intent);
+    }
+
     public void toCalender(View view){
         Intent intent = new Intent(this, CalenderProxy.class);
         startActivity(intent);

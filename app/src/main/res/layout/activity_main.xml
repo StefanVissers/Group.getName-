@@ -7,6 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#3AA8C1"
     tools:context="getname.group.project_4.MainActivity">
 
     <Button
@@ -23,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="To Graph 2"
-        android:id="@+id/buttonToGraphTwo"
+        android:id="@+id/buttonToGraph2"
         android:onClick="toGraphTwo"
         android:layout_below="@+id/buttonToGraph1"
         android:layout_alignParentLeft="true"
@@ -35,7 +36,17 @@
         android:text="To Calender"
         android:id="@+id/calender"
         android:onClick="toCalender"
-        android:layout_below="@+id/buttonToGraphTwo"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="To Graph 3"
+        android:id="@+id/buttonToGraph3"
+        android:onClick="toGraphThree"
+        android:layout_below="@+id/buttonToGraph2"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 

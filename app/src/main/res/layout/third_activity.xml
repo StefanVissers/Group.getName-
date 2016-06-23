@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/third_activity"
+    android:background="#3AA8C1"
     tools:context="getname.group.project_4.SecondActivity">
 
 </RelativeLayout>
