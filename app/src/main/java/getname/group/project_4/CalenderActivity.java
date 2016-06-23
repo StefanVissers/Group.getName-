@@ -1,7 +1,7 @@
 package getname.group.project_4;
 
-public class CalanderActivity {
+public class CalenderActivity {
 
-    //sent
+    //send
     //onCreate
 }
