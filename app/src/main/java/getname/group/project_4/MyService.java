@@ -6,9 +6,6 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.widget.Toast;
 
-/**
- * Created by stefan on 20-Jun-16.
- */
 public class MyService extends Service{
 
     @Override
@@ -18,7 +15,7 @@ public class MyService extends Service{
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        // Let it continue runninig until it is stopped.
+        // Let it continue running until it is stopped.
         Toast.makeText(this, "Service Started", Toast.LENGTH_LONG).show();
         return START_STICKY;
     }
