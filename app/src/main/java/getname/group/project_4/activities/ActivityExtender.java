@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
+import getname.group.project_4.MainActivity;
 import getname.group.project_4.charts.BarChart;
 import getname.group.project_4.charts.GroupedBarChart;
 import getname.group.project_4.charts.LineChart;
