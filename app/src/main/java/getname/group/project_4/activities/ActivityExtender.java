@@ -2,18 +2,18 @@ package getname.group.project_4.activities;
 
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-
 import getname.group.project_4.MainActivity;
 import getname.group.project_4.charts.BarChart;
 import getname.group.project_4.charts.GroupedBarChart;
 import getname.group.project_4.charts.LineChart;
 import getname.group.project_4.charts.PieChart;
+import getname.group.project_4.R;
 
 public abstract class ActivityExtender extends AppCompatActivity{
-
 
     public void changeActivity(View view) {
         Intent intent = new Intent();
@@ -57,7 +57,11 @@ public abstract class ActivityExtender extends AppCompatActivity{
                 break;
             case CALENDER:
                 gotDestinationIntent = true;
-                intent = new Intent(this, CalenderActivity.class);
+                setContentView(R.layout.activity_calender);
+                intent = new Intent(Intent.ACTION_EDIT);
+                CalenderActivity calenderActivity = new CalenderActivity();
+                calenderActivity.send(intent);
+                startActivity(intent);
                 break;
             case NOTE:
                 gotDestinationIntent = true;
@@ -69,8 +73,6 @@ public abstract class ActivityExtender extends AppCompatActivity{
 
         if (!gotDestinationIntent) {
             Log.d("[Main.changeActivity()]", "Didn't get destination intent");
-            intent = new Intent();
-            startActivity(intent);
         } else {
             Log.d("[Main.changeActivity()]", "Got destination intent");
             startActivity(intent);
