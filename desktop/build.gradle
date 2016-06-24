@@ -12,6 +12,5 @@ buildscript {
 //apply from: "javafx.plugin"
 
 dependencies {
-    compile files('libs/mysql-connector-java-5.1.38.jar')
     compile files('libs/sqlite-jdbc-3.8.11.2.jar')
 }
