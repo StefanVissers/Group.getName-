@@ -1,4 +1,4 @@
-package getname.group.project_4;
+package getname.group.project_4.charts;
 
 
 import android.content.Intent;

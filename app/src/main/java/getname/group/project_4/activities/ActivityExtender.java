@@ -6,6 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
+import getname.group.project_4.charts.BarChart;
+import getname.group.project_4.charts.GroupedBarChart;
+import getname.group.project_4.charts.LineChart;
+import getname.group.project_4.charts.PieChart;
+
 public abstract class ActivityExtender extends AppCompatActivity{
 
 
@@ -29,25 +34,34 @@ public abstract class ActivityExtender extends AppCompatActivity{
                 gotDestinationIntent = true;
                 intent = new Intent(this, ChartMenuActivity.class);
                 break;
-            case CHART1:
+            case BARCHART:
                 gotDestinationIntent = true;
-                intent = new Intent(this, SecondActivity.class);
+                intent = new Intent(this, BarChart.class);
                 break;
-            case CHART2:
+            case GROUPEDBARCHART:
                 gotDestinationIntent = true;
-                intent = new Intent(this, ThirdActivity.class);
+                intent = new Intent(this, GroupedBarChart.class);
                 break;
-            case CHART3: break;
-            case CHART4: break;
-            case CHART5: break;
-            case CHART6: break;
-            case CHART7: break;
-            case CHART8: break;
+            case PIECHART1:
+                gotDestinationIntent = true;
+                intent = new Intent(this, PieChart.class);
+                break;
+            case PIECHART2:
+                gotDestinationIntent = true;
+                intent = new Intent(this, PieChart.class);
+                break;
+            case LINECHART:
+                gotDestinationIntent = true;
+                intent = new Intent(this, LineChart.class);
+                break;
             case CALENDER:
                 gotDestinationIntent = true;
                 intent = new Intent(this, CalenderActivity.class);
                 break;
-            case NOTE: break;
+            case NOTE:
+                gotDestinationIntent = true;
+                intent = new Intent(this, NoteActivity.class);
+                break;
             default: break;
         }
 

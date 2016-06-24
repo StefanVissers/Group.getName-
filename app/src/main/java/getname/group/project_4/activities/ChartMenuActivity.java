@@ -14,7 +14,7 @@ public class ChartMenuActivity extends ActivityExtender {
 
         Log.e("[chartmenu]", "Creating chartmenu");
 
-        setContentView(R.layout.fourth_activity);
+        setContentView(R.layout.activity_chartmenu);
 
         LinearLayout layout = (LinearLayout) findViewById(R.id.graphmenu);
     }

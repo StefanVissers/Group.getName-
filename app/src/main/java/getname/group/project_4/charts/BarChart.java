@@ -1,22 +1,22 @@
-package getname.group.project_4;
+package getname.group.project_4.charts;
 
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.widget.RelativeLayout;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
 
+import getname.group.project_4.R;
+
 public class BarChart extends Chart {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.barchart_activity);
+        setContentView(R.layout.activity_barchart);
 
         Intent intent = getIntent();
 

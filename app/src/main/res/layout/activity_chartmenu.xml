@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/graphmenu"
+    >
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="To BarChart"
+        android:id="@+id/buttonToBarchart"
+        android:tag="barchart"
+        android:onClick="changeActivity"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="To GroupedBarChart"
+        android:id="@+id/buttonToGroupedBarChart"
+        android:tag="groupedbarchart"
+        android:onClick="changeActivity"
+        android:layout_below="@+id/buttonToBarchart"
+        android:layout_centerHorizontal="true"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="To PieChart 1"
+        android:id="@+id/buttonToPieChartOne"
+        android:tag="piechart1"
+        android:onClick="changeActivity"
+        android:layout_below="@+id/buttonToGroupedBarChart"
+        android:layout_centerHorizontal="true"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="To PieChart 2"
+        android:id="@+id/buttonToPieChartTwo"
+        android:tag="piechart2"
+        android:onClick="changeActivity"
+        android:layout_below="@+id/buttonToPieChartOne"
+        android:layout_centerHorizontal="true"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="To LineChart"
+        android:id="@+id/buttonToLineChart"
+        android:tag="linechart"
+        android:onClick="changeActivity"
+        android:layout_below="@+id/buttonToPieChartTwo"
+        android:layout_centerHorizontal="true"
+        />
+</LinearLayout>

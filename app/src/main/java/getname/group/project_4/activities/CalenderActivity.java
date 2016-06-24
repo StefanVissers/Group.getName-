@@ -2,7 +2,6 @@ package getname.group.project_4.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.util.Log;
 
 import java.util.Calendar;
@@ -15,7 +14,7 @@ public class CalenderActivity extends ActivityExtender {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.calender_activity);
+        setContentView(R.layout.activity_calender);
         Log.e("[Calender]", "Creating Calender");
         Log.d(msg, " The onCreate() event");
 

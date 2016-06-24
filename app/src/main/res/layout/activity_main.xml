@@ -11,15 +11,38 @@
     tools:context=".activities.MainActivity">
 
     <Button
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
+        android:layout_height="250px"
+        android:layout_width="500px"
         android:text="To Chart Menu"
-        android:id="@+id/chartmenubutton"
+        android:id="@+id/buttonToChartMenu"
         android:tag="@string/activities_chartmenu"
         android:onClick="changeActivity"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_centerHorizontal="true"
         />
+
+    <Button
+        android:layout_height="250px"
+        android:layout_width="500px"
+        android:text="To Calender Menu"
+        android:id="@+id/buttonToCalenderMenu"
+        android:tag="calender"
+        android:onClick="changeActivity"
+        android:layout_below="@+id/buttonToChartMenu"
+        android:layout_centerHorizontal="true"
+        />
+
+
+    <Button
+        android:layout_height="250px"
+        android:layout_width="500px"
+        android:text="To Note Menu"
+        android:id="@+id/buttonToNoteMenu"
+        android:tag="note"
+        android:onClick="changeActivity"
+        android:layout_below="@+id/buttonToCalenderMenu"
+        android:layout_centerHorizontal="true"
+        />
+
 
 </RelativeLayout>

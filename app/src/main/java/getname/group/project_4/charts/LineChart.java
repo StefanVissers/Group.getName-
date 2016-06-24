@@ -1,8 +1,10 @@
-package getname.group.project_4.activities;
+package getname.group.project_4.charts;
+
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.RelativeLayout;
 
@@ -12,18 +14,16 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 
 import getname.group.project_4.R;
 
-public class SecondActivity extends ActivityExtender {
-
+public class LineChart extends Chart {
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         Intent intent = getIntent();
 
         super.onCreate(savedInstanceState);
 
-        Log.e("[Second]", "Creating Second");
+        Log.e("[LineChart]", "Creating LineChart");
 
-        setContentView(R.layout.secondary_activity);
+        setContentView(R.layout.activity_linechart);
 
         GraphView graph = (GraphView) findViewById(R.id.chart);
         LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {
@@ -36,9 +36,13 @@ public class SecondActivity extends ActivityExtender {
         series.setColor(Color.GREEN);
         graph.addSeries(series);
 
-        RelativeLayout layout = (RelativeLayout) findViewById(R.id.second_activity);
+        RelativeLayout layout = (RelativeLayout) findViewById(R.id.activity_linechart);
         layout.removeAllViews();
         layout.addView(graph);
     }
 
+    @Override
+    public void draw() {
+
+    }
 }

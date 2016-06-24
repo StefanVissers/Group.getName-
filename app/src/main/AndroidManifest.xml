@@ -15,11 +15,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.SecondActivity"></activity>
-        <activity android:name=".activities.ThirdActivity"></activity>
         <activity android:name=".activities.ChartMenuActivity"></activity>
         <activity android:name=".activities.NoteActivity"></activity>
         <activity android:name=".activities.CalenderActivity"></activity>
+
+        <activity android:name=".charts.BarChart"></activity>
+        <activity android:name=".charts.GroupedBarChart"></activity>
+        <activity android:name=".charts.LineChart"></activity>
+        <activity android:name=".charts.PieChart"></activity>
     </application>
 
     <uses-sdk android:minSdkVersion="14" />
