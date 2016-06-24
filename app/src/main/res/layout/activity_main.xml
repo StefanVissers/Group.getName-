@@ -11,15 +11,25 @@
     tools:context=".MainActivity">
 
     <Button
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
+        android:layout_height="250px"
+        android:layout_width="500px"
         android:text="To Chart Menu"
         android:id="@+id/chartmenubutton"
         android:tag="@string/activities_chartmenu"
         android:onClick="changeActivity"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_centerHorizontal="true"
+        />
+
+    <Button
+        android:layout_width="500px"
+        android:layout_height="250px"
+        android:text="Send to Calender"
+        android:id="@+id/calender"
+        android:tag="calender"
+        android:onClick="changeActivity"
+        android:layout_below="@+id/chartmenubutton"
+        android:layout_centerHorizontal="true"
         />
 
 </RelativeLayout>
