@@ -22,11 +22,12 @@ public class PieChartActivity extends ActivityExtender implements Chart {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.piechart_activity);
+        setContentView(R.layout.activity_piechart);
 
         Intent intent = getIntent();
 
         pieChart = (PieChart) findViewById(R.id.chart);
+
 // creating data values
         ArrayList<Entry> entries = new ArrayList<>();
         entries.add(new Entry(4f, 0));

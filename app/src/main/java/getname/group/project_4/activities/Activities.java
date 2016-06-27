@@ -11,4 +11,5 @@ public enum Activities {
     LINECHART,
     CALENDER,
     NOTE,
+    KILLME
 }
