@@ -2,7 +2,6 @@ package getname.group.project_4.activities;
 
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -10,7 +9,7 @@ import getname.group.project_4.MainActivity;
 import getname.group.project_4.charts.BarChart;
 import getname.group.project_4.charts.GroupedBarChart;
 import getname.group.project_4.charts.LineChart;
-import getname.group.project_4.charts.PieChart;
+import getname.group.project_4.charts.PieChart_Project;
 import getname.group.project_4.R;
 
 public abstract class ActivityExtender extends AppCompatActivity{
@@ -45,11 +44,11 @@ public abstract class ActivityExtender extends AppCompatActivity{
                 break;
             case PIECHART1:
                 gotDestinationIntent = true;
-                intent = new Intent(this, PieChart.class);
+                intent = new Intent(this, PieChart_Project.class);
                 break;
             case PIECHART2:
                 gotDestinationIntent = true;
-                intent = new Intent(this, PieChart.class);
+                intent = new Intent(this, PieChart_Project.class);
                 break;
             case LINECHART:
                 gotDestinationIntent = true;
