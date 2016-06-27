@@ -26,6 +26,9 @@ public class LineChart extends Chart {
         setContentView(R.layout.activity_linechart);
 
         GraphView graph = (GraphView) findViewById(R.id.chart);
+
+//      Making datapoints for in the graph with value: (X, Y)
+
         LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {
                 new DataPoint(0, 1),
                 new DataPoint(1, 1.5),
@@ -33,7 +36,7 @@ public class LineChart extends Chart {
                 new DataPoint(3, 2),
                 new DataPoint(4, 1.0)
         });
-        series.setColor(Color.GREEN);
+        series.setColor(Color.GREEN);   // set color
         graph.addSeries(series);
 
         RelativeLayout layout = (RelativeLayout) findViewById(R.id.activity_linechart);
