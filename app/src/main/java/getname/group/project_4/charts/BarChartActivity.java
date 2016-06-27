@@ -22,6 +22,9 @@ public class BarChartActivity extends ActivityExtender implements Chart {
         Intent intent = getIntent();
 
         GraphView graph = (GraphView) findViewById(R.id.barchart);
+
+//      Making datapoints for in the graph with value: (X, Y)
+
         BarGraphSeries<DataPoint> series = new BarGraphSeries<DataPoint>(new DataPoint[] {
                 new DataPoint(0, -1),
                 new DataPoint(1, 5),
