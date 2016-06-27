@@ -5,14 +5,25 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.RelativeLayout;
 
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
+
+import java.util.ArrayList;
 
 import getname.group.project_4.R;
 import getname.group.project_4.activities.ActivityExtender;
 
 public class BarChartActivity extends ActivityExtender implements Chart {
+    private BarChart barchart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,23 +32,31 @@ public class BarChartActivity extends ActivityExtender implements Chart {
 
         Intent intent = getIntent();
 
-        GraphView graph = (GraphView) findViewById(R.id.barchart);
+        barchart = (BarChart) findViewById(R.id.chart);
 
-//      Making datapoints for in the graph with value: (X, Y)
+        ArrayList<BarEntry> entries = new ArrayList<>();
 
-        BarGraphSeries<DataPoint> series = new BarGraphSeries<DataPoint>(new DataPoint[] {
-                new DataPoint(0, -1),
-                new DataPoint(1, 5),
-                new DataPoint(2, 3),
-                new DataPoint(3, 2),
-                new DataPoint(4, 6)
-        });
+        entries.add(new BarEntry(2f,0));
+        entries.add(new BarEntry(5f,1));
+        entries.add(new BarEntry(8f,2));
+        entries.add(new BarEntry(0f,3));
 
-        graph.addSeries(series);
+        BarDataSet dataSet = new BarDataSet(entries, "# of Calls");
 
-        RelativeLayout layout = (RelativeLayout) findViewById(R.id.barchart_activity);
-        layout.removeAllViews();
-        layout.addView(graph);
+
+        ArrayList<String> labels = new ArrayList<>();
+        labels.add("January");
+        labels.add("February");
+        labels.add("March");
+        labels.add("April");
+
+        BarData data = new BarData(labels, dataSet);
+
+        barchart.setData(data);
+
+        barchart.setDescription("Lorem ipsum");
+
+//        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
     }
 
     @Override

@@ -8,41 +8,52 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.RelativeLayout;
 
-import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.series.DataPoint;
-import com.jjoe64.graphview.series.LineGraphSeries;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
+
+import java.util.ArrayList;
 
 import getname.group.project_4.R;
 import getname.group.project_4.activities.ActivityExtender;
 
 public class LineChartActivity extends ActivityExtender implements Chart {
+    LineChart lineChart;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        Intent intent = getIntent();
-
         super.onCreate(savedInstanceState);
-
-        Log.e("[LineChartActivity]", "Creating LineChartActivity");
-
         setContentView(R.layout.activity_linechart);
 
-        GraphView graph = (GraphView) findViewById(R.id.chart);
+        Intent intent = getIntent();
 
-//      Making datapoints for in the graph with value: (X, Y)
+        lineChart = (LineChart) findViewById(R.id.chart);
 
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {
-                new DataPoint(0, 1),
-                new DataPoint(1, 1.5),
-                new DataPoint(2, 1.5),
-                new DataPoint(3, 2),
-                new DataPoint(4, 1.0)
-        });
-        series.setColor(Color.GREEN);   // set color
-        graph.addSeries(series);
+        ArrayList<Entry> entries = new ArrayList<>();
 
-        RelativeLayout layout = (RelativeLayout) findViewById(R.id.activity_linechart);
-        layout.removeAllViews();
-        layout.addView(graph);
+        entries.add(new Entry(2f,0));
+        entries.add(new Entry(5f,1));
+        entries.add(new Entry(8f,2));
+        entries.add(new Entry(0f,3));
+
+        LineDataSet dataSet = new LineDataSet(entries, "# of Calls");
+
+
+        ArrayList<String> labels = new ArrayList<>();
+        labels.add("January");
+        labels.add("February");
+        labels.add("March");
+        labels.add("April");
+
+        LineData data = new LineData(labels, dataSet);
+
+        lineChart.setData(data);
+
+        lineChart.setDescription("Lorem ipsum");
+
+//        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
     }
 
     @Override

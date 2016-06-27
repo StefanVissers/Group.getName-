@@ -7,14 +7,9 @@
     <!--android:background="#3AA8C1"-->
 
 
-    <com.jjoe64.graphview.GraphView
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/chart"
         android:layout_width="match_parent"
-        android:layout_height="200dip"
-        android:title="Graph Title"
-        android:id="@+id/barchart"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true" />
+        android:layout_height="match_parent" />
 
 </RelativeLayout>

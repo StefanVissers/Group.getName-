@@ -13,6 +13,6 @@ public class DatabaseReader extends Fragment {
     SQLiteDatabase mydatabase = getActivity().openOrCreateDatabase(":shared/libs/Data.db", android.content.Context.MODE_PRIVATE, null);
 
     public Array DatabaseReader(String query) {
-        return Array;
+        return null;
     }
 }

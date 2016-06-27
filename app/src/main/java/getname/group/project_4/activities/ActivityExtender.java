@@ -64,6 +64,11 @@ public abstract class ActivityExtender extends AppCompatActivity{
                 gotDestinationIntent = true;
                 intent = new Intent(this, NoteActivity.class);
                 break;
+            case KILLME:
+                gotDestinationIntent = true;
+                intent = new Intent(this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("EXIT", true);
             default: break;
         }
 

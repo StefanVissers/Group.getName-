@@ -35,10 +35,10 @@ public class CalenderActivity extends ActivityExtender {
         intent.putExtra("title", "");
     }
 
-    @Override
-    public void onBackPressed() {
-        View v = new View(getApplicationContext());
-        v.setTag("main");
-        changeActivity(v);
-    }
+//    @Override
+//    public void onBackPressed() {
+//        View v = new View(getApplicationContext());
+//        v.setTag("main");
+//        changeActivity(v);
+//    }
 }
