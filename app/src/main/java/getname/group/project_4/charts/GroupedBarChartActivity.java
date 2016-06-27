@@ -4,8 +4,10 @@ package getname.group.project_4.charts;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-public class GroupedBarChart extends Chart{
-    private BarChart[] charts;
+import getname.group.project_4.activities.ActivityExtender;
+
+public class GroupedBarChartActivity extends ActivityExtender implements Chart {
+    private BarChartActivity[] charts;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -13,7 +15,7 @@ public class GroupedBarChart extends Chart{
     }
 
     @Override
-    public void draw() {
+    public void addData(ChartData cd) {
 
     }
 }

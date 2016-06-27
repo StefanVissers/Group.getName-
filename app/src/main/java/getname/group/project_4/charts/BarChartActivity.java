@@ -10,8 +10,9 @@ import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
 
 import getname.group.project_4.R;
+import getname.group.project_4.activities.ActivityExtender;
 
-public class BarChart extends Chart {
+public class BarChartActivity extends ActivityExtender implements Chart {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +38,7 @@ public class BarChart extends Chart {
     }
 
     @Override
-    public void draw() {
+    public void addData(ChartData cd) {
 
     }
 }

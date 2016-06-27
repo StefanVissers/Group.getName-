@@ -13,15 +13,16 @@ import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
 import getname.group.project_4.R;
+import getname.group.project_4.activities.ActivityExtender;
 
-public class LineChart extends Chart {
+public class LineChartActivity extends ActivityExtender implements Chart {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         Intent intent = getIntent();
 
         super.onCreate(savedInstanceState);
 
-        Log.e("[LineChart]", "Creating LineChart");
+        Log.e("[LineChartActivity]", "Creating LineChartActivity");
 
         setContentView(R.layout.activity_linechart);
 
@@ -42,7 +43,7 @@ public class LineChart extends Chart {
     }
 
     @Override
-    public void draw() {
+    public void addData(ChartData cd) {
 
     }
 }

@@ -2,15 +2,14 @@ package getname.group.project_4.activities;
 
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import getname.group.project_4.MainActivity;
-import getname.group.project_4.charts.BarChart;
-import getname.group.project_4.charts.GroupedBarChart;
-import getname.group.project_4.charts.LineChart;
-import getname.group.project_4.charts.PieChart;
+import getname.group.project_4.charts.BarChartActivity;
+import getname.group.project_4.charts.GroupedBarChartActivity;
+import getname.group.project_4.charts.LineChartActivity;
+import getname.group.project_4.charts.PieChartActivity;
 import getname.group.project_4.R;
 
 public abstract class ActivityExtender extends AppCompatActivity{
@@ -37,31 +36,29 @@ public abstract class ActivityExtender extends AppCompatActivity{
                 break;
             case BARCHART:
                 gotDestinationIntent = true;
-                intent = new Intent(this, BarChart.class);
+                intent = new Intent(this, BarChartActivity.class);
                 break;
             case GROUPEDBARCHART:
                 gotDestinationIntent = true;
-                intent = new Intent(this, GroupedBarChart.class);
+                intent = new Intent(this, GroupedBarChartActivity.class);
                 break;
             case PIECHART1:
                 gotDestinationIntent = true;
-                intent = new Intent(this, PieChart.class);
+                intent = new Intent(this, PieChartActivity.class);
                 break;
             case PIECHART2:
                 gotDestinationIntent = true;
-                intent = new Intent(this, PieChart.class);
+                intent = new Intent(this, PieChartActivity.class);
                 break;
             case LINECHART:
                 gotDestinationIntent = true;
-                intent = new Intent(this, LineChart.class);
+                intent = new Intent(this, LineChartActivity.class);
                 break;
             case CALENDER:
                 gotDestinationIntent = true;
                 setContentView(R.layout.activity_calender);
-                intent = new Intent(Intent.ACTION_EDIT);
-                CalenderActivity calenderActivity = new CalenderActivity();
-                calenderActivity.send(intent);
-                startActivity(intent);
+                intent = new Intent(this, CalenderActivity.class);
+                intent.setAction(Intent.ACTION_EDIT);
                 break;
             case NOTE:
                 gotDestinationIntent = true;
@@ -74,7 +71,7 @@ public abstract class ActivityExtender extends AppCompatActivity{
         if (!gotDestinationIntent) {
             Log.d("[Main.changeActivity()]", "Didn't get destination intent");
         } else {
-            Log.d("[Main.changeActivity()]", "Got destination intent");
+            Log.d("[Main.changeActivity()]", "Got destination intent" + intent.toString());
             startActivity(intent);
         }
     }

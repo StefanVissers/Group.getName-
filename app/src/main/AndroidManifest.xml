@@ -19,10 +19,10 @@
         <activity android:name=".activities.NoteActivity"></activity>
         <activity android:name=".activities.CalenderActivity"></activity>
 
-        <activity android:name=".charts.BarChart"></activity>
-        <activity android:name=".charts.GroupedBarChart"></activity>
-        <activity android:name=".charts.LineChart"></activity>
-        <activity android:name=".charts.PieChart"></activity>
+        <activity android:name=".charts.BarChartActivity"></activity>
+        <activity android:name=".charts.GroupedBarChartActivity"></activity>
+        <activity android:name=".charts.LineChartActivity"></activity>
+        <activity android:name=".charts.PieChartActivity"></activity>
     </application>
 
     <uses-sdk android:minSdkVersion="14" />

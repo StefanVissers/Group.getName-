@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-public class PieChart extends Chart{
+import getname.group.project_4.activities.ActivityExtender;
+
+public class PieChartActivity extends ActivityExtender implements Chart {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -15,7 +17,7 @@ public class PieChart extends Chart{
     }
 
     @Override
-    public void draw() {
-
+    public void addData(ChartData cd) {
+        // TODO: Implement me
     }
 }
