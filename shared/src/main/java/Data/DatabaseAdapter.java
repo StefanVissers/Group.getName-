@@ -5,29 +5,29 @@ import java.sql.Array;
 /**
  * Created by floris-jan on 27-06-16.
  */
-public class DatabaseAdaper implements DatabaseConnector {
+public class DatabaseAdapter implements DatabaseConnector {
 
     DatabaseDirectConnector databaseDirectConnector;
 
-    public DatabaseAdaper(String operatorType) {
+    public DatabaseAdapter(String operatorType) {
         if(operatorType.equalsIgnoreCase("desktop")) {
             databaseDirectConnector = new DesktopDatabaseConnector();
         }
         else if (operatorType.equalsIgnoreCase("android")) {
             databaseDirectConnector = new AndroidDatabaseConnector();
-        }
-        else {
-            System.out.println("Invalid operatorType" + operatorType + ". It should be \"Android\" or \"Desktop\".");
         }
     }
 
     @Override
-    public Array executeQuery(String query, String operatorType) {
+    public Array executeQuery(String database, String query, String where, String operatorType) {
         if(operatorType.equalsIgnoreCase("desktop")) {
-            databaseDirectConnector = new DesktopDatabaseConnector();
+            return databaseDirectConnector.executyQueryDesktop(database, query, where);
         }
         else if (operatorType.equalsIgnoreCase("android")) {
-            databaseDirectConnector = new AndroidDatabaseConnector();
+            return databaseDirectConnector.executeQueryAndroid(database, query, where);
+        }
+        else {
+            return null;
         }
     }
 }

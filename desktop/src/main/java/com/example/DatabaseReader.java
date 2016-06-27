@@ -5,11 +5,8 @@ package com.example;
  */
 import java.sql.*;
 
-public class JDBCExample {
-    // JDBC driver name and database URL
-    static final String JDBC_DRIVER = "org.gjt.mm.mysql.Driver";
-    static final String DB_URL = "jdbc:sqlite:desktop/libs/Data.db";
-//    static final String DB_URL = "jdbc:mysql://localhost/fietsen";
+public class DatabaseReader {
+    static final String DB_URL = "jdbc:sqlite:shared/libs/Data.db";
 
     public static void main(String[] args) {
         Connection conn = null;
