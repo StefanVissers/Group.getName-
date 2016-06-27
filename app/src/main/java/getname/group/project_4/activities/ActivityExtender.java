@@ -62,7 +62,9 @@ public abstract class ActivityExtender extends AppCompatActivity{
                 break;
             case NOTE:
                 gotDestinationIntent = true;
+                setContentView(R.layout.activity_calender);
                 intent = new Intent(this, NoteActivity.class);
+                intent.setAction(Intent.ACTION_EDIT);
                 break;
             case KILLME:
                 gotDestinationIntent = true;
