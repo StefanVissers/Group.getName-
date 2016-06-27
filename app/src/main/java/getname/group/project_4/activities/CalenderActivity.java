@@ -26,14 +26,14 @@ public class CalenderActivity extends ActivityExtender {
         startActivity(sendIntent);
     }
 
-    public void send(Intent intent) {
-        Calendar cal = Calendar.getInstance();
-        intent.setType("vnd.android.cursor.item/event");
-        intent.putExtra("beginTime", cal.getTimeInMillis());
-        intent.putExtra("allDay", true);
-        intent.putExtra("endTime", cal.getTimeInMillis() + 60 * 60 * 1000);
-        intent.putExtra("title", "");
-    }
+//    public void send(Intent intent) {
+//        Calendar cal = Calendar.getInstance();
+//        intent.setType("vnd.android.cursor.item/event");
+//        intent.putExtra("beginTime", cal.getTimeInMillis());
+//        intent.putExtra("allDay", true);
+//        intent.putExtra("endTime", cal.getTimeInMillis() + 60 * 60 * 1000);
+//        intent.putExtra("title", "");
+//    }
 
     @Override
     public void onBackPressed() {
