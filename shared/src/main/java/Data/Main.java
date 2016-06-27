@@ -4,7 +4,7 @@ public class Main {
 
     public static void main(String[] args) {
         DatabaseReader databaseReader = new DatabaseReader();
-        databaseReader.executeQuery("Data.db", "SELECT count(diefstal.diefstal_voorvalnummer) FROM diefstal", "count(diefstal.diefstal_voorvalnummer)", "DESKTOP");
+        databaseReader.executeQuery("fietsdiefstal.db", "SELECT count('Voorval nummer') FROM diefstal", "count('Voorval nummer')", "DESKTOP");
     }
 
     public static String getString() {
