@@ -11,12 +11,22 @@ import java.util.Calendar;
 
 import getname.group.project_4.R;
 
-public class CalenderActivity extends ActivityExtender {
+public class CalendarActivity extends ActivityExtender {
+    private static int counter = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent sendIntent = new Intent(this.getIntent().getAction());
+
+        ID = counter;
+        logDebugMessage("CREATE", this);
+
+        setContentView(R.layout.activity_calendar);
+    }
+
+    public void showCalendarMenu(View view) {
+        Intent sendIntent = new Intent(getIntent().getAction());
+        setContentView(R.layout.activity_calendar);
         Calendar cal = Calendar.getInstance();
         sendIntent.setType("vnd.android.cursor.item/event");
         sendIntent.putExtra("beginTime", cal.getTimeInMillis());

@@ -15,7 +15,7 @@ public class NoteActivity extends ActivityExtender {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.e("[Note]", "Creating Note");
+        logDebugMessage("CREATE", this);
 
 //        case R.id.share:
 //            Intent sendIntent = new Intent();

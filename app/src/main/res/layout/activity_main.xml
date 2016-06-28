@@ -26,7 +26,7 @@
         android:layout_width="500px"
         android:text="To Calender Menu"
         android:id="@+id/buttonToCalenderMenu"
-        android:tag="calender"
+        android:tag="calendar"
         android:onClick="changeActivity"
         android:layout_below="@+id/buttonToChartMenu"
         android:layout_centerHorizontal="true"
