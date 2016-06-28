@@ -34,5 +34,6 @@ dependencies {
     compile 'com.github.PhilJay:MPAndroidChart:v2.2.5'
     compile project(':shared')
     compile 'com.google.android.gms:play-services-appindexing:8.1.0'
+    compile 'com.evernote:android-sdk:2.0.0-RC3'
 
 }
