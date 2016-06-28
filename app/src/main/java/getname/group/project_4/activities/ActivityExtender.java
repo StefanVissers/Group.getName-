@@ -72,10 +72,6 @@ public abstract class ActivityExtender extends AppCompatActivity {
                 intent.setAction(Intent.ACTION_EDIT);
                 break;
             case KILLAPP:
-//                gotDestinationIntent = true;
-//                intent = new Intent(this, MainActivity.class);
-//                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                intent.putExtra("EXIT", true);
                 gotDestinationIntent = true;
                 intent = getIntent();
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
