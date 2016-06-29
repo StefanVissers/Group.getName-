@@ -17,16 +17,24 @@
         </activity>
         <activity android:name=".activities.ChartMenuActivity"></activity>
         <activity android:name=".activities.NoteActivity"></activity>
+        <activity android:name=".activities.CalenderActivity"></activity>
         <activity android:name=".activities.CalendarActivity"></activity>
 
         <activity android:name=".charts.BarChartActivity"></activity>
         <activity android:name=".charts.GroupedBarChartActivity"></activity>
         <activity android:name=".charts.LineChartActivity"></activity>
         <activity android:name=".charts.PieChartActivity"></activity>
+        <activity android:name=".charts.GroupedBarChartActivity"></activity>
+        <activity android:name=".activities.MyLocation"></activity>
     </application>
 
     <uses-sdk android:minSdkVersion="14" />
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <meta-data
+        android:name="com.google.android.gms.version"
+        android:value="@integer/google_play_services_version" />
     <uses-permission android:name="android.permission.SEND_RESPOND_VIA_MESSAGE"/>
 </manifest>

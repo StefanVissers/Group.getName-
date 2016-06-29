@@ -80,6 +80,10 @@ public abstract class ActivityExtender extends AppCompatActivity {
                 intent = getIntent();
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("EXIT", true);
+            case LOCATION:
+                gotDestinationIntent = true;
+                intent = new Intent(this, MyLocation.class);
+                break;
             default: break;
         }
 

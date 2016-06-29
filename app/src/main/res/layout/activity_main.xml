@@ -44,5 +44,16 @@
         android:layout_centerHorizontal="true"
         />
 
+    <Button
+        android:layout_height="250px"
+        android:layout_width="500px"
+        android:text="To Location"
+        android:id="@+id/buttontoLocation"
+        android:tag="location"
+        android:onClick="changeActivity"
+        android:layout_alignParentTop="@+id/buttonToNoteMenu"
+        android:layout_centerHorizontal="true"
+        />
+
 
 </RelativeLayout>
