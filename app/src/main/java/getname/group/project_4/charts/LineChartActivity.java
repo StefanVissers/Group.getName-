@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 import getname.group.project_4.R;
 import getname.group.project_4.activities.ActivityExtender;
+import getname.group.project_4.debug.LogHelper;
 
 public class LineChartActivity extends ActivityExtender implements Chart {
     LineChart lineChart;
@@ -29,7 +30,7 @@ public class LineChartActivity extends ActivityExtender implements Chart {
 
         Intent intent = getIntent();
 
-        logDebugMessage("CREATE", this);
+        LogHelper.logDebugMessage("CREATE", this);
 
         lineChart = (LineChart) findViewById(R.id.chart);
 
@@ -60,6 +61,6 @@ public class LineChartActivity extends ActivityExtender implements Chart {
 
     @Override
     public void addData(ChartData cd) {
-        logDebugMessage("ADD_DATA", this);
+        LogHelper.logDebugMessage("ADD_DATA", this);
     }
 }

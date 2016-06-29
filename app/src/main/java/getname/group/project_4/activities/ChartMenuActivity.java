@@ -5,6 +5,7 @@ import android.util.Log;
 import android.widget.LinearLayout;
 
 import getname.group.project_4.R;
+import getname.group.project_4.debug.LogHelper;
 
 public class ChartMenuActivity extends ActivityExtender {
     private static int counter = 0;
@@ -17,7 +18,7 @@ public class ChartMenuActivity extends ActivityExtender {
 
         ID = counter;
 
-        logDebugMessage("CREATE", this);
+        LogHelper.logDebugMessage("CREATE", this);
 
         setContentView(R.layout.activity_chartmenu);
 

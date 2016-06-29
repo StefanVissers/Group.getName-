@@ -12,7 +12,6 @@ public enum Activities {
     LINECHART,
     CALENDAR,
     NOTE,
-    KILLME,
-    LOCATION
+    LOCATION,
     KILLAPP
 }

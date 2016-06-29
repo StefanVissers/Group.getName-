@@ -13,10 +13,10 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import getname.group.project_4.R;
 
-public class MyLocation extends Activity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener{
+public class MyLocation extends ActivityExtender implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener{
 
-    private TextView mLatitudeText;
-    private TextView mLongitudeText;
+    public TextView mLatitudeText;
+    public TextView mLongitudeText;
 
     LocationRequest mLocationRequest;
     GoogleApiClient mGoogleApiClient;

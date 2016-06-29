@@ -3,12 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.MyLocation">
+    tools:context=".activities.MyLocation"
+    >
+
 
     <Button
         android:layout_height="250px"
         android:layout_width="500px"
-        android:text="Get Location"
         android:id="@+id/loclong"
         android:tag="@string/activities_chartmenu"
         android:onClick="onClick"
@@ -23,5 +24,12 @@
         android:layout_centerHorizontal="true"
         />
 
-
+    <Button
+        android:layout_width="500px"
+        android:layout_height="250px"
+        android:id="@+id/address"
+        android:tag="address"
+        android:layout_alignParentTop="@+id/loclat"
+        android:layout_centerHorizontal="true"
+        />
 </LinearLayout>

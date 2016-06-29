@@ -10,6 +10,7 @@ import android.view.View;
 import java.util.Calendar;
 
 import getname.group.project_4.R;
+import getname.group.project_4.debug.LogHelper;
 
 public class CalendarActivity extends ActivityExtender {
     private static int counter = 0;
@@ -19,7 +20,7 @@ public class CalendarActivity extends ActivityExtender {
         super.onCreate(savedInstanceState);
 
         ID = counter;
-        logDebugMessage("CREATE", this);
+        LogHelper.logDebugMessage("CREATE", this);
 
         setContentView(R.layout.activity_calendar);
     }
