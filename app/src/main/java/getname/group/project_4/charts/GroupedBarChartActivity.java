@@ -7,58 +7,80 @@ import android.support.annotation.Nullable;
 import android.widget.RelativeLayout;
 
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import getname.group.project_4.R;
 import getname.group.project_4.activities.ActivityExtender;
 
 public class GroupedBarChartActivity extends ActivityExtender implements Chart {
-    private ArrayList<BarChart> charts;
-
+    private static int counter = 0;
+    private BarChart barchart;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_linechart);
+        setContentView(R.layout.activity_groupedbarchart);
+
+        ID = counter++;
+        logDebugMessage("CREATE", this);
 
         Intent intent = getIntent();
 
-        charts.add((BarChart) findViewById(R.id.chart));
+        barchart = ((BarChart) findViewById(R.id.chart));
 
-        ArrayList<Entry> entries = new ArrayList<>();
+        List<BarEntry> group1 = new ArrayList<>();
+        group1.add(new BarEntry(2f,0));
+        group1.add(new BarEntry(10f,1));
+        group1.add(new BarEntry(14f,2));
+        group1.add(new BarEntry(4f,3));
+        group1.add(new BarEntry(15f,4));
 
-        entries.add(new Entry(2f,0));
-        entries.add(new Entry(5f,1));
-        entries.add(new Entry(8f,2));
-        entries.add(new Entry(0f,3));
+        BarDataSet group1DataSet = new BarDataSet(group1, "group1");
+        group1DataSet.setColors(ColorTemplate.COLORFUL_COLORS);
 
-        LineDataSet dataSet = new LineDataSet(entries, "# of Calls");
+        List<BarEntry> group2 = new ArrayList<>();
+        group2.add(new BarEntry(21f,0));
+        group2.add(new BarEntry(4f,1));
+        group2.add(new BarEntry(7f,2));
+        group2.add(new BarEntry(18f,3));
+        group2.add(new BarEntry(2f,4));
 
+        BarDataSet group2DataSet = new BarDataSet(group2, "group 2");
+        group2DataSet.setColors(ColorTemplate.JOYFUL_COLORS);
 
-        ArrayList<String> labels = new ArrayList<>();
+        List<IBarDataSet> dataSets = new ArrayList<>();
+        dataSets.add(group1DataSet);
+        dataSets.add(group2DataSet);
+
+        List<String> labels = new ArrayList<>();
         labels.add("January");
         labels.add("February");
         labels.add("March");
         labels.add("April");
+        labels.add("May");
 
-        LineData data = new LineData(labels, dataSet);
-//
-//        lineChart.setData(data);
-//
-//        lineChart.setDescription("Lorem ipsum");
+        BarData data = new BarData(labels, dataSets);
 
-//        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        System.out.println("foo");
+
+        barchart.setData(data);
     }
 
     @Override
     public void addData(ChartData cd) {
-
+        logDebugMessage("ADD_DATA", this);
     }
 }

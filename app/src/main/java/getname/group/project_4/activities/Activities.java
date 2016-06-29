@@ -10,8 +10,9 @@ public enum Activities {
     PIECHART1,
     PIECHART2,
     LINECHART,
-    CALENDER,
+    CALENDAR,
     NOTE,
     KILLME,
     LOCATION
+    KILLAPP
 }

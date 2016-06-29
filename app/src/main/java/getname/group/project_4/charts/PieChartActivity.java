@@ -26,9 +26,11 @@ public class PieChartActivity extends ActivityExtender implements Chart {
 
         Intent intent = getIntent();
 
+        logDebugMessage("CREATE", this);
+
         pieChart = (PieChart) findViewById(R.id.chart);
 
-// creating data values
+        // creating data values
         ArrayList<Entry> entries = new ArrayList<>();
         entries.add(new Entry(4f, 0));
         entries.add(new Entry(8f, 1));
@@ -60,6 +62,6 @@ public class PieChartActivity extends ActivityExtender implements Chart {
 
     @Override
     public void addData(ChartData cd) {
-        // TODO: Implement me
+        logDebugMessage("ADD_DATA", this);
     }
 }

@@ -29,6 +29,8 @@ public class LineChartActivity extends ActivityExtender implements Chart {
 
         Intent intent = getIntent();
 
+        logDebugMessage("CREATE", this);
+
         lineChart = (LineChart) findViewById(R.id.chart);
 
         ArrayList<Entry> entries = new ArrayList<>();
@@ -58,6 +60,6 @@ public class LineChartActivity extends ActivityExtender implements Chart {
 
     @Override
     public void addData(ChartData cd) {
-
+        logDebugMessage("ADD_DATA", this);
     }
 }

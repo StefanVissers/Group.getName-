@@ -3,26 +3,20 @@ package getname.group.project_4.charts;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.RelativeLayout;
 
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
-import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.series.BarGraphSeries;
-import com.jjoe64.graphview.series.DataPoint;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import getname.group.project_4.R;
 import getname.group.project_4.activities.ActivityExtender;
 
 public class BarChartActivity extends ActivityExtender implements Chart {
+    private static int counter = 0;
     private BarChart barchart;
 
     @Override
@@ -30,11 +24,14 @@ public class BarChartActivity extends ActivityExtender implements Chart {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_barchart);
 
+        ID = counter++;
+        logDebugMessage("CREATE", this);
+
         Intent intent = getIntent();
 
         barchart = (BarChart) findViewById(R.id.chart);
 
-        ArrayList<BarEntry> entries = new ArrayList<>();
+        List<BarEntry> entries = new ArrayList<>();
 
         entries.add(new BarEntry(2f,0));
         entries.add(new BarEntry(5f,1));
@@ -44,7 +41,7 @@ public class BarChartActivity extends ActivityExtender implements Chart {
         BarDataSet dataSet = new BarDataSet(entries, "# of Calls");
 
 
-        ArrayList<String> labels = new ArrayList<>();
+        List<String> labels = new ArrayList<>();
         labels.add("January");
         labels.add("February");
         labels.add("March");
@@ -61,6 +58,6 @@ public class BarChartActivity extends ActivityExtender implements Chart {
 
     @Override
     public void addData(ChartData cd) {
-
+        logDebugMessage("ADD_DATA", this);
     }
 }
