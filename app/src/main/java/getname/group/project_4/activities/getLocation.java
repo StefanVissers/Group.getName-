@@ -10,7 +10,7 @@ import android.location.Geocoder;
 
 import getname.group.project_4.debug.LogHelper;
 
-public class getLocation extends MyLocation {
+public class GetLocation extends MyLocation {
 
     public void run(Context context) {
         Geocoder geocoder = new Geocoder(context, Locale.getDefault());

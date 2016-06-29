@@ -1,6 +1,6 @@
 package getname.group.project_4.activities;
 
-import android.app.Activity;
+import android.content.Context;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
@@ -12,7 +12,6 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import getname.group.project_4.R;
-import getname.group.project_4.debug.LogHelper;
 
 public class MyLocation extends ActivityExtender implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener{
 
@@ -76,6 +75,7 @@ public class MyLocation extends ActivityExtender implements GoogleApiClient.Conn
     protected void onStart() {
         mGoogleApiClient.connect();
         super.onStart();
+        new GetLocation().run(getApplicationContext());
     }
 
     @Override
