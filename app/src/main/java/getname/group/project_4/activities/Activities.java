@@ -1,6 +1,7 @@
 package getname.group.project_4.activities;
 
 
+
 public enum Activities {
     MAIN,
     CHARTMENU,
@@ -11,5 +12,6 @@ public enum Activities {
     LINECHART,
     CALENDER,
     NOTE,
-    KILLME
+    KILLME,
+    LOCATION
 }

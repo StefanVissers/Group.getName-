@@ -62,7 +62,6 @@ public abstract class ActivityExtender extends AppCompatActivity{
                 break;
             case NOTE:
                 gotDestinationIntent = true;
-                setContentView(R.layout.activity_calender);
                 intent = new Intent(this, NoteActivity.class);
                 intent.setAction(Intent.ACTION_EDIT);
                 break;
@@ -71,6 +70,10 @@ public abstract class ActivityExtender extends AppCompatActivity{
                 intent = new Intent(this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("EXIT", true);
+            case LOCATION:
+                gotDestinationIntent = true;
+                intent = new Intent(this, MyLocation.class);
+                break;
             default: break;
         }
 
