@@ -15,6 +15,10 @@ import getname.group.project_4.R;
 public abstract class ActivityExtender extends AppCompatActivity {
     protected int ID;
 
+    public int getID() {
+        return ID;
+    }
+
     /**
      * Finds new Activity according to tag attached to view and switches to it.
      * @param view
@@ -85,45 +89,6 @@ public abstract class ActivityExtender extends AppCompatActivity {
         } else {
             Log.d("[Main.changeActivity()]", "Got destination intent" + intent.toString());
             startActivity(intent);
-        }
-    }
-
-    /**
-     *  Builds and prints debug message.
-     *  Defaults logType to Log.ERROR for easy readability
-     * @param actionType
-     * @param activityExtender
-     */
-    protected void logDebugMessage(String actionType, ActivityExtender activityExtender) {
-        logDebugMessage(actionType, activityExtender, Log.ERROR);
-    }
-
-    /**
-     * Builds and prints Log message.
-     * @param actionType
-     * @param activityInstance
-     * @param logType
-     */
-    protected void logDebugMessage(String actionType, ActivityExtender activityInstance, int logType) {
-        switch (logType) {
-            case Log.DEBUG:
-                Log.d("["+actionType.toUpperCase()+"]", activityInstance.getClass().getSimpleName() + " " + ID);
-                break;
-            case Log.ERROR:
-                Log.e("["+actionType.toUpperCase()+"]", activityInstance.getClass().getSimpleName() + " " + ID);
-                break;
-            case Log.INFO:
-                Log.i("["+actionType.toUpperCase()+"]", activityInstance.getClass().getSimpleName() + " " + ID);
-                break;
-            case Log.VERBOSE:
-                Log.v("["+actionType.toUpperCase()+"]", activityInstance.getClass().getSimpleName() + " " + ID);
-                break;
-            case Log.WARN:
-                Log.w("["+actionType.toUpperCase()+"]", activityInstance.getClass().getSimpleName() + " " + ID);
-                break;
-            default:
-                Log.d("["+actionType.toUpperCase()+"]", activityInstance.getClass().getSimpleName() + " " + ID);
-                break;
         }
     }
 }
