@@ -12,6 +12,7 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import getname.group.project_4.R;
+import getname.group.project_4.debug.LogHelper;
 
 public class MyLocation extends Activity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener{
 
@@ -27,7 +28,6 @@ public class MyLocation extends Activity implements GoogleApiClient.ConnectionCa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
-
 
         mLatitudeText = (TextView) findViewById(R.id.loclat);
         mLongitudeText = (TextView)  findViewById(R.id.loclong);

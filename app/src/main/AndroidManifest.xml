@@ -17,14 +17,12 @@
         </activity>
         <activity android:name=".activities.ChartMenuActivity"></activity>
         <activity android:name=".activities.NoteActivity"></activity>
-        <activity android:name=".activities.CalenderActivity"></activity>
         <activity android:name=".activities.CalendarActivity"></activity>
 
         <activity android:name=".charts.BarChartActivity"></activity>
         <activity android:name=".charts.GroupedBarChartActivity"></activity>
         <activity android:name=".charts.LineChartActivity"></activity>
         <activity android:name=".charts.PieChartActivity"></activity>
-        <activity android:name=".charts.GroupedBarChartActivity"></activity>
         <activity android:name=".activities.MyLocation"></activity>
     </application>
 

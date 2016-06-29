@@ -24,6 +24,7 @@ import java.util.List;
 
 import getname.group.project_4.R;
 import getname.group.project_4.activities.ActivityExtender;
+import getname.group.project_4.debug.LogHelper;
 
 public class GroupedBarChartActivity extends ActivityExtender implements Chart {
     private static int counter = 0;
@@ -35,7 +36,7 @@ public class GroupedBarChartActivity extends ActivityExtender implements Chart {
         setContentView(R.layout.activity_groupedbarchart);
 
         ID = counter++;
-        logDebugMessage("CREATE", this);
+        LogHelper.logDebugMessage("CREATE", this);
 
         Intent intent = getIntent();
 
@@ -81,6 +82,6 @@ public class GroupedBarChartActivity extends ActivityExtender implements Chart {
 
     @Override
     public void addData(ChartData cd) {
-        logDebugMessage("ADD_DATA", this);
+        LogHelper.logDebugMessage("ADD_DATA", this);
     }
 }
