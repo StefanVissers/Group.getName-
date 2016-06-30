@@ -2,6 +2,7 @@ package getname.group.project_4;
 
 import android.os.Bundle;
 import android.view.View;
+import getname.group.project_4.debug.LogHelper;
 
 import getname.group.project_4.activities.ActivityExtender;
 
@@ -17,20 +18,20 @@ public class MainActivity extends ActivityExtender {
         }
 
         ID = counter++;
-        super.logDebugMessage("CREATE", this);
+        LogHelper.logDebugMessage("CREATE", this);
         setContentView(R.layout.activity_main);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        super.logDebugMessage("RESUME", this);
+        LogHelper.logDebugMessage("RESUME", this);
         setContentView(R.layout.activity_main);
     }
 
     @Override
     public void onBackPressed() {
-        logDebugMessage("BACK_PRESS", this);
+        LogHelper.logDebugMessage("BACK_PRESS", this);
 
         View v = new View(this);
         v.setTag("KILLAPP");
@@ -40,7 +41,7 @@ public class MainActivity extends ActivityExtender {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        super.logDebugMessage("DESTROY", this);
+        LogHelper.logDebugMessage("DESTROY", this);
         counter = 0;
     }
 }
