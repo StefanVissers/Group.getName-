@@ -35,11 +35,12 @@ public class PieChartActivity extends ActivityExtender implements Chart {
         addFromSQL(new ArrayList<Entry>(), new ArrayList<String>(), new String());
 
         PieDataSet dataset = new PieDataSet(entries, description);
-        dataset.setValueTextSize(30); //set text size
+        dataset.setValueTextSize(20); //set text size
 
         PieData data = new PieData(labels, dataset); // initialize Piedata
         pieChart.setData(data); //set data into chart
         pieChart.setDescription(description);  // set the description
+        pieChart.animateXY(3000, 3000);
         dataset.setColors(ColorTemplate.COLORFUL_COLORS); // set the color
     }
 

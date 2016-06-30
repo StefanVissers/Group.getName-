@@ -53,7 +53,7 @@ public class LineChartActivity extends ActivityExtender implements Chart {
         LineData data = new LineData(labels, dataSet);
 
         lineChart.setData(data);
-
+        lineChart.animateY(3000);
         lineChart.setDescription("Lorem ipsum");
 
 //        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);

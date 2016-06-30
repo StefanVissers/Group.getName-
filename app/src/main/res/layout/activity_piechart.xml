@@ -5,7 +5,7 @@
     >
 
     <TextView
-        android:text="5 meest gestolen fietskleuren"
+        android:text="5 meest gestolen fietsen"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

@@ -12,6 +12,7 @@ import android.view.View;
 
 import getname.group.project_4.MainActivity;
 import getname.group.project_4.charts.BarChartActivity;
+import getname.group.project_4.charts.BarChartActivity1;
 import getname.group.project_4.charts.GroupedBarChartActivity;
 import getname.group.project_4.charts.LineChartActivity;
 import getname.group.project_4.charts.PieChartActivity;
@@ -53,7 +54,7 @@ public abstract class ActivityExtender extends AppCompatActivity {
                 break;
             case BARCHART:
                 gotDestinationIntent = true;
-                intent = new Intent(this, BarChartActivity.class);
+                intent = new Intent(this, BarChartActivity1.class);
                 break;
             case GROUPEDBARCHART:
                 gotDestinationIntent = true;
