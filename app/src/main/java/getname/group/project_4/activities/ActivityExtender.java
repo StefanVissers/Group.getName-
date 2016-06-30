@@ -2,15 +2,21 @@ package getname.group.project_4.activities;
 
 
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+
+import com.evernote.edam.type.Note;
+import com.evernote.edam.type.Notebook;
+
 import getname.group.project_4.MainActivity;
 import getname.group.project_4.charts.BarChartActivity;
 import getname.group.project_4.charts.GroupedBarChartActivity;
 import getname.group.project_4.charts.LineChartActivity;
 import getname.group.project_4.charts.PieChartActivity;
 import getname.group.project_4.R;
+
 
 public abstract class ActivityExtender extends AppCompatActivity {
     protected int ID;

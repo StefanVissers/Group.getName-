@@ -52,6 +52,7 @@
         android:tag="location"
         android:onClick="changeActivity"
         android:layout_alignParentTop="@+id/buttonToNoteMenu"
+        android:layout_below="@+id/buttonToNoteMenu"
         android:layout_centerHorizontal="true"
         />
 

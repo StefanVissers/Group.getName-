@@ -8,8 +8,8 @@ import java.sql.Array;
 public class AndroidDatabaseConnector implements DatabaseDirectConnector {
     @Override
     public Array executeQueryAndroid(String database, String query, String where) {
-        Array array = null;
-        return array;
+
+        return null;
     }
 
     @Override

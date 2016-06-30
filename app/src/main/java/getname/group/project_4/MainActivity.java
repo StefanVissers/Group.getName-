@@ -1,7 +1,9 @@
 package getname.group.project_4;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import getname.group.project_4.debug.LogHelper;
 
 import getname.group.project_4.activities.ActivityExtender;
 import getname.group.project_4.debug.LogHelper;
