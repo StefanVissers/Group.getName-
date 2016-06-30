@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.evernote.android.intent.CreateNewNoteIntentBuilder;
 import com.evernote.android.intent.EvernoteIntent;
 import com.google.android.gms.common.ConnectionResult;
@@ -73,7 +72,7 @@ public class MyLocation extends ActivityExtender implements GoogleApiClient.Conn
             catch(SecurityException ex)
             {
                 Toast.makeText(this,"Security Exception",Toast.LENGTH_SHORT).show();
-            };
+            }
         if (mLastLocation != null){
             mLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
             mLongitudeText.setText(String.valueOf(mLastLocation.getLongitude()));
@@ -91,7 +90,7 @@ public class MyLocation extends ActivityExtender implements GoogleApiClient.Conn
         catch(SecurityException sx)
         {
             Toast.makeText(this,"Security Exception",Toast.LENGTH_SHORT).show();
-        };
+        }
     }
 
     @Override
@@ -114,14 +113,9 @@ public class MyLocation extends ActivityExtender implements GoogleApiClient.Conn
     public void onClick(View view){
     }
 
-    protected synchronized void buildGoogleApiClient(){
-        Toast.makeText(this,"buildGoogleApiClient",Toast.LENGTH_LONG).show();
-
-    }
-
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
-        Toast.makeText(this,"onConnectionFailed",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"Connection Failed",Toast.LENGTH_SHORT).show();
     }
 
     public void onLocationChanged(Location location) {
@@ -139,8 +133,10 @@ public class MyLocation extends ActivityExtender implements GoogleApiClient.Conn
             Geocoder geocoder = new Geocoder(this, Locale.getDefault());
             try {
                 List<Address> addresses = geocoder.getFromLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude(), 1);
-                Address gotAddress = addresses.get(0);
-                String sAddress = gotAddress.toString();
+                String gotAddressLine = addresses.get(0).getAddressLine(0);
+                String gotCity = addresses.get(0).getLocality();
+                String gotPostalCode = addresses.get(0).getPostalCode();
+                String sAddress = gotAddressLine + "\n" + gotCity + "\n"+ gotPostalCode;
                 LogHelper.logDebugMessage("GETLOCATION", sAddress);
                 return sAddress;
 
