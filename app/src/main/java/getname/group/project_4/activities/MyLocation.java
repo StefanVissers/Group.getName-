@@ -1,5 +1,6 @@
 package getname.group.project_4.activities;
 
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -7,6 +8,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.evernote.android.intent.CreateNewNoteIntentBuilder;
+import com.evernote.android.intent.EvernoteIntent;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -130,7 +134,7 @@ public class MyLocation extends ActivityExtender implements GoogleApiClient.Conn
         LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
     }
 
-    public void getLocation(View view) {
+    public String getLocation(View view) {
         if (!(mLastLocation == null)) {
             Geocoder geocoder = new Geocoder(this, Locale.getDefault());
             try {
@@ -138,10 +142,26 @@ public class MyLocation extends ActivityExtender implements GoogleApiClient.Conn
                 Address gotAddress = addresses.get(0);
                 String sAddress = gotAddress.toString();
                 LogHelper.logDebugMessage("GETLOCATION", sAddress);
+                return sAddress;
+
             } catch (IOException e)
             {
                 Toast.makeText(this, "IO Exception", Toast.LENGTH_SHORT).show();
             }
         }
+        return "Not Found";
+    }
+
+    public void savePlainTextNote(View view) {
+        String address = getLocation(view);
+        Intent intent = EvernoteIntent.createNewNote()
+                .setTitle("Location")
+                .addTags("Location")
+                .setTextPlain("Address: " + address)
+                .setSourceApp(getPackageName())
+                .setAppVisibility(CreateNewNoteIntentBuilder.AppVisibility.QUICK_SEND)
+                .create();
+
+        startActivity(intent);
     }
 }

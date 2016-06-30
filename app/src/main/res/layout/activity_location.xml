@@ -29,7 +29,7 @@
         android:id="@+id/address"
         android:tag="address"
         android:text="getAddress"
-        android:onClick="getLocation"
+        android:onClick="savePlainTextNote"
         android:layout_below="@+id/loclat"
         android:layout_centerHorizontal="true"
         />

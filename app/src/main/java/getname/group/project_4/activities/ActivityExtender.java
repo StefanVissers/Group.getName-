@@ -7,8 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
-import com.evernote.edam.type.Note;
-import com.evernote.edam.type.Notebook;
+//import com.evernote.edam.type.Note;
+//import com.evernote.edam.type.Notebook;
 
 import getname.group.project_4.MainActivity;
 import getname.group.project_4.charts.BarChartActivity;
@@ -73,12 +73,6 @@ public abstract class ActivityExtender extends AppCompatActivity {
                 gotDestinationIntent = true;
                 setContentView(R.layout.activity_calendar);
                 intent = new Intent(this, CalendarActivity.class);
-                intent.setAction(Intent.ACTION_EDIT);
-                break;
-            case NOTE:
-                gotDestinationIntent = true;
-                setContentView(R.layout.activity_calendar);
-                intent = new Intent(this, NoteActivity.class);
                 intent.setAction(Intent.ACTION_EDIT);
                 break;
             case KILLAPP:

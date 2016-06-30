@@ -16,7 +16,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.ChartMenuActivity"></activity>
-        <activity android:name=".activities.NoteActivity"></activity>
         <activity android:name=".activities.CalendarActivity"></activity>
         <activity android:name=".charts.BarChartActivity"></activity>
         <activity android:name=".charts.GroupedBarChartActivity"></activity>
