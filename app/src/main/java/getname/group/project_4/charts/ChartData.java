@@ -1,8 +1,6 @@
 package getname.group.project_4.charts;
 
-/**
- * Created by Lucas on 6/27/2016.
- */
+
 public class ChartData {
     String sql_query; String title; String desc; String db_index; String color;
     public String getSql_query() {

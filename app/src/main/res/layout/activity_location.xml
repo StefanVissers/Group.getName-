@@ -6,7 +6,6 @@
     tools:context=".activities.MyLocation"
     >
 
-
     <Button
         android:layout_height="250px"
         android:layout_width="500px"
@@ -15,11 +14,12 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         />
+
     <Button
         android:layout_height="250px"
         android:layout_width="500px"
         android:id="@+id/loclat"
-        android:layout_alignParentTop="@+id/loclong"
+        android:layout_below="@+id/loclong"
         android:layout_centerHorizontal="true"
         />
 
@@ -28,7 +28,10 @@
         android:layout_height="250px"
         android:id="@+id/address"
         android:tag="address"
-        android:layout_alignParentTop="@+id/loclat"
+        android:text="getAddress"
+        android:onClick="getLocation"
+        android:layout_below="@+id/loclat"
         android:layout_centerHorizontal="true"
         />
+
 </LinearLayout>

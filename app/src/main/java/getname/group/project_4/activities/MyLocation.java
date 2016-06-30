@@ -1,6 +1,7 @@
 package getname.group.project_4.activities;
 
-import android.content.Context;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
@@ -11,17 +12,21 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 import getname.group.project_4.R;
+import getname.group.project_4.debug.LogHelper;
 
 public class MyLocation extends ActivityExtender implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener{
 
-    public TextView mLatitudeText;
-    public TextView mLongitudeText;
+    protected TextView mLatitudeText;
+    protected TextView mLongitudeText;
 
     LocationRequest mLocationRequest;
     GoogleApiClient mGoogleApiClient;
 
-    Location mLastLocation;
+    protected Location mLastLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +43,15 @@ public class MyLocation extends ActivityExtender implements GoogleApiClient.Conn
                 .build();
         try
         {
-            Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+            Location newLoc = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+            if (newLoc!=null) {
+                mLastLocation = newLoc;
+                LogHelper.logDebugMessage("LOCATION","create/got last location");
+            }
         }
-        catch(SecurityException sx){
+        catch(SecurityException sx)
+        {
+            Toast.makeText(this,"Security Exception",Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -49,9 +60,15 @@ public class MyLocation extends ActivityExtender implements GoogleApiClient.Conn
         Toast.makeText(this,"onConnected",Toast.LENGTH_SHORT).show();
         try
         {
-            Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+            Location newLoc = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+            if (newLoc!=null) {
+                mLastLocation = newLoc;
+                LogHelper.logDebugMessage("LOCATION","connect/got last location");
+            }
         }
-            catch(SecurityException ex){
+            catch(SecurityException ex)
+            {
+                Toast.makeText(this,"Security Exception",Toast.LENGTH_SHORT).show();
             };
         if (mLastLocation != null){
             mLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
@@ -67,7 +84,9 @@ public class MyLocation extends ActivityExtender implements GoogleApiClient.Conn
         {
             LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
         }
-        catch(SecurityException sx){
+        catch(SecurityException sx)
+        {
+            Toast.makeText(this,"Security Exception",Toast.LENGTH_SHORT).show();
         };
     }
 
@@ -75,7 +94,6 @@ public class MyLocation extends ActivityExtender implements GoogleApiClient.Conn
     protected void onStart() {
         mGoogleApiClient.connect();
         super.onStart();
-        new GetLocation().run(getApplicationContext());
     }
 
     @Override
@@ -90,7 +108,6 @@ public class MyLocation extends ActivityExtender implements GoogleApiClient.Conn
     }
 
     public void onClick(View view){
-
     }
 
     protected synchronized void buildGoogleApiClient(){
@@ -111,5 +128,20 @@ public class MyLocation extends ActivityExtender implements GoogleApiClient.Conn
         mLongitudeText.setText(String.valueOf(location.getLongitude()));
 
         LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+    }
+
+    public void getLocation(View view) {
+        if (!(mLastLocation == null)) {
+            Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+            try {
+                List<Address> addresses = geocoder.getFromLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude(), 1);
+                Address gotAddress = addresses.get(0);
+                String sAddress = gotAddress.toString();
+                LogHelper.logDebugMessage("GETLOCATION", sAddress);
+            } catch (IOException e)
+            {
+                Toast.makeText(this, "IO Exception", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }

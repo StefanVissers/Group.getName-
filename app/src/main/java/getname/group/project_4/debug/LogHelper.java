@@ -4,9 +4,7 @@ import android.util.Log;
 
 import getname.group.project_4.activities.ActivityExtender;
 
-/**
- * Created by Lucas on 6/29/2016.
- */
+
 public class LogHelper {
 
     private static void printLog(String tag, String message, int logType) {
