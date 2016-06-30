@@ -26,6 +26,11 @@ android {
 repositories {
     maven { url "https://jitpack.io" }
 }
+
+configurations {
+    all*.exclude group: 'com.google.firebase', module: 'firebase-common'
+}
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.google.android.gms:play-services-location:9.2.0'

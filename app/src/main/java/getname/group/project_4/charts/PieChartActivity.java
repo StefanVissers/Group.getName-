@@ -14,6 +14,7 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import java.util.ArrayList;
 
 import getname.group.project_4.R;
+import getname.group.project_4.SQL.DatabaseHelper;
 import getname.group.project_4.activities.ActivityExtender;
 import getname.group.project_4.debug.LogHelper;
 
@@ -33,25 +34,51 @@ public class PieChartActivity extends ActivityExtender implements Chart {
 
         // creating data values
         ArrayList<Entry> entries = new ArrayList<>();
-        entries.add(new Entry(4f, 0));
-        entries.add(new Entry(8f, 1));
-        entries.add(new Entry(6f, 2));
-        entries.add(new Entry(12f, 3));
-        entries.add(new Entry(18f, 4));
-        entries.add(new Entry(9f, 5));
+        ArrayList<String> labels = new ArrayList<String>();
 
-        PieDataSet dataset = new PieDataSet(entries, "# of Calls");
+        DatabaseHelper databaseHelper;
+        databaseHelper = new DatabaseHelper(getApplicationContext());
+        try {
+            databaseHelper.createDataBase();
+            databaseHelper.openDataBase();
+            entries = databaseHelper.getEntryList("select [kleur], Count(*) as cnt\n" +
+                    "from fietsdiefstal\n" +
+                    "where [kleur]<>\"\"\n" +
+                    "Group By [kleur]\n" +
+                    "Order By cnt Desc\n" +
+                    "limit 5");
+            labels = databaseHelper.getEntryListLabels("select [kleur], Count(*) as cnt\n" +
+                    "from fietsdiefstal\n" +
+                    "where [kleur]<>\"\"\n" +
+                    "Group By [kleur]\n" +
+                    "Order By cnt Desc\n" +
+                    "limit 5");
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+//
+//        entries.add(new Entry(4f, 0));
+//        entries.add(new Entry(8f, 1));
+//        entries.add(new Entry(6f, 2));
+//        entries.add(new Entry(12f, 3));
+//        entries.add(new Entry(18f, 4));
+//        entries.add(new Entry(9f, 5));
+
+        PieDataSet dataset = new PieDataSet(entries, "Gestolen fietsen per kleur");
 
         dataset.setValueTextSize(20); //set text size
 
         // creating labels
-        ArrayList<String> labels = new ArrayList<String>();
-        labels.add("January");
-        labels.add("February");
-        labels.add("March");
-        labels.add("April");
-        labels.add("May");
-        labels.add("June");
+//        ArrayList<String> labels = new ArrayList<String>();
+//        labels.add("January");
+//        labels.add("February");
+//        labels.add("March");
+//        labels.add("April");
+//        labels.add("May");
+//        labels.add("June");
 
         PieData data = new PieData(labels, dataset); // initialize Piedata
         pieChart.setData(data); //set data into chart

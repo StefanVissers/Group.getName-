@@ -1,5 +1,6 @@
 package getname.group.project_4.activities;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.LinearLayout;
@@ -24,15 +25,5 @@ public class ChartMenuActivity extends ActivityExtender {
         setContentView(R.layout.activity_chartmenu);
 
         LinearLayout layout = (LinearLayout) findViewById(R.id.graphmenu);
-
-        DatabaseHelper databaseHelper;
-        databaseHelper = new DatabaseHelper(getApplicationContext());
-        try {
-            databaseHelper.createDataBase();
-            databaseHelper.openDataBase();
-            databaseHelper.executeQuery("SELECT * FROM 'diefstal'");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }

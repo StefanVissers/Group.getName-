@@ -15,11 +15,13 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.github.mikephil.charting.data.Entry;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static String DB_PATH = "/data/user/0/getname.group.project_4/databases/";
 
-    public static String DB_NAME = "fietsdiefstal.db";
+    public static String DB_NAME = "dataSource.db";
     public static final int DB_VERSION = 1;
 
     private SQLiteDatabase myDB;
@@ -127,6 +129,68 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         } catch (Exception e) {
             Log.e("Exception", e.getMessage());
         };
+    }
+
+    public ArrayList<Entry> getEntryList(String query) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        Cursor cursor;
+        ArrayList<Entry> list = new ArrayList<>();;
+
+        try {
+            cursor = database.rawQuery(query, null);
+            if(cursor == null) return null;
+            int number;
+            int counter = 0;
+            cursor.moveToFirst();
+
+            do {
+                number = cursor.getInt(1);
+                list.add(new Entry(number, counter));
+                counter++;
+                Log.i("Query number ", number + "");
+            } while (cursor.moveToNext());
+            cursor.close();
+            return list;
+        } catch (Exception e) {
+            Log.e("Exception", e.getMessage());
+            return null;
+        }
+    }
+
+    public ArrayList<String> getEntryListLabels(String query) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        Cursor cursor;
+        ArrayList<String> list = new ArrayList<>();;
+
+        try {
+            cursor = database.rawQuery(query, null);
+            if(cursor == null) return null;
+            String text;
+            cursor.moveToFirst();
+
+            do {
+                text = cursor.getString(0);
+                list.add(text);
+                Log.i("Query text ", text);
+            } while (cursor.moveToNext());
+            cursor.close();
+            return list;
+        } catch (Exception e) {
+            Log.e("Exception", e.getMessage());
+            return null;
+        }
+    }
+
+    public Cursor getCursor(String query) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        Cursor cursor;
+
+        try {
+            return database.rawQuery(query, null);
+        } catch (Exception e) {
+            Log.e("Exception", e.getMessage());
+            return null;
+        }
     }
 
     /***
