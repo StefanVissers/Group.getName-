@@ -13,7 +13,7 @@ import android.widget.Toast;
 import getname.group.project_4.debug.LogHelper;
 
 
-public class GetLocation extends MyLocation {
+public class getLocation extends MyLocation {
 
 //    public void run(Context context, Location mLastLocation) {
 //
