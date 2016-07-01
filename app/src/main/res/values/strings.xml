@@ -1,6 +1,28 @@
 <resources>
-    <string name="app_name">Project_4</string>
+    <string name="app_name">Bike Data App</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="activities_chartmenu">chartmenu</string>
+
+    <!--activity_main Strings -->
+    <string name="to_chart_menu">To Chart Menu</string>
+    <string name="to_calender_menu">To Calender Menu</string>
+    <string name="to_location_menu">To Location Menu</string>
+
+    <!--activity_chartmenu Strings -->
+    <string name="show_barchart">Show BarChart</string>
+    <string name="show_groupedBarChart">Show Grouped BarChart</string>
+    <string name="show_piechart_1">Show PieChart 1</string>
+    <string name="show_piechart_2">Show PieChart 2</string>
+    <string name="show_linechart">Show LineChart</string>
+
+    <!--activity_barchart Strings-->
+    <string name="barchart_text">5 Wijken met de meeste trommels</string>
+
+    <!--activity_location Strings-->
+    <string name="show_address">Save current location in Evernote</string>
+
+    <!--activity_piechart Strings-->
+    <string name="piechart_text">5 meest gestolen fietsen</string>
+
 </resources>

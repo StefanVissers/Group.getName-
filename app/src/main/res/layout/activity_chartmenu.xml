@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,7 +9,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="To BarChart"
+        android:text="@string/show_barchart"
         android:id="@+id/buttonToBarchart"
         android:tag="barchart"
         android:onClick="changeActivity"
@@ -20,7 +20,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="To GroupedBarChart"
+        android:text="@string/show_groupedBarChart"
         android:id="@+id/buttonToGroupedBarChart"
         android:tag="groupedbarchart"
         android:onClick="changeActivity"
@@ -31,7 +31,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="To PieChart 1"
+        android:text="@string/show_piechart_1"
         android:id="@+id/buttonToPieChartOne"
         android:tag="piechart1"
         android:onClick="changeActivity"
@@ -42,7 +42,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="To PieChart 2"
+        android:text="@string/show_piechart_2"
         android:id="@+id/buttonToPieChartTwo"
         android:tag="piechart2"
         android:onClick="changeActivity"
@@ -53,11 +53,11 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="To LineChart"
+        android:text="@string/show_linechart"
         android:id="@+id/buttonToLineChart"
         android:tag="linechart"
         android:onClick="changeActivity"
         android:layout_below="@+id/buttonToPieChartTwo"
         android:layout_centerHorizontal="true"
         />
-</LinearLayout>
+</RelativeLayout>
