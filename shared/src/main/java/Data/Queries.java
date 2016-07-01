@@ -16,7 +16,7 @@ public class Queries {
                 "Limit 5",
                 "title: " +
                 "Fietstrommels",
-                "description: " +
+                "desc: " +
                 "Aantal fietstrommels per wijk" };
     }
 
@@ -34,7 +34,7 @@ public class Queries {
                 "limit 7",
                 "title: " +
                 "Fietskleur",
-                "description: " +
+                "desc: " +
                 "Gestolen fietsen per kleur"};
     }
 
@@ -45,10 +45,10 @@ public class Queries {
                 "where [merk]<>\"\"\n" +
                 "Group By [merk]\n" +
                 "Order By cnt Desc\n" +
-                "limit 6",
+                "limit 5",
                 "title: " +
                 "Fietsmerk",
-                "description: " +
+                "desc: " +
                 "Gestolen fietsen per merk"};
     }
 
@@ -63,7 +63,7 @@ public class Queries {
                 "Order By jaar, maand;",
                 "title: " +
                 "Fietsdiefstal",
-                "description: " +
+                "desc: " +
                 "Gestolen fietsen per maand"};
     }
 }
