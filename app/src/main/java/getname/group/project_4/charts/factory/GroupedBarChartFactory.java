@@ -8,8 +8,8 @@ import getname.group.project_4.charts.builder.ChartData;
 public class GroupedBarChartFactory implements Factory<GroupedBarChartActivity> {
     @Override
     public GroupedBarChartActivity create(String... args) {
-        GroupedBarChartActivity groupedBarChart = new GroupedBarChartActivity();
         ChartData cd;
+        GroupedBarChartActivity groupedBarChart = new GroupedBarChartActivity();
         ChartData.ChartDataBuilder builder = null;
         for (String s : args) {
             if (s.startsWith("sql:")) {
@@ -30,6 +30,8 @@ public class GroupedBarChartFactory implements Factory<GroupedBarChartActivity> 
                 builder.setNestedDesc(value);
             } else if (type.equalsIgnoreCase("color")) {
                 builder.setNestedColor(value);
+            } else if (type.equalsIgnoreCase("filter")) {
+                builder.setNestedFilter(value);
             }
         }
         groupedBarChart.addData(builder.createChartData());

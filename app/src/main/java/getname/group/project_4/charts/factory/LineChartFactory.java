@@ -31,6 +31,8 @@ public class LineChartFactory implements Factory<LineChartActivity> {
                 builder.setNestedDesc(value);
             } else if (type.equalsIgnoreCase("color")) {
                 builder.setNestedColor(value);
+            } else if (type.equalsIgnoreCase("filter")) {
+                builder.setNestedFilter(value);
             }
         }
         lineChart.addData(builder.createChartData());

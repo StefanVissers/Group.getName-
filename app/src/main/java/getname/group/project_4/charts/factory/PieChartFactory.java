@@ -30,6 +30,8 @@ public class PieChartFactory implements Factory<PieChartActivity> {
                 builder.setNestedDesc(value);
             } else if (type.equalsIgnoreCase("color")) {
                 builder.setNestedColor(value);
+            } else if (type.equalsIgnoreCase("filter")) {
+                builder.setNestedFilter(value);
             }
         }
         pieChart.addData(builder.createChartData());

@@ -31,6 +31,8 @@ public class BarChartFactory implements Factory<BarChartActivity> {
                 builder.setNestedDesc(value);
             } else if (type.equalsIgnoreCase("color")) {
                 builder.setNestedColor(value);
+            } else if (type.equalsIgnoreCase("filter")) {
+                builder.setNestedFilter(value);
             }
         }
         barChart.addData(builder.createChartData());

@@ -1,12 +1,18 @@
 package getname.group.project_4.charts.builder;
 
-import java.io.Serializable;
+import android.text.TextUtils;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import getname.group.project_4.debug.LogHelper;
 
-public class ChartData implements Serializable {
-    private final String sql_query; private final String title;
-    private final String desc; private final String color;
+public class ChartData {
+    private final String sql_query;
+    private final String desc;
+    private final String title;
+    private final String color;
 
     ChartData(final String sql_query, final String title,
               final String desc, final String color) {
@@ -31,6 +37,8 @@ public class ChartData implements Serializable {
 
     public static class ChartDataBuilder {
         private String nestedQuery;
+        private String nestedFQuery = null;
+        private String nestedFilter;
         private String nestedTitle = "";
         private String nestedDesc = "";
         private String nestedColor = "#000000";
@@ -54,8 +62,29 @@ public class ChartData implements Serializable {
             return this;
         }
 
+        public void setNestedFilter(String nestedFilter) {
+            this.nestedFilter = nestedFilter;
+
+            String OLDQuery = this.nestedQuery;
+            List<String> unFilteredQuery = Arrays.asList(OLDQuery.split(" "));
+            List<String> filteredQuery = unFilteredQuery;
+
+            for (int i = 0; i < unFilteredQuery.size(); i++) {
+                if (unFilteredQuery.get(i).equalsIgnoreCase("where ")) {
+                    filteredQuery.add(i, this.nestedFilter + " and ");
+                }
+            }
+
+            String newQuery = TextUtils.join("", filteredQuery);
+            LogHelper.logDebugMessage("FILTER", newQuery);
+            nestedFQuery = newQuery;
+        }
+
         public ChartData createChartData() {
-            return new ChartData(nestedQuery,nestedTitle,nestedDesc,nestedColor);
+
+            return nestedFQuery != null ?
+                    new ChartData(nestedQuery,nestedTitle,nestedDesc,nestedColor) :
+                    new ChartData(nestedFQuery,nestedTitle,nestedDesc,nestedColor);
         }
     }
 }
