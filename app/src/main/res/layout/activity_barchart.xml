@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:id="@+id/barchart_activity"
-    android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/barchart_activity">
+
 
     <!--android:background="#3AA8C1"-->
 
     <TextView
-        android:text="5 wijken met meeste trommels"
+        android:text="@string/barchart_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.MyLocation"
+    android:background="#3AA8C1"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp"
     >
 
     <Button
@@ -28,10 +31,10 @@
         android:layout_height="250px"
         android:id="@+id/address"
         android:tag="address"
-        android:text="getAddress"
+        android:text="@string/show_address"
         android:onClick="savePlainTextNote"
         android:layout_below="@+id/loclat"
         android:layout_centerHorizontal="true"
         />
 
-</LinearLayout>
+</RelativeLayout>

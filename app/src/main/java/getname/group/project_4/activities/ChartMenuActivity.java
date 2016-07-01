@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import getname.group.project_4.R;
 import getname.group.project_4.SQL.DatabaseHelper;
@@ -24,6 +25,6 @@ public class ChartMenuActivity extends ActivityExtender {
 
         setContentView(R.layout.activity_chartmenu);
 
-        LinearLayout layout = (LinearLayout) findViewById(R.id.graphmenu);
+        RelativeLayout layout = (RelativeLayout) findViewById(R.id.graphmenu);
     }
 }
