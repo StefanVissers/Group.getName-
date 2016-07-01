@@ -13,7 +13,7 @@
     <Button
         android:layout_height="250px"
         android:layout_width="500px"
-        android:text="To Chart Menu"
+        android:text="@string/to_chart_menu"
         android:id="@+id/buttonToChartMenu"
         android:tag="@string/activities_chartmenu"
         android:onClick="changeActivity"
@@ -24,7 +24,7 @@
     <Button
         android:layout_height="250px"
         android:layout_width="500px"
-        android:text="To Calender Menu"
+        android:text="@string/to_calender_menu"
         android:id="@+id/buttonToCalenderMenu"
         android:tag="calendar"
         android:onClick="changeActivity"
@@ -35,13 +35,12 @@
     <Button
         android:layout_height="250px"
         android:layout_width="500px"
-        android:text="To Location"
+        android:text="@string/to_location_menu"
         android:id="@+id/buttontoLocation"
         android:tag="location"
         android:onClick="changeActivity"
         android:layout_below="@+id/buttonToCalenderMenu"
-        android:layout_centerHorizontal="true"
-        />
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>
