@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.RelativeLayout;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -17,11 +18,18 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import java.util.ArrayList;
 
 import getname.group.project_4.R;
+import getname.group.project_4.SQL.DatabaseHelper;
 import getname.group.project_4.activities.ActivityExtender;
+import getname.group.project_4.charts.builder.ChartData;
 import getname.group.project_4.debug.LogHelper;
 
 public class LineChartActivity extends ActivityExtender implements Chart {
     LineChart lineChart;
+    ArrayList<Entry> entries;
+    ArrayList<String> labels;
+    String title;
+    String description;
+    ChartData chartData;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,38 +37,39 @@ public class LineChartActivity extends ActivityExtender implements Chart {
         setContentView(R.layout.activity_linechart);
 
         Intent intent = getIntent();
-
         LogHelper.logDebugMessage("CREATE", this);
-
         lineChart = (LineChart) findViewById(R.id.chart);
+        chartData = (ChartData) getIntent().getSerializableExtra("ChartData");
 
-        ArrayList<Entry> entries = new ArrayList<>();
+        DatabaseHelper databaseHelper;
+        databaseHelper = new DatabaseHelper(getApplicationContext());
+        try {
+            databaseHelper.createDataBase();
+            databaseHelper.openDataBase();
+            entries = databaseHelper.getEntryList(chartData.getSql_query(), 2);
+            labels = databaseHelper.getEntryListLabels(chartData.getSql_query(), 0);
+            description = chartData.getDesc();
+            title = chartData.getTitle();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        entries.add(new Entry(2f,0));
-        entries.add(new Entry(5f,1));
-        entries.add(new Entry(8f,2));
-        entries.add(new Entry(0f,3));
-
-        LineDataSet dataSet = new LineDataSet(entries, "# of Calls");
-
-
-        ArrayList<String> labels = new ArrayList<>();
-        labels.add("January");
-        labels.add("February");
-        labels.add("March");
-        labels.add("April");
-
+        LineDataSet dataSet = new LineDataSet(entries, description);
         LineData data = new LineData(labels, dataSet);
-
         lineChart.setData(data);
         lineChart.animateY(3000);
-        lineChart.setDescription("Lorem ipsum");
-
-//        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        lineChart.setDescription(description);
+        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
     }
 
     @Override
     public void addData(ChartData cd) {
+        this.chartData = cd;
         LogHelper.logDebugMessage("ADD_DATA", this);
+    }
+
+    @Override
+    public ChartData getData() {
+        return chartData;
     }
 }

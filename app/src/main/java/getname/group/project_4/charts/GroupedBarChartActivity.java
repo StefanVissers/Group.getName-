@@ -24,11 +24,13 @@ import java.util.List;
 
 import getname.group.project_4.R;
 import getname.group.project_4.activities.ActivityExtender;
+import getname.group.project_4.charts.builder.ChartData;
 import getname.group.project_4.debug.LogHelper;
 
 public class GroupedBarChartActivity extends ActivityExtender implements Chart {
     private static int counter = 0;
     private BarChart barchart;
+    ChartData chartData;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -83,6 +85,11 @@ public class GroupedBarChartActivity extends ActivityExtender implements Chart {
 
     @Override
     public void addData(ChartData cd) {
+        this.chartData = chartData;
         LogHelper.logDebugMessage("ADD_DATA", this);
+    }
+
+    public ChartData getData() {
+        return chartData;
     }
 }
