@@ -112,7 +112,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 //        this.getReadableDatabase().rawQuery("Select * from 'diefstal'", null);
     }
 
-    public void executeQuery(String query) {
+    public void executeQuery(String query, int column) {
         SQLiteDatabase database = this.getWritableDatabase();
         Cursor cursor;
 
@@ -123,7 +123,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             cursor.moveToFirst();
 
             do {
-                text = cursor.getString(0);
+                text = cursor.getString(column);
                 Log.i("Query", text);
             } while (cursor.moveToNext());
             cursor.close();
@@ -132,7 +132,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         };
     }
 
-    public ArrayList<Entry> getEntryList(String query) {
+    public ArrayList<Entry> getEntryList(String query, int column) {
         SQLiteDatabase database = this.getWritableDatabase();
         Cursor cursor;
         ArrayList<Entry> list = new ArrayList<>();
@@ -145,7 +145,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             cursor.moveToFirst();
 
             do {
-                number = cursor.getInt(1);
+                number = cursor.getInt(column);
                 list.add(new Entry(number, counter));
                 counter++;
                 Log.i("Query number ", number + "");
@@ -158,7 +158,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public ArrayList<BarEntry> getBarEntryList(String query) {
+    public ArrayList<BarEntry> getBarEntryList(String query, int column) {
         SQLiteDatabase database = this.getWritableDatabase();
         Cursor cursor;
         ArrayList<BarEntry> list = new ArrayList<>();
@@ -171,7 +171,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             cursor.moveToFirst();
 
             do {
-                number = cursor.getInt(1);
+                number = cursor.getInt(column);
                 list.add(new BarEntry(number, counter));
                 counter++;
                 Log.i("Query number ", number + "");
@@ -184,7 +184,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public ArrayList<String> getEntryListLabels(String query) {
+    public ArrayList<String> getEntryListLabels(String query, int column) {
         SQLiteDatabase database = this.getWritableDatabase();
         Cursor cursor;
         ArrayList<String> list = new ArrayList<>();;
@@ -196,7 +196,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             cursor.moveToFirst();
 
             do {
-                text = cursor.getString(0);
+                text = cursor.getString(column);
                 list.add(text);
                 Log.i("Query text ", text);
             } while (cursor.moveToNext());

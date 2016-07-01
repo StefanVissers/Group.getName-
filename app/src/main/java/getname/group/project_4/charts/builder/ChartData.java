@@ -1,8 +1,10 @@
 package getname.group.project_4.charts.builder;
 
+import java.io.Serializable;
+
 import getname.group.project_4.debug.LogHelper;
 
-public class ChartData {
+public class ChartData implements Serializable {
     private final String sql_query; private final String title;
     private final String desc; private final String color;
 

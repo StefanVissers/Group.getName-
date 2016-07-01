@@ -1,7 +1,9 @@
 package getname.group.project_4.charts;
 
 
+import getname.group.project_4.charts.builder.ChartData;
+
 public interface Chart {
-    // TODO: Implement addData();
     void addData(ChartData cd);
+    ChartData getData();
 }

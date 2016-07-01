@@ -16,13 +16,16 @@ import java.util.ArrayList;
 import getname.group.project_4.R;
 import getname.group.project_4.SQL.DatabaseHelper;
 import getname.group.project_4.activities.ActivityExtender;
+import getname.group.project_4.charts.builder.ChartData;
 import getname.group.project_4.debug.LogHelper;
 
 public class PieChartActivity extends ActivityExtender implements Chart {
     PieChart pieChart;
     ArrayList<Entry> entries;
     ArrayList<String> labels;
+    String title;
     String description;
+    ChartData chartData;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,9 +33,23 @@ public class PieChartActivity extends ActivityExtender implements Chart {
         setContentView(R.layout.activity_piechart);
 
         Intent intent = getIntent();
-        LogHelper.logDebugMessage("CREATE", this);
+        LogHelper.logDebugMessage("CREATE", "piechart");
         pieChart = (PieChart) findViewById(R.id.chart);
-        addFromSQL(new ArrayList<Entry>(), new ArrayList<String>(), new String());
+
+        chartData = (ChartData) getIntent().getSerializableExtra("ChartData");
+
+        DatabaseHelper databaseHelper;
+        databaseHelper = new DatabaseHelper(getApplicationContext());
+        try {
+            databaseHelper.createDataBase();
+            databaseHelper.openDataBase();
+            entries = databaseHelper.getEntryList(chartData.getSql_query(), 1);
+            labels = databaseHelper.getEntryListLabels(chartData.getSql_query(), 0);
+            description = chartData.getDesc();
+            title = chartData.getTitle();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         PieDataSet dataset = new PieDataSet(entries, description);
         dataset.setValueTextSize(20); //set text size
@@ -44,38 +61,15 @@ public class PieChartActivity extends ActivityExtender implements Chart {
         dataset.setColors(ColorTemplate.COLORFUL_COLORS); // set the color
     }
 
-    public void addFromSQL(ArrayList<Entry> entries, ArrayList<String> labels, String description) {
-        if(entries.isEmpty()) {
-            entries.add(new Entry(4f, 0));
-            entries.add(new Entry(8f, 1));
-            entries.add(new Entry(6f, 2));
-            entries.add(new Entry(12f, 3));
-            entries.add(new Entry(18f, 4));
-            entries.add(new Entry(9f, 5));
-        }
-
-        this.entries = entries;
-
-        if(labels.isEmpty()) {
-            labels.add("January");
-            labels.add("February");
-            labels.add("March");
-            labels.add("April");
-            labels.add("May");
-            labels.add("June");
-        }
-
-        this.labels = labels;
-
-        if(description.isEmpty()) {
-            description = "Description";
-        }
-
-        this.description = description;
-    }
 
     @Override
     public void addData(ChartData cd) {
+        this.chartData = cd;
         LogHelper.logDebugMessage("ADD_DATA", this);
+    }
+
+    @Override
+    public ChartData getData() {
+        return chartData;
     }
 }

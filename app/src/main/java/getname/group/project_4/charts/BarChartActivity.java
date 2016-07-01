@@ -15,6 +15,7 @@ import java.util.List;
 import getname.group.project_4.R;
 import getname.group.project_4.SQL.DatabaseHelper;
 import getname.group.project_4.activities.ActivityExtender;
+import getname.group.project_4.charts.builder.ChartData;
 import getname.group.project_4.debug.LogHelper;
 
 public class BarChartActivity extends ActivityExtender implements Chart {
@@ -22,7 +23,9 @@ public class BarChartActivity extends ActivityExtender implements Chart {
     private BarChart barchart;
     ArrayList<BarEntry> entries;
     ArrayList<String> labels;
+    String title;
     String description;
+    ChartData chartData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +36,21 @@ public class BarChartActivity extends ActivityExtender implements Chart {
         LogHelper.logDebugMessage("CREATE", this);
         Intent intent = getIntent();
         barchart = (BarChart) findViewById(R.id.chart);
-        addFromSQL(new ArrayList<BarEntry>(), new ArrayList<String>(), new String());
+
+        chartData = (ChartData) getIntent().getSerializableExtra("ChartData");
+
+        DatabaseHelper databaseHelper;
+        databaseHelper = new DatabaseHelper(getApplicationContext());
+        try {
+            databaseHelper.createDataBase();
+            databaseHelper.openDataBase();
+            entries = databaseHelper.getBarEntryList(chartData.getSql_query(), 1);
+            labels = databaseHelper.getEntryListLabels(chartData.getSql_query(), 0);
+            description = chartData.getDesc();
+            title = chartData.getTitle();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         BarDataSet dataSet = new BarDataSet(entries, description);
         dataSet.setValueTextSize(20);
@@ -47,31 +64,13 @@ public class BarChartActivity extends ActivityExtender implements Chart {
 //        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
     }
 
-    public void addFromSQL(ArrayList<BarEntry> entries, ArrayList<String> labels, String description) {
-        if(entries.isEmpty()) {
-            entries.add(new BarEntry(2f,0));
-            entries.add(new BarEntry(5f,1));
-            entries.add(new BarEntry(8f,2));
-            entries.add(new BarEntry(0f,3));
-        }
-        this.entries = entries;
-
-        if(labels.isEmpty()) {
-            labels.add("January");
-            labels.add("February");
-            labels.add("March");
-            labels.add("April");
-        }
-        this.labels = labels;
-
-        if(description.isEmpty()) {
-
-        }
-        this.description = description;
-    }
-
     @Override
     public void addData(ChartData cd) {
+        this.chartData = cd;
         LogHelper.logDebugMessage("ADD_DATA", this);
+    }
+
+    public ChartData getData() {
+        return chartData;
     }
 }
