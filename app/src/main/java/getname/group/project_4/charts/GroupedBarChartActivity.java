@@ -78,6 +78,7 @@ public class GroupedBarChartActivity extends ActivityExtender implements Chart {
         System.out.println("foo");
 
         barchart.setData(data);
+        barchart.animateY(3000);
     }
 
     @Override

@@ -1,16 +1,18 @@
 apply plugin: 'java'
 buildscript {
     dependencies {
-//        classpath group: 'de.dynamicfiles.projects.gradle.plugins', name: 'javafx-gradle-plugin', version: '8.4.1'
+        classpath group: 'de.dynamicfiles.projects.gradle.plugins', name: 'javafx-gradle-plugin', version: '8.4.1'
     }
 
     repositories {
         mavenCentral()
     }
 }
-//apply from: "http://dl.bintray.com/content/shemnon/javafx-gradle/0.3.0/javafx.plugin"
+
 //apply from: "javafx.plugin"
 
 dependencies {
+    //    apply from: "http://dl.bintray.com/content/shemnon/javafx-gradle/0.3.0/javafx.plugin"
     compile files('libs/sqlite-jdbc-3.8.11.2.jar')
+    compile files('libs/jfxrt.jar')
 }
