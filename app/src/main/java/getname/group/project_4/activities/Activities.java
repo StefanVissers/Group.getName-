@@ -1,6 +1,7 @@
 package getname.group.project_4.activities;
 
 
+// All Activities for ActivityExtender.
 
 public enum Activities {
     MAIN,
