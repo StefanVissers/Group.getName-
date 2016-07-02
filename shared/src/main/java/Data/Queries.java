@@ -62,8 +62,26 @@ public class Queries {
                 "Group By jaar, maand\n" +
                 "Order By jaar, maand;",
                 "title: " +
+                        "Fietsdiefstal",
+                "desc: " +
+                        "Gestolen fietsen per maand"};
+    }
+
+    public String[] getLineStat1(int year, boolean before) {
+        String filter = before ? " > " + year : " < " + year;
+        return new String[] { "sql: " +
+                "SELECT replace(Begindatum, rtrim(Begindatum, replace(Begindatum, '/', '' ) ), '') AS [jaar],\n" +
+                "\t\t\treplace(Begindatum, ltrim(Begindatum, replace(Begindatum, '/', '' ) ), '') AS [maand],\n" +
+                "\t\t\tCount(Begindatum) AS [diefstallen]\n" +
+                "FROM fietsdiefstal\n " +
+                "Where (Begindatum <> null or Begindatum <> \"\")\n" +
+                "Group By jaar, maand\n" +
+                "Order By jaar, maand;",
+                "title: " +
                 "Fietsdiefstal",
                 "desc: " +
-                "Gestolen fietsen per maand"};
+                "Gestolen fietsen per maand",
+                "filter: " +
+                filter};
     }
 }

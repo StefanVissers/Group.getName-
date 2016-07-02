@@ -2,13 +2,14 @@ package getname.group.project_4.charts.builder;
 
 import android.text.TextUtils;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import getname.group.project_4.debug.LogHelper;
 
-public class ChartData {
+public class ChartData implements Serializable {
     private final String sql_query;
     private final String desc;
     private final String title;
@@ -67,11 +68,20 @@ public class ChartData {
 
             String OLDQuery = this.nestedQuery;
             List<String> unFilteredQuery = Arrays.asList(OLDQuery.split(" "));
-            List<String> filteredQuery = unFilteredQuery;
+            List<String> filteredQuery = new ArrayList<>();
 
             for (int i = 0; i < unFilteredQuery.size(); i++) {
-                if (unFilteredQuery.get(i).equalsIgnoreCase("where ")) {
-                    filteredQuery.add(i, this.nestedFilter + " and ");
+                unFilteredQuery.set(i, unFilteredQuery.get(i) + " ");
+                String s = unFilteredQuery.get(i);
+                if (unFilteredQuery.get(i).equalsIgnoreCase("(Begindatum ")) {
+//                    filteredQuery.add("where ");
+//                    filteredQuery.add(this.nestedFilter);
+//                    filteredQuery.add(" and ");
+                    filteredQuery.add(i, "Cast(jaar AS INTEGER) " + this.nestedFilter);
+                    filteredQuery.add(" and ");
+                    filteredQuery.add("(Begindatum ");
+                } else {
+                    filteredQuery.add(unFilteredQuery.get(i));
                 }
             }
 
@@ -81,8 +91,8 @@ public class ChartData {
         }
 
         public ChartData createChartData() {
-
-            return nestedFQuery != null ?
+//            return new ChartData(nestedQuery,nestedTitle,nestedDesc,nestedColor);
+            return nestedFQuery == null ?
                     new ChartData(nestedQuery,nestedTitle,nestedDesc,nestedColor) :
                     new ChartData(nestedFQuery,nestedTitle,nestedDesc,nestedColor);
         }

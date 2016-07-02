@@ -46,6 +46,7 @@ public class LineChartActivity extends ActivityExtender implements Chart {
         try {
             databaseHelper.createDataBase();
             databaseHelper.openDataBase();
+            String str = chartData.getSql_query();
             entries = databaseHelper.getEntryList(chartData.getSql_query(), 2);
             labels = databaseHelper.getEntryListLabels(chartData.getSql_query(), 0);
             description = chartData.getDesc();
@@ -59,7 +60,7 @@ public class LineChartActivity extends ActivityExtender implements Chart {
         lineChart.setData(data);
         lineChart.animateY(3000);
         lineChart.setDescription(description);
-        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
     }
 
     @Override
