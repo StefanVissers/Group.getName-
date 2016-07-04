@@ -1,7 +1,7 @@
 package getname.group.project_4.charts.factory;
 
-import getname.group.project_4.charts.Chart;
-import getname.group.project_4.charts.builder.ChartData;
+import Data.Queries;
+import Data.builder.ChartData;
 import getname.group.project_4.charts.PieChartActivity;
 
 
@@ -32,6 +32,8 @@ public class PieChartFactory implements Factory<PieChartActivity> {
                 builder.setNestedColor(value);
             } else if (type.equalsIgnoreCase("filter")) {
                 builder.setNestedFilter(value);
+            } else if (type.equalsIgnoreCase("reltime")) {
+                builder.setNestedRelativeTime(Queries.RelativeTime.valueOf(value));
             }
         }
         pieChart.addData(builder.createChartData());

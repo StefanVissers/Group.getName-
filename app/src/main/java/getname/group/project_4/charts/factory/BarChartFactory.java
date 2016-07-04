@@ -1,9 +1,8 @@
 package getname.group.project_4.charts.factory;
 
-import getname.group.project_4.charts.Chart;
+import Data.Queries;
 import getname.group.project_4.charts.BarChartActivity;
-import getname.group.project_4.charts.builder.ChartData;
-import getname.group.project_4.debug.LogHelper;
+import Data.builder.ChartData;
 
 
 public class BarChartFactory implements Factory<BarChartActivity> {
@@ -33,6 +32,8 @@ public class BarChartFactory implements Factory<BarChartActivity> {
                 builder.setNestedColor(value);
             } else if (type.equalsIgnoreCase("filter")) {
                 builder.setNestedFilter(value);
+            } else if (type.equalsIgnoreCase("reltime")) {
+                builder.setNestedRelativeTime(Queries.RelativeTime.valueOf(value));
             }
         }
         barChart.addData(builder.createChartData());

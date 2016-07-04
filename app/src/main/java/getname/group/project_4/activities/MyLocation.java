@@ -24,6 +24,7 @@ import getname.group.project_4.R;
 import getname.group.project_4.debug.LogHelper;
 
 public class MyLocation extends ActivityExtender implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener{
+    private static int counter = 0;
 
     protected TextView mLatitudeText;
     protected TextView mLongitudeText;
@@ -114,9 +115,6 @@ public class MyLocation extends ActivityExtender implements GoogleApiClient.Conn
     @Override
     public void onConnectionSuspended(int i) {
         Toast.makeText(this,"onConnectionSuspended",Toast.LENGTH_SHORT).show();
-    }
-
-    public void onClick(View view){
     }
 
     @Override

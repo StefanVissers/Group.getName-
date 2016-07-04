@@ -15,12 +15,12 @@ public class DesktopDatabaseConnector implements DatabaseDirectConnector {
     static final String databaseLocation = "jdbc:sqlite:shared/libs/";
 
     @Override
-    public Array executeQueryAndroid(String database, String query, String where) {
+    public ResultSet executeQueryAndroid(String database, String query, String where) {
         return null;
     }
 
     @Override
-    public Array executyQueryDesktop(String database, String query, String where) {
+    public ResultSet executyQueryDesktop(String database, String query, String where) {
 
         Connection conn = null;
         Statement stmt = null;
@@ -30,15 +30,16 @@ public class DesktopDatabaseConnector implements DatabaseDirectConnector {
             stmt = conn.createStatement();
 
             String sql = query;
-            ResultSet rs = stmt.executeQuery(sql);
-            //STEP 5: Extract data from result set
-            while(rs.next()){
-                //Retrieve by column name
-                System.out.println(rs.getFloat(where));
-            }
-            rs.close();
 
-            stmt.executeUpdate(sql);
+            return stmt.executeQuery(sql);
+            //STEP 5: Extract data from result set
+//            while(rs.next()){
+//                //Retrieve by column name
+//                System.out.println(rs.getString(where));
+//            }
+//            rs.close();
+//
+//            stmt.executeUpdate(sql);
         }catch(SQLException se){
             //Handle errors for JDBC
             se.printStackTrace();
@@ -59,8 +60,6 @@ public class DesktopDatabaseConnector implements DatabaseDirectConnector {
                 se.printStackTrace();
             }//end finally try
         }//end try
-
-        Array array = null;
-        return array;
+        return null;
     }
 }

@@ -12,7 +12,6 @@ import getname.group.project_4.debug.LogHelper;
 
 public class ChartMenuActivity extends ActivityExtender {
     private static int counter = 0;
-    private int ID;
 
 
     @Override

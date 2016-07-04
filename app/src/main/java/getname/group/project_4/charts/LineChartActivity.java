@@ -2,7 +2,6 @@ package getname.group.project_4.charts;
 
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -25,7 +24,7 @@ import java.util.ArrayList;
 import getname.group.project_4.R;
 import getname.group.project_4.SQL.DatabaseHelper;
 import getname.group.project_4.activities.ActivityExtender;
-import getname.group.project_4.charts.builder.ChartData;
+import Data.builder.ChartData;
 import getname.group.project_4.debug.LogHelper;
 
 public class LineChartActivity extends ActivityExtender implements Chart {

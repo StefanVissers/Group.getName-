@@ -2,7 +2,7 @@ package getname.group.project_4.charts.factory;
 
 public interface Factory<T> {
     /**
-     *  "sql: 'xxx' "
+     *  "sql: 'xxx' ",
      *  "title: 'xxx' "
      *  "desc: 'desc' "
      *  "color:

@@ -1,10 +1,8 @@
 package getname.group.project_4.charts.factory;
 
-import com.github.mikephil.charting.charts.LineChart;
-
-import getname.group.project_4.charts.Chart;
+import Data.Queries;
 import getname.group.project_4.charts.LineChartActivity;
-import getname.group.project_4.charts.builder.ChartData;
+import Data.builder.ChartData;
 
 public class LineChartFactory implements Factory<LineChartActivity> {
     @Override
@@ -33,6 +31,8 @@ public class LineChartFactory implements Factory<LineChartActivity> {
                 builder.setNestedColor(value);
             } else if (type.equalsIgnoreCase("filter")) {
                 builder.setNestedFilter(value);
+            } else if (type.equalsIgnoreCase("reltime")) {
+                builder.setNestedRelativeTime(Queries.RelativeTime.valueOf(value));
             }
         }
         lineChart.addData(builder.createChartData());

@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import getname.group.project_4.R;
 import getname.group.project_4.SQL.DatabaseHelper;
 import getname.group.project_4.activities.ActivityExtender;
-import getname.group.project_4.charts.builder.ChartData;
+import Data.builder.ChartData;
 import getname.group.project_4.debug.LogHelper;
 
 public class PieChartActivity extends ActivityExtender implements Chart {

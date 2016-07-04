@@ -10,12 +10,11 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import getname.group.project_4.R;
 import getname.group.project_4.SQL.DatabaseHelper;
 import getname.group.project_4.activities.ActivityExtender;
-import getname.group.project_4.charts.builder.ChartData;
+import Data.builder.ChartData;
 import getname.group.project_4.debug.LogHelper;
 
 public class BarChartActivity extends ActivityExtender implements Chart {
@@ -34,6 +33,7 @@ public class BarChartActivity extends ActivityExtender implements Chart {
 
         ID = counter++;
         LogHelper.logDebugMessage("CREATE", this);
+
         Intent intent = getIntent();
         barchart = (BarChart) findViewById(R.id.chart);
 

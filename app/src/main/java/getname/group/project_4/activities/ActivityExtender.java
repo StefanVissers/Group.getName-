@@ -9,6 +9,8 @@ import android.view.View;
 //import com.evernote.edam.type.Note;
 //import com.evernote.edam.type.Notebook;
 
+import java.util.NoSuchElementException;
+
 import Data.Queries;
 import getname.group.project_4.MainActivity;
 import getname.group.project_4.charts.BarChartActivity;
@@ -36,7 +38,7 @@ public abstract class ActivityExtender extends AppCompatActivity {
     public void changeActivity(View view) {
         Intent intent = new Intent();
         boolean gotDestinationIntent = false;
-        Queries queries = new Data.Queries();
+//        Queries queries = new Data.Queries();
 
         BarChartFactory barChartFactory;
         GroupedBarChartFactory groupedBarChartFactory;
@@ -69,35 +71,35 @@ public abstract class ActivityExtender extends AppCompatActivity {
             case BARCHART:
                 gotDestinationIntent = true;
                 barChartFactory = new BarChartFactory();
-                barChart = barChartFactory.create(queries.getBarStat1());
+                barChart = barChartFactory.create(Queries.getBarStat1());
                 intent = new Intent(this, barChart.getClass());
                 intent.putExtra("ChartData", barChart.getData());
                 break;
             case GROUPEDBARCHART:
                 gotDestinationIntent = true;
                 groupedBarChartFactory = new GroupedBarChartFactory();
-                groupedBarChartActivity = groupedBarChartFactory.create(queries.getGroupedBarStat1());
+                groupedBarChartActivity = groupedBarChartFactory.create(Queries.getGroupedBarStat1());
                 intent = new Intent(this, groupedBarChartActivity.getClass());
                 intent.putExtra("ChartData", groupedBarChartActivity.getData());
                 break;
             case PIECHART1:
                 gotDestinationIntent = true;
                 pieChartFactory = new PieChartFactory();
-                pieChart = pieChartFactory.create(queries.getPieStat1());
+                pieChart = pieChartFactory.create(Queries.getPieStat1());
                 intent = new Intent(this, pieChart.getClass());
                 intent.putExtra("ChartData", pieChart.getData());
                 break;
             case PIECHART2:
                 gotDestinationIntent = true;
                 pieChartFactory = new PieChartFactory();
-                pieChart = pieChartFactory.create(queries.getPieStat2());
+                pieChart = pieChartFactory.create(Queries.getPieStat2());
                 intent = new Intent(this, pieChart.getClass());
                 intent.putExtra("ChartData", pieChart.getData());
                 break;
             case LINECHART:
                 gotDestinationIntent = true;
                 lineChartFactory = new LineChartFactory();
-                lineChart = lineChartFactory.create(queries.getLineStat1(2010, true));
+                lineChart = lineChartFactory.create(Queries.getLineStat1(2012, Queries.RelativeTime.CURRENT));
                 intent = new Intent(this, lineChart.getClass());
                 intent.putExtra("ChartData", lineChart.getData());
                 break;
@@ -125,6 +127,50 @@ public abstract class ActivityExtender extends AppCompatActivity {
         } else {
             Log.d("[Main.changeActivity()]", "Got destination intent" + intent.toString());
             startActivity(intent);
+        }
+    }
+
+
+    public enum Activities {
+        MAIN,
+        CHARTMENU,
+        BARCHART,
+        GROUPEDBARCHART,
+        PIECHART1,
+        PIECHART2,
+        LINECHART,
+        CALENDAR,
+        NOTE,
+        LOCATION,
+        KILLAPP;
+
+        @Override
+        public String toString() {
+            switch (this) {
+                case MAIN:
+                    return "Main";
+                case CHARTMENU:
+                    return "ChartMenu";
+                case BARCHART:
+                    return "BarChart";
+                case GROUPEDBARCHART:
+                    return "GroupedBarChart";
+                case PIECHART1:
+                    return "PieChart1";
+                case PIECHART2:
+                    return "PieChart2";
+                case LINECHART:
+                    return "LineChart";
+                case CALENDAR:
+                    return "Calendar";
+                case NOTE:
+                    return "Note";
+                case LOCATION:
+                    return "Location";
+                case KILLAPP:
+                    return "KillApp";
+                default: throw new NoSuchElementException();
+            }
         }
     }
 }

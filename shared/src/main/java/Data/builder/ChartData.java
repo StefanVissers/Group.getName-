@@ -1,26 +1,26 @@
-package getname.group.project_4.charts.builder;
-
-import android.text.TextUtils;
+package Data.builder;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import getname.group.project_4.debug.LogHelper;
+import Data.Queries;
 
 public class ChartData implements Serializable {
     private final String sql_query;
     private final String desc;
     private final String title;
     private final String color;
+    private final Queries.RelativeTime relativeTime;
 
     ChartData(final String sql_query, final String title,
-              final String desc, final String color) {
+              final String desc, final String color,
+              final Queries.RelativeTime relativeTime) {
         this.sql_query = sql_query;
         this.title = title;
         this.desc = desc;
         this.color = color;
+        this.relativeTime = relativeTime;
     }
 
     public String getSql_query() {
@@ -35,14 +35,18 @@ public class ChartData implements Serializable {
     public String getColor() {
         return color;
     }
+    public Queries.RelativeTime getRelativeTime() {
+        return relativeTime;
+    }
 
     public static class ChartDataBuilder {
         private String nestedQuery;
         private String nestedFQuery = null;
-        private String nestedFilter;
+        private String nestedFilter = null;
         private String nestedTitle = "";
         private String nestedDesc = "";
         private String nestedColor = "#000000";
+        private Queries.RelativeTime nestedRelativeTime = null;
 
         public ChartDataBuilder(final String newQuery) {
             nestedQuery = newQuery;
@@ -68,33 +72,31 @@ public class ChartData implements Serializable {
 
             String OLDQuery = this.nestedQuery;
             List<String> unFilteredQuery = Arrays.asList(OLDQuery.split(" "));
-            List<String> filteredQuery = new ArrayList<>();
+            String filteredQuery = "";
 
             for (int i = 0; i < unFilteredQuery.size(); i++) {
-                unFilteredQuery.set(i, unFilteredQuery.get(i) + " ");
+                unFilteredQuery.set(i, unFilteredQuery.get(i));
                 String s = unFilteredQuery.get(i);
-                if (unFilteredQuery.get(i).equalsIgnoreCase("(Begindatum ")) {
-//                    filteredQuery.add("where ");
-//                    filteredQuery.add(this.nestedFilter);
-//                    filteredQuery.add(" and ");
-                    filteredQuery.add(i, "Cast(jaar AS INTEGER) " + this.nestedFilter);
-                    filteredQuery.add(" and ");
-                    filteredQuery.add("(Begindatum ");
+                if (unFilteredQuery.get(i).equalsIgnoreCase("Where")) {
+                    filteredQuery += "Where ";
+                    filteredQuery += this.nestedFilter;
+                    filteredQuery += " and ";
                 } else {
-                    filteredQuery.add(unFilteredQuery.get(i));
+                    filteredQuery += unFilteredQuery.get(i) + " ";
                 }
             }
 
-            String newQuery = TextUtils.join("", filteredQuery);
-            LogHelper.logDebugMessage("FILTER", newQuery);
-            nestedFQuery = newQuery;
+            nestedFQuery = filteredQuery;
+        }
+
+        public void setNestedRelativeTime(Queries.RelativeTime nestedRelativeTime) {
+            this.nestedRelativeTime = nestedRelativeTime;
         }
 
         public ChartData createChartData() {
-//            return new ChartData(nestedQuery,nestedTitle,nestedDesc,nestedColor);
             return nestedFQuery == null ?
-                    new ChartData(nestedQuery,nestedTitle,nestedDesc,nestedColor) :
-                    new ChartData(nestedFQuery,nestedTitle,nestedDesc,nestedColor);
+                    new ChartData(nestedQuery,nestedTitle,nestedDesc,nestedColor,nestedRelativeTime) :
+                    new ChartData(nestedFQuery,nestedTitle,nestedDesc,nestedColor,nestedRelativeTime);
         }
     }
 }

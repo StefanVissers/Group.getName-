@@ -2,35 +2,39 @@ package Data;
 
 //import com.sun.xml.internal.fastinfoset.util.StringArray;
 
+import java.util.NoSuchElementException;
+
 /**
  * Created by floris-jan on 01-07-16.
  */
 public class Queries {
-    public String[] getBarStat1() {
+    private Queries() {}
+
+    public static String[] getBarStat1() {
         return new String[] { "sql: " +
-                "Select [Deelgem.], Count(*) as cnt\n" +
-                "From fietstrommels\n" +
-                "Where [Deelgem.] <> \"\"\n" +
-                "Group By [Deelgem.]\n" +
-                "Order By cnt Desc\n" +
+                "Select [Deelgem.], Count(*) as cnt " +
+                "From fietstrommels " +
+                "Where [Deelgem.] <> \"\" " +
+                "Group By [Deelgem.] " +
+                "Order By cnt Desc " +
                 "Limit 5",
                 "title: " +
                 "Fietstrommels",
                 "desc: " +
-                "Aantal fietstrommels per wijk" };
+                "Aantal fietstrommels per wijk"};
     }
 
-    public String[] getGroupedBarStat1() {
+    public static String[] getGroupedBarStat1() {
         return new String[] { "" };
     }
 
-    public String[] getPieStat1() {
+    public static String[] getPieStat1() {
         return new String[] {"sql: " +
-                "select [kleur], Count(*) as cnt\n" +
-                "from fietsdiefstal\n" +
-                "where [kleur]<>\"\"\n" +
-                "Group By [kleur]\n" +
-                "Order By cnt Desc\n" +
+                "select [kleur], Count(*) as cnt " +
+                "from fietsdiefstal " +
+                "where [kleur]<>\"\" " +
+                "Group By [kleur] " +
+                "Order By cnt Desc " +
                 "limit 7",
                 "title: " +
                 "Fietskleur",
@@ -38,13 +42,13 @@ public class Queries {
                 "Gestolen fietsen per kleur"};
     }
 
-    public String[] getPieStat2() {
+    public static String[] getPieStat2() {
         return new String[] { "sql: " +
-                "select [merk], Count(*) as cnt\n" +
-                "from fietsdiefstal\n" +
-                "where [merk]<>\"\"\n" +
-                "Group By [merk]\n" +
-                "Order By cnt Desc\n" +
+                "select [merk], Count(*) as cnt " +
+                "from fietsdiefstal " +
+                "where [merk]<>\"\" " +
+                "Group By [merk] " +
+                "Order By cnt Desc " +
                 "limit 5",
                 "title: " +
                 "Fietsmerk",
@@ -52,36 +56,58 @@ public class Queries {
                 "Gestolen fietsen per merk"};
     }
 
-    public String[] getLineStat1() {
+    public static String[] getLineStat1() {
         return new String[] { "sql: " +
-                "SELECT replace(Begindatum, rtrim(Begindatum, replace(Begindatum, '/', '' ) ), '') AS [jaar],\n" +
-                "\t\t\treplace(Begindatum, ltrim(Begindatum, replace(Begindatum, '/', '' ) ), '') AS [maand],\n" +
-                "\t\t\tCount(Begindatum) AS [diefstallen]\n" +
-                "FROM fietsdiefstal\n" +
-                "Where Begindatum <> null or Begindatum <> \"\"\n" +
-                "Group By jaar, maand\n" +
+                "SELECT replace(Begindatum, rtrim(Begindatum, replace(Begindatum, '/', '' ) ), '') AS [jaar], " +
+                "replace(Begindatum, ltrim(Begindatum, replace(Begindatum, '/', '' ) ), '') AS [maand], " +
+                "Count(Begindatum) AS [diefstallen] " +
+                "FROM fietsdiefstal " +
+                "Where Begindatum <> null or Begindatum <> \"\" " +
+                "Group By jaar, maand " +
                 "Order By jaar, maand;",
                 "title: " +
-                        "Fietsdiefstal",
+                "Fietsdiefstal",
                 "desc: " +
-                        "Gestolen fietsen per maand"};
+                "Gestolen fietsen per maand"};
     }
 
-    public String[] getLineStat1(int year, boolean before) {
-        String filter = before ? " > " + year : " < " + year;
+    public static String[] getLineStat1(int year, RelativeTime relativeTime) {
+        String filter = relativeTime == RelativeTime.BEFORE ? " < " + year :
+                        relativeTime == RelativeTime.CURRENT ? " = " + year :
+                        relativeTime == RelativeTime.AFTER ? " > " + year : null;
+
         return new String[] { "sql: " +
-                "SELECT replace(Begindatum, rtrim(Begindatum, replace(Begindatum, '/', '' ) ), '') AS [jaar],\n" +
-                "\t\t\treplace(Begindatum, ltrim(Begindatum, replace(Begindatum, '/', '' ) ), '') AS [maand],\n" +
-                "\t\t\tCount(Begindatum) AS [diefstallen]\n" +
-                "FROM fietsdiefstal\n " +
-                "Where (Begindatum <> null or Begindatum <> \"\")\n" +
-                "Group By jaar, maand\n" +
+                "SELECT replace(Begindatum, rtrim(Begindatum, replace(Begindatum, '/', '' ) ), '') AS [jaar], " +
+                "replace(Begindatum, ltrim(Begindatum, replace(Begindatum, '/', '' ) ), '') AS [maand], " +
+                "Count(Begindatum) AS [diefstallen] " +
+                "FROM fietsdiefstal " +
+                "Where (Begindatum <> null or Begindatum <> \"\") " +
+                "Group By jaar, maand " +
                 "Order By jaar, maand;",
                 "title: " +
                 "Fietsdiefstal",
                 "desc: " +
                 "Gestolen fietsen per maand",
                 "filter: " +
-                filter};
+                "Cast(jaar AS INTEGER)" + filter,
+                "reltime: " +
+                relativeTime.toString()};
+    }
+
+    public enum RelativeTime {
+        BEFORE,
+        CURRENT,
+        AFTER;
+
+        @Override
+        public String toString() {
+            switch (this) {
+                case BEFORE: return "BEFORE";
+                case CURRENT: return "CURRENT";
+                case AFTER: return "AFTER";
+                default: throw new NoSuchElementException();
+            }
+        }
+
     }
 }
