@@ -149,11 +149,11 @@ public class General {
 
         Text sceneText = new Text();
         sceneText.setText("Copyright© Group.getName() 2016");
-        sceneText.setFont(Font.font("null", FontWeight.LIGHT, 50));
+        sceneText.setFont(Font.font("null", FontWeight.LIGHT, 40));
 
         Text sceneTextSub = new Text();
         sceneTextSub.setText("Thomas de Graaf, Stefan Visser, Jacob Vroegop, L. Pekelharing, F.J. Willemsen");
-        sceneTextSub.setFont(Font.font("null", FontWeight.LIGHT, 30));
+        sceneTextSub.setFont(Font.font("null", FontWeight.LIGHT, 20));
         if(Main.scene != null) { sceneTextSub.setWrappingWidth(sceneText.getWrappingWidth()); }
         else { sceneTextSub.setWrappingWidth(Main.width); }
         sceneTextSub.setTextAlignment(TextAlignment.CENTER);

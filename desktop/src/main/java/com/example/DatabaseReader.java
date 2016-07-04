@@ -58,4 +58,18 @@ public class DatabaseReader {
         }
         return series;
     }
+
+    public XYChart.Series getLineChartData(ChartData chartData, int column) {
+        XYChart.Series series = new XYChart.Series();
+        ResultSet resultSet;
+        try {
+            resultSet = statement.executeQuery(chartData.getSql_query());
+            while (resultSet.next()) {
+                series.getData().add(new XYChart.Data(resultSet.getInt(1), resultSet.getInt(column+1)));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return series;
+    }
 }

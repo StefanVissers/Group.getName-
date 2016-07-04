@@ -2,19 +2,19 @@ package com.example;
 
 import Data.Queries;
 import Data.builder.ChartData;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
-import javafx.scene.chart.*;
-import javafx.scene.chart.PieChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.layout.VBox;
 
 /**
  * Created by floris-jan on 04-07-16.
  */
-public class BarChart {
+public class LineChart {
 
     static VBox sceneView;
-    static javafx.scene.chart.BarChart barChart;
+    static javafx.scene.chart.LineChart lineChart;
     static CategoryAxis XAxis;
     static NumberAxis YAxis;
 
@@ -24,7 +24,7 @@ public class BarChart {
         YAxis = new NumberAxis();
         sceneView.setPadding(new Insets(10, 10, 10, 10));
         sceneView.setPrefSize(Main.width, Main.height);
-        barChart = new javafx.scene.chart.BarChart(XAxis, YAxis);
+        lineChart = new javafx.scene.chart.LineChart(XAxis, YAxis);
 
         ChartData cd;
         ChartData.ChartDataBuilder builder = null;
@@ -54,13 +54,13 @@ public class BarChart {
             }
         }
 
-        XAxis.setLabel("Wijk");
-        YAxis.setLabel("Aantal fietstrommels");
-        XYChart.Series series = new DatabaseReader().getBarChartData(builder.createChartData(), 1);
+        XAxis.setLabel("Jaar");
+        YAxis.setLabel("Gestolen fietsen");
+        XYChart.Series series = new DatabaseReader().getBarChartData(builder.createChartData(), 2);
         series.setName(builder.createChartData().getTitle());
-        barChart.getData().add(series);
-        barChart.setTitle(builder.createChartData().getDesc());
-        sceneView.getChildren().add(barChart);
+        lineChart.getData().add(series);
+        lineChart.setTitle(builder.createChartData().getDesc());
+        sceneView.getChildren().add(lineChart);
         return sceneView;
     }
 }
