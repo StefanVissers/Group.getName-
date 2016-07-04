@@ -148,11 +148,11 @@ public class General {
         sceneView.setAlignment(Pos.CENTER);
 
         Text sceneText = new Text();
-        sceneText.setText("Copyright© BitsPlease 2016");
+        sceneText.setText("Copyright© Group.getName() 2016");
         sceneText.setFont(Font.font("null", FontWeight.LIGHT, 50));
 
         Text sceneTextSub = new Text();
-        sceneTextSub.setText("J.W. Taylor-Parkins, M. de Klein, L. Pekelharing, F.J. Willemsen");
+        sceneTextSub.setText("Thomas de Graaf, Stefan Visser, Jacob Vroegop, L. Pekelharing, F.J. Willemsen");
         sceneTextSub.setFont(Font.font("null", FontWeight.LIGHT, 30));
         if(Main.scene != null) { sceneTextSub.setWrappingWidth(sceneText.getWrappingWidth()); }
         else { sceneTextSub.setWrappingWidth(Main.width); }
