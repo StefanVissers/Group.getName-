@@ -43,5 +43,4 @@ dependencies {
     compile 'com.google.android.gms:play-services-appindexing:9.2.0'
     compile 'com.evernote:android-sdk:2.0.0-RC3'
     compile 'com.evernote:android-intent:1.0.3'
-    compile 'com.google.android.gms:play-services:9.2.0'
 }

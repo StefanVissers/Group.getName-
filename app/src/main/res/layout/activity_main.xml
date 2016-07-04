@@ -36,7 +36,7 @@
         android:layout_height="250px"
         android:layout_width="500px"
         android:text="@string/to_location_menu"
-        android:id="@+id/buttontoLocation"
+        android:id="@+id/buttonToLocation"
         android:tag="location"
         android:onClick="changeActivity"
         android:layout_below="@+id/buttonToCalenderMenu"
@@ -46,10 +46,10 @@
         android:layout_height="250px"
         android:layout_width="500px"
         android:text="@string/to_map_menu"
-        android:id="@+id/buttontomap"
+        android:id="@+id/buttonToMap"
         android:tag="map"
         android:onClick="changeActivity"
-        android:layout_below="@+id/buttontoLocation"
+        android:layout_below="@+id/buttonToLocation"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
