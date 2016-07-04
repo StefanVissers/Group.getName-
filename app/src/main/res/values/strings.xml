@@ -8,6 +8,7 @@
     <string name="to_chart_menu">To Chart Menu</string>
     <string name="to_calender_menu">To Calender Menu</string>
     <string name="to_location_menu">To Location Menu</string>
+    <string name="to_map_menu">To Map Menu</string>
 
     <!--activity_chartmenu Strings -->
     <string name="show_barchart">Show BarChart</string>
@@ -25,4 +26,12 @@
     <!--activity_piechart Strings-->
     <string name="piechart_text">5 meest gestolen fietsen</string>
 
+    <!--Jacobs dingen niet aankomen-->
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="date_label_set">Press the button to set the date</string>
+    <string name="date_button_set">Set Date</string>
+    <string name="date_view_set">The Date is: </string>
+    <string name="date_selected"></string>
+    <string name="title_activity_maps">Map</string>
 </resources>

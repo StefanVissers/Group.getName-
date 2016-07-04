@@ -33,14 +33,15 @@ configurations {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.google.android.gms:play-services-location:9.2.0'
     testCompile 'junit:junit:4.12'
+    compile project(':shared')
+    compile 'com.google.android.gms:play-services-location:9.2.0'
     compile 'com.google.android.gms:play-services-maps:9.2.0'
     compile 'com.android.support:appcompat-v7:24.0.0'
     compile 'com.jjoe64:graphview:4.0.1'
     compile 'com.github.PhilJay:MPAndroidChart:v2.2.5'
-    compile project(':shared')
     compile 'com.google.android.gms:play-services-appindexing:9.2.0'
     compile 'com.evernote:android-sdk:2.0.0-RC3'
     compile 'com.evernote:android-intent:1.0.3'
+    compile 'com.google.android.gms:play-services:9.2.0'
 }

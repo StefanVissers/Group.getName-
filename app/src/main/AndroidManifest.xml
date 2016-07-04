@@ -2,6 +2,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="getname.group.project_4">
 
+    <uses-sdk android:minSdkVersion="14" />
+
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.SEND_RESPOND_VIA_MESSAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <meta-data
+        android:name="com.google.android.gms.version"
+        android:value="@integer/google_play_services_version" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,23 +28,36 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.ChartMenuActivity"></activity>
-        <activity android:name=".activities.CalendarActivity"></activity>
-        <activity android:name=".charts.BarChartActivity"></activity>
-        <activity android:name=".charts.GroupedBarChartActivity"></activity>
-        <activity android:name=".charts.LineChartActivity"></activity>
-        <activity android:name=".charts.PieChartActivity"></activity>
-        <activity android:name=".activities.MyLocation"></activity>
+        <activity android:name=".activities.ChartMenuActivity" />
+        <activity android:name=".activities.CalendarActivity" />
+        <activity android:name=".charts.BarChartActivity" />
+        <activity android:name=".charts.GroupedBarChartActivity" />
+        <activity android:name=".charts.LineChartActivity" />
+        <activity android:name=".charts.PieChartActivity" />
+        <activity android:name=".activities.MyLocation" />
+        <activity android:name=".activities.MapsActivity"/>
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <!--<activity-->
+            <!--android:name=".activities.MapsActivity"-->
+            <!--android:label="@string/title_activity_maps">-->
+            <!--<meta-data-->
+                <!--android:name="android.support.PARENT_ACTIVITY"-->
+                <!--android:value="getname.group.project_4.MainActivity" />-->
+        <!--</activity>-->
     </application>
 
-    <uses-sdk android:minSdkVersion="14" />
-    <uses-permission android:name="android.permission.READ_CALENDAR" />
-    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.SEND_RESPOND_VIA_MESSAGE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <meta-data
-    android:name="com.google.android.gms.version"
-    android:value="@integer/google_play_services_version" />
 </manifest>
