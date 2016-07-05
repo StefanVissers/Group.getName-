@@ -6,8 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
-//import com.evernote.edam.type.Note;
-//import com.evernote.edam.type.Notebook;
+import com.evernote.edam.type.Note;
+import com.evernote.edam.type.Notebook;
 
 import java.util.NoSuchElementException;
 
@@ -114,6 +114,11 @@ public abstract class ActivityExtender extends AppCompatActivity {
                 intent = new Intent(this, CalendarActivity.class);
                 intent.setAction(Intent.ACTION_EDIT);
                 break;
+            case MAP:
+                gotDestinationIntent =true;
+                setContentView(R.layout.activity_maps);
+                intent = new Intent(this,MapsActivity.class);
+                break;
             case KILLAPP:
                 gotDestinationIntent = true;
                 intent = getIntent();
@@ -146,6 +151,7 @@ public abstract class ActivityExtender extends AppCompatActivity {
         LINECHART,
         CALENDAR,
         NOTE,
+        MAP,
         LOCATION,
         KILLAPP;
 

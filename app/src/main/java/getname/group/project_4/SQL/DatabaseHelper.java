@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.DataSet;
 import com.github.mikephil.charting.data.Entry;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -146,6 +147,31 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
             do {
                 number = cursor.getInt(column);
+                list.add(new Entry(number, counter));
+                counter++;
+                Log.i("Query number ", number + "");
+            } while (cursor.moveToNext());
+            cursor.close();
+            return list;
+        } catch (Exception e) {
+            Log.e("Exception", e.getMessage());
+            return null;
+        }
+    }
+    public ArrayList<Entry> getFloatEntryList(String query, int column) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        Cursor cursor;
+        ArrayList<Entry> list = new ArrayList<>();
+
+        try {
+            cursor = database.rawQuery(query, null);
+            if(cursor == null) return null;
+            float number;
+            int counter = 0;
+            cursor.moveToFirst();
+
+            do {
+                number = cursor.getFloat(column);
                 list.add(new Entry(number, counter));
                 counter++;
                 Log.i("Query number ", number + "");

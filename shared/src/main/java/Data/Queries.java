@@ -123,6 +123,14 @@ public class Queries {
                 relativeTime.toString()};
     }
 
+    public static String[] getFietstrommelsCoord(){
+        return new String[]{"sql: " +
+                "SELECT [X-Coord.] AS X," +
+                "[Y-Coord.] AS Y " +
+                "FROM fietstrommels"
+        };
+    }
+
     public enum RelativeTime {
         BEFORE,
         CURRENT,

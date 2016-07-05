@@ -36,6 +36,7 @@ public class MainActivity extends ActivityExtender {
        LogHelper.logDebugMessage("BACK_PRESS", this);
 
         View v = new View(this);
+        //  Kill the app.
         v.setTag("KILLAPP");
         changeActivity(v);
     }

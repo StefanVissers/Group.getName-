@@ -4,6 +4,7 @@ package com.example;
  * Created by floris-jan on 30-06-16.
  */
 
+import Data.Queries;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -31,23 +32,20 @@ public class Main extends Application {
     public static boolean openInNewWindow;
     public static BorderPane borderPane;
 
-    public static Stage mapStage;
-    public static Scene mapScene;
+    public static Stage pieChart1Stage;
+    public static Scene pieChart1Scene;
 
-    public static Stage pieChartStage;
-    public static Scene pieChartScene;
-
-    public static Stage areaChart1Stage;
-    public static Scene areaChart1Scene;
-
-    public static Stage areaChart2Stage;
-    public static Scene areaChart2Scene;
+    public static Stage lineChart1Stage;
+    public static Scene lineChart1Scene;
 
     public static Stage pieChart2Stage;
     public static Scene pieChart2Scene;
 
-    public static Stage stackBarChartStage;
-    public static Scene stackBarChartScene;
+    public static Stage barChart1Stage;
+    public static Scene barChart1Scene;
+
+    public static Stage stackBarChart1Stage;
+    public static Scene stackBarChart1Scene;
 
     // Setting if db name gets changed
     public static String DatabaseName = "Database";
@@ -87,6 +85,7 @@ public class Main extends Application {
         width = 1000;
         height = 800;
         borderPane = new BorderPane();
+        final DatabaseReader databaseReader = new DatabaseReader();
 
         //Creates HBox-menubar layout and buttons
         MenuBar menuBar = new MenuBar();
@@ -99,13 +98,13 @@ public class Main extends Application {
         MenuItem quit = new MenuItem("Quit");
 
         MenuItem start = new MenuItem("Start");
-        MenuItem stat1 = new MenuItem("Question 1: ?");
-        MenuItem stat2 = new MenuItem("Question 2: ?");
-        MenuItem stat3 = new MenuItem("Question 2: ?");
+        MenuItem stat1 = new MenuItem("5 meest gestolen fietsenkleuren");
+        MenuItem stat2 = new MenuItem("5 meest gestolen fietsenmerken");
+        MenuItem stat3 = new MenuItem("Gestolen fietsen per maand");
         MenuItem stat4 = new MenuItem("Question 3: ?");
         MenuItem stat5 = new MenuItem("Question 4: ?");
-        MenuItem stat6 = new MenuItem("Question 5: ?");
-        MenuItem stat7 = new MenuItem("Question 5: ?");
+        MenuItem stat6 = new MenuItem("Wijken met de meeste trommels");
+        MenuItem stat7 = new MenuItem("Question 6: ?");
 
         general.getItems().addAll(help, preferences, about, quit);
         statistics.getItems().addAll(start, stat1,stat2,stat3,stat4,stat5,stat6,stat7);
@@ -135,6 +134,13 @@ public class Main extends Application {
             }
         });
 
+        start.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                borderPane.setCenter(General.getStartScene());
+            }
+        });
+
         quit.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -145,16 +151,17 @@ public class Main extends Application {
         stat1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                VBox vBox = new PieChart().getScene(Queries.getPieStat1());
                 if(openInNewWindow) {
-                    pieChartStage = new Stage();
-                    pieChartStage.setTitle("Pie Chart");
-//                pieChartScene = new Scene(PieChartX.getScene(chartInfo, false), width, height);
-//                pieChartScene.setRoot(PieChartX.getScene(chartInfo, false));
-                    pieChartStage.setScene(pieChartScene);
-                    pieChartStage.show();
+                    pieChart1Stage = new Stage();
+                    pieChart1Stage.setTitle("Pie Chart");
+                    pieChart1Scene = new Scene(vBox, width, height);
+                    pieChart1Scene.setRoot(vBox);
+                    pieChart1Stage.setScene(pieChart1Scene);
+                    pieChart1Stage.show();
                 }
                 else {
-//                borderPane.setCenter(PieChartX.getScene(chartInfo, false));
+                    borderPane.setCenter(vBox);
                 }
             }
         });
@@ -162,16 +169,17 @@ public class Main extends Application {
         stat2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                VBox vBox = new PieChart().getScene(Queries.getPieStat2());
                 if(openInNewWindow) {
-                    areaChart1Stage = new Stage();
-                    areaChart1Stage.setTitle("Area Chart 1");
-//                areaChart1Scene = new Scene(AreaChartX.getScene(chartInfo), width, height);
-//                areaChart1Scene.setRoot(AreaChartX.getScene(chartInfo));
-                    areaChart1Stage.setScene(areaChart1Scene);
-                    areaChart1Stage.show();
+                    pieChart2Stage = new Stage();
+                    pieChart2Stage.setTitle("Pie Chart");
+                    pieChart2Scene = new Scene(vBox, width, height);
+                    pieChart2Scene.setRoot(vBox);
+                    pieChart2Stage.setScene(pieChart2Scene);
+                    pieChart2Stage.show();
                 }
                 else {
-//                    borderPane.setCenter(AreaChartX.getScene(chartInfo));
+                    borderPane.setCenter(vBox);
                 }
             }
         });
@@ -179,16 +187,17 @@ public class Main extends Application {
         stat3.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                VBox vBox = LineChart.getScene(Queries.getLineStat1());
                 if(openInNewWindow) {
-                    areaChart2Stage = new Stage();
-                    areaChart2Stage.setTitle("Area Chart 2");
-//                    areaChart2Scene = new Scene(AreaChartX.getScene(chartInfo), width, height);
-//                    areaChart2Scene.setRoot(AreaChartX.getScene(chartInfo));
-                    areaChart2Stage.setScene(areaChart2Scene);
-                    areaChart2Stage.show();
+                    lineChart1Stage = new Stage();
+                    lineChart1Stage.setTitle("Line Chart");
+                    lineChart1Scene = new Scene(vBox, width, height);
+                    lineChart1Scene.setRoot(vBox);
+                    lineChart1Stage.setScene(lineChart1Scene);
+                    lineChart1Stage.show();
                 }
                 else {
-//                    borderPane.setCenter(AreaChartX.getScene(chartInfo));
+                    borderPane.setCenter(vBox);
                 }
             }
         });
@@ -220,12 +229,12 @@ public class Main extends Application {
             @Override
             public void handle(ActionEvent actionEvent) {
                 if(openInNewWindow) {
-                    stackBarChartStage = new Stage();
-                    stackBarChartStage.setTitle("Stacked Bar Chart");
+                    stackBarChart1Stage = new Stage();
+                    stackBarChart1Stage.setTitle("Stacked Bar Chart");
 //                    stackBarChartScene = new Scene(StackBarChart1.getScene("buurtprobleem fietsendiefstal", false), width, height);
 //                    stackBarChartScene.setRoot(StackBarChart1.getScene("buurtprobleem fietsendiefstal", false));
-                    stackBarChartStage.setScene(stackBarChartScene);
-                    stackBarChartStage.show();
+                    stackBarChart1Stage.setScene(stackBarChart1Scene);
+                    stackBarChart1Stage.show();
                 }
                 else {
 //                    borderPane.setCenter(StackBarChart1.getScene("buurtprobleem fietsendiefstal", false));
@@ -236,34 +245,17 @@ public class Main extends Application {
         stat6.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                VBox vBox = BarChart.getScene(Queries.getBarStat1());
                 if(openInNewWindow) {
-                    mapStage = new Stage();
-                    mapStage.setTitle("Map");
-//                    mapScene = new Scene(MapChart1.getScene(), width, height);
-//                    mapScene.setRoot(MapChart1.getScene());
-                    mapStage.setScene(mapScene);
-                    mapStage.show();
+                    barChart1Stage = new Stage();
+                    barChart1Stage.setTitle("BarChart");
+                    barChart1Scene = new Scene(vBox);
+                    barChart1Scene.setRoot(vBox);
+                    barChart1Stage.setScene(barChart1Scene);
+                    barChart1Stage.show();
                 }
                 else {
-//                    borderPane.setCenter(MapChart1.getScene());
-                }
-            }
-        });
-
-        stat7.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                String year = 2006 + "";
-                if(openInNewWindow) {
-                    mapStage = new Stage();
-                    mapStage.setTitle("Map");
-//                    mapScene = new Scene(MapChart2.getScene(year), width, height);
-//                    mapScene.setRoot(MapChart2.getScene(year));
-                    mapStage.setScene(mapScene);
-                    mapStage.show();
-                }
-                else {
-//                    borderPane.setCenter(MapChart2.getScene(year));
+                    borderPane.setCenter(BarChart.getScene(Queries.getBarStat1()));
                 }
             }
         });
