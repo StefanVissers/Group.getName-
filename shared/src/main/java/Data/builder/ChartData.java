@@ -93,6 +93,20 @@ public class ChartData implements Serializable {
             this.nestedRelativeTime = nestedRelativeTime;
         }
 
+        public void tryParse(String type, String value) {
+            if (type.equalsIgnoreCase("title")) {
+                this.setNestedTitle(value);
+            } else if (type.equalsIgnoreCase("desc")) {
+                this.setNestedDesc(value);
+            } else if (type.equalsIgnoreCase("color")) {
+                this.setNestedColor(value);
+            } else if (type.equalsIgnoreCase("filter")) {
+                this.setNestedFilter(value);
+            } else if (type.equalsIgnoreCase("reltime")) {
+                this.setNestedRelativeTime(Queries.RelativeTime.valueOf(value));
+            }
+        }
+
         public ChartData createChartData() {
             return nestedFQuery == null ?
                     new ChartData(nestedQuery,nestedTitle,nestedDesc,nestedColor,nestedRelativeTime) :

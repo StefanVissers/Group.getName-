@@ -10,6 +10,7 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import getname.group.project_4.R;
 import getname.group.project_4.SQL.DatabaseHelper;
@@ -70,7 +71,9 @@ public class BarChartActivity extends ActivityExtender implements Chart {
         LogHelper.logDebugMessage("ADD_DATA", this);
     }
 
-    public ChartData getData() {
-        return chartData;
+    public List<ChartData> getData() {
+        List<ChartData> cd = new ArrayList<>();
+        cd.add(chartData);
+        return cd;
     }
 }

@@ -25,7 +25,36 @@ public class Queries {
     }
 
     public static String[] getGroupedBarStat1() {
-        return new String[] { "" };
+        return new String[] {
+            "^START^1",
+                "sql: " +
+                    "SELECT REPLACE(Begindatum, RTRIM(Begindatum, REPLACE(Begindatum, '/', '' ) ), '') AS [jaar], " +
+                    "REPLACE(Begindatum, LTRIM(Begindatum, REPLACE(Begindatum, '/', '' ) ), '') AS [maand], " +
+                    "COUNT(Begindatum) AS [diefstallen] " +
+                    "FROM fietsdiefstal " +
+                    "WHERE (Begindatum <> NULL OR Begindatum <> \"\")" +
+                    "GROUP BY jaar, maand " +
+                    "ORDER BY jaar, maand",
+                "title: " +
+                    "Fietsdiefstallen",
+                "desc: " +
+                    "Aantal fietsdiefstallen per maand",
+            "^END^1",
+
+            "^START^2",
+                "sql: " +
+                    "SELECT replace(Mutdatum, rtrim(Mutdatum, replace(Mutdatum, '-', '' ) ), '') AS [jaar], " +
+                    "substr(ltrim(ltrim(Mutdatum, \"0123456789\"), \"-\"),3,-3) AS [maand], " +
+                    "Count(*) AS cnt " +
+                    "FROM fietstrommels " +
+                    "GROUP BY jaar, maand " +
+                    "ORDER BY jaar, maand DESC",
+                "title: " +
+                    "Fietstrommels",
+                "desc: " +
+                    "Actieve fietstrommels per maand",
+            "^END^2"
+        };
     }
 
     public static String[] getPieStat1() {

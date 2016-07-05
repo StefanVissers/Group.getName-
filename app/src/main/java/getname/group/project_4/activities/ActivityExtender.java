@@ -73,35 +73,40 @@ public abstract class ActivityExtender extends AppCompatActivity {
                 barChartFactory = new BarChartFactory();
                 barChart = barChartFactory.create(Queries.getBarStat1());
                 intent = new Intent(this, barChart.getClass());
-                intent.putExtra("ChartData", barChart.getData());
+                intent.putExtra("ChartData", barChart.getData().get(0));
                 break;
             case GROUPEDBARCHART:
                 gotDestinationIntent = true;
                 groupedBarChartFactory = new GroupedBarChartFactory();
                 groupedBarChartActivity = groupedBarChartFactory.create(Queries.getGroupedBarStat1());
                 intent = new Intent(this, groupedBarChartActivity.getClass());
-                intent.putExtra("ChartData", groupedBarChartActivity.getData());
+                int cdAmount = 0;
+                for (int i = 0; i < groupedBarChartActivity.getData().size(); i++) {
+                    intent.putExtra("ChartData" + i, groupedBarChartActivity.getData().get(i));
+                    cdAmount++;
+                }
+                intent.putExtra("cdAmount", cdAmount);
                 break;
             case PIECHART1:
                 gotDestinationIntent = true;
                 pieChartFactory = new PieChartFactory();
                 pieChart = pieChartFactory.create(Queries.getPieStat1());
                 intent = new Intent(this, pieChart.getClass());
-                intent.putExtra("ChartData", pieChart.getData());
+                intent.putExtra("ChartData", pieChart.getData().get(0));
                 break;
             case PIECHART2:
                 gotDestinationIntent = true;
                 pieChartFactory = new PieChartFactory();
                 pieChart = pieChartFactory.create(Queries.getPieStat2());
                 intent = new Intent(this, pieChart.getClass());
-                intent.putExtra("ChartData", pieChart.getData());
+                intent.putExtra("ChartData", pieChart.getData().get(0));
                 break;
             case LINECHART:
                 gotDestinationIntent = true;
                 lineChartFactory = new LineChartFactory();
                 lineChart = lineChartFactory.create(Queries.getLineStat1(2012, Queries.RelativeTime.CURRENT));
                 intent = new Intent(this, lineChart.getClass());
-                intent.putExtra("ChartData", lineChart.getData());
+                intent.putExtra("ChartData", lineChart.getData().get(0));
                 break;
             case CALENDAR:
                 gotDestinationIntent = true;

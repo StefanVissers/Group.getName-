@@ -4,22 +4,20 @@ package getname.group.project_4.charts;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import getname.group.project_4.R;
 import getname.group.project_4.SQL.DatabaseHelper;
@@ -117,7 +115,9 @@ public class LineChartActivity extends ActivityExtender implements Chart {
     }
 
     @Override
-    public ChartData getData() {
-        return chartData;
+    public List<ChartData> getData() {
+        List<ChartData> cd = new ArrayList<>();
+        cd.add(chartData);
+        return cd;
     }
 }

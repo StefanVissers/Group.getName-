@@ -208,6 +208,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    public ArrayList<BarEntry> getCumulativeSum(String query, int column) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        Cursor cursor;
+        ArrayList<BarEntry> list = new ArrayList<>();
+        int total = 0;
+        int counter = 0;
+
+        try {
+            cursor = database.rawQuery(query, null);
+            if(cursor == null) return null;
+            String text;
+
+            while (cursor.moveToNext()) {
+                total += cursor.getInt(column);
+                list.add(new BarEntry( (float) total, counter));
+                counter++;
+                Log.i("Query total ", "" + total);
+            }
+            cursor.close();
+            return list;
+        } catch (Exception e) {
+            Log.e("Exception", e.getMessage());
+            return null;
+        }
+    }
+
     public Cursor getCursor(String query) {
         SQLiteDatabase database = this.getWritableDatabase();
         Cursor cursor;

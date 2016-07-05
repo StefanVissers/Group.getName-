@@ -12,6 +12,7 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import getname.group.project_4.R;
 import getname.group.project_4.SQL.DatabaseHelper;
@@ -69,7 +70,9 @@ public class PieChartActivity extends ActivityExtender implements Chart {
     }
 
     @Override
-    public ChartData getData() {
-        return chartData;
+    public List<ChartData> getData() {
+        List<ChartData> cd = new ArrayList<>();
+        cd.add(chartData);
+        return cd;
     }
 }

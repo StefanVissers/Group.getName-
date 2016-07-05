@@ -2,16 +2,14 @@ package getname.group.project_4.charts;
 
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
@@ -27,12 +25,12 @@ import getname.group.project_4.debug.LogHelper;
 public class GroupedBarChartActivity extends ActivityExtender implements Chart {
     private static int counter = 0;
     private BarChart barchart;
-    ArrayList<BarEntry> entries;
-    ArrayList<IBarDataSet> groups;
-    ArrayList<String> labels;
+    ArrayList<BarEntry> entries = new ArrayList<>();
+    ArrayList<IBarDataSet> dataGroups = new ArrayList<>();
+    ArrayList<String> labels = new ArrayList<>();
     String title;
     String description;
-    ChartData chartData;
+    List<ChartData> chartDatas = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -92,31 +90,51 @@ public class GroupedBarChartActivity extends ActivityExtender implements Chart {
         Intent intent = getIntent();
         barchart = (BarChart) findViewById(R.id.chart);
 
-        chartData = (ChartData) getIntent().getSerializableExtra("ChartData");
+        for (int i = 0; i < getIntent().getIntExtra("cdAmount", -1); i++) {
+            chartDatas.add( (ChartData) getIntent().getSerializableExtra("ChartData" + i));
+        }
 
         DatabaseHelper databaseHelper;
         databaseHelper = new DatabaseHelper(getApplicationContext());
         try {
             databaseHelper.createDataBase();
             databaseHelper.openDataBase();
-            BarDataSet group1 = new BarDataSet(
-                                databaseHelper.getBarEntryList(chartData.getSql_query(), 1),
+
+            ArrayList<BarEntry> barentries1 = databaseHelper.getBarEntryList(chartDatas.get(0).getSql_query(), 1);
+
+            BarDataSet dataGroup1 = new BarDataSet(
+                                databaseHelper.getBarEntryList(chartDatas.get(0).getSql_query(), 2),
                                 "group1");
-            BarDataSet group2 = new BarDataSet(
-                                databaseHelper.getBarEntryList(chartData.getSql_query(), 2),
+            BarDataSet dataGroup2 = new BarDataSet(
+                                databaseHelper.getCumulativeSum(chartDatas.get(1).getSql_query(), 2),
                                 "group2");
 
-            groups.add(group1);
-            groups.add(group2);
+            dataGroup1.setColors(ColorTemplate.COLORFUL_COLORS);
+            dataGroup2.setColors(ColorTemplate.JOYFUL_COLORS);
 
-            labels = databaseHelper.getEntryListLabels(chartData.getSql_query(), 0);
-            description = chartData.getDesc();
-            title = chartData.getTitle();
+            dataGroups.add(dataGroup1);
+            dataGroups.add(dataGroup2);
+
+            ArrayList<String> unProcessedYears = databaseHelper.getEntryListLabels(chartDatas.get(0).getSql_query(), 0);
+            ArrayList<String> unProcessedMonths = databaseHelper.getEntryListLabels(chartDatas.get(0).getSql_query(), 1);
+            if (unProcessedMonths.size() == unProcessedYears.size()) {
+                for (int i = 0; i < unProcessedMonths.size(); i++) {
+                    String month = unProcessedMonths.get(i);
+                    String year = unProcessedYears.get(i);
+                    if (month.length() == 1) {
+                        month = "0" + month;
+                    }
+                    labels.add(month + "/" + year);
+                }
+            }
+
+            description = chartDatas.get(0).getDesc();
+            title = chartDatas.get(0).getTitle();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        BarData data = new BarData(labels, groups);
+        BarData data = new BarData(labels, dataGroups);
         barchart.setData(data);
         barchart.setDescription(description);
         barchart.setVisibleXRangeMaximum(2);
@@ -126,11 +144,11 @@ public class GroupedBarChartActivity extends ActivityExtender implements Chart {
 
     @Override
     public void addData(ChartData cd) {
-        this.chartData = chartData;
+        this.chartDatas.add(cd);
         LogHelper.logDebugMessage("ADD_DATA", this);
     }
 
-    public ChartData getData() {
-        return chartData;
+    public List<ChartData> getData() {
+        return chartDatas;
     }
 }
