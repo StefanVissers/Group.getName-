@@ -1,55 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="#3AA8C1"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+    android:background="@drawable/erasmus2_blurred_logo"
     tools:context=".MainActivity">
 
-    <Button
-        android:layout_height="250px"
-        android:layout_width="500px"
-        android:text="@string/to_chart_menu"
+    <!--android:background="#3AA8C1"-->
+
+    <!--<ImageView-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="fill_parent"-->
+        <!--android:src="@drawable/header"-->
+        <!--android:scaleType = "fitXY"-->
+        <!--android:layout_above="@+id/buttonToChartMenu"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_marginBottom="28dp" />-->
+
+    <ImageButton
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:id="@+id/buttonToChartMenu"
         android:tag="@string/activities_chartmenu"
         android:onClick="changeActivity"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        />
+        android:scaleType="fitCenter"
+        android:src="@drawable/linechart"
+        android:background="@null"
+        android:layout_marginLeft="52dp"
+        android:layout_marginStart="52dp"
+        android:layout_alignTop="@+id/buttonToLocation"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
-    <Button
-        android:layout_height="250px"
-        android:layout_width="500px"
-        android:text="@string/to_calender_menu"
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Charts"
+        android:layout_below="@+id/buttonToChartMenu"
+        android:layout_toStartOf="@id/buttonToChartMenu"
+        android:layout_alignStart="@id/buttonToChartMenu"
+        android:layout_alignRight="@+id/buttonToChartMenu"
+        android:layout_alignEnd="@+id/buttonToChartMenu"
+        android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF" />
+
+    <ImageButton
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:id="@+id/buttonToCalenderMenu"
         android:tag="calendar"
         android:onClick="changeActivity"
-        android:layout_below="@+id/buttonToChartMenu"
-        android:layout_centerHorizontal="true"
-        />
+        android:scaleType="fitCenter"
+        android:src="@drawable/calendar"
+        android:background="@null"
+        android:layout_alignTop="@+id/buttonToMap"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_alignStart="@+id/textView1" />
 
-    <Button
-        android:layout_height="250px"
-        android:layout_width="500px"
-        android:text="@string/to_location_menu"
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Calendar"
+        android:layout_alignStart="@id/buttonToCalenderMenu"
+        android:gravity="center_horizontal"
+        android:layout_alignEnd="@id/buttonToCalenderMenu"
+        android:layout_toStartOf="@id/buttonToCalenderMenu"
+        android:layout_below="@+id/buttonToCalenderMenu"
+        android:layout_alignRight="@+id/buttonToCalenderMenu"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF" />
+
+    <ImageButton
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:id="@+id/buttonToLocation"
         android:tag="location"
         android:onClick="changeActivity"
-        android:layout_below="@+id/buttonToCalenderMenu"
-        android:layout_centerHorizontal="true" />
+        android:scaleType="fitCenter"
+        android:src="@drawable/location"
+        android:background="@null"
+        android:layout_marginRight="38dp"
+        android:layout_marginEnd="38dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
-    <Button
-        android:layout_height="250px"
-        android:layout_width="500px"
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Location Note"
+        android:layout_below="@+id/buttonToLocation"
+        android:layout_toStartOf="@id/buttonToLocation"
+        android:layout_alignStart="@id/buttonToLocation"
+        android:layout_alignRight="@+id/buttonToLocation"
+        android:layout_alignEnd="@+id/buttonToLocation"
+        android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF" />
+
+    <ImageButton
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:text="@string/to_map_menu"
         android:id="@+id/buttonToMap"
         android:tag="map"
         android:onClick="changeActivity"
-        android:layout_below="@+id/buttonToLocation"
-        android:layout_centerHorizontal="true" />
+        android:scaleType="fitCenter"
+        android:src="@drawable/route"
+        android:background="@null"
+        android:layout_below="@+id/textView3"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_alignStart="@+id/textView3"
+        android:layout_marginTop="28dp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Map Route"
+        android:layout_below="@+id/buttonToMap"
+        android:layout_toRightOf="@+id/textView2"
+        android:layout_toStartOf="@id/buttonToMap"
+        android:layout_alignStart="@id/buttonToMap"
+        android:layout_alignRight="@+id/buttonToMap"
+        android:layout_alignEnd="@+id/buttonToMap"
+        android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF" />
 
 </RelativeLayout>
