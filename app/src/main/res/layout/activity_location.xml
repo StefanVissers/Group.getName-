@@ -37,4 +37,14 @@
         android:layout_centerHorizontal="true"
         />
 
+    <Button
+        android:layout_height="250px"
+        android:layout_width="500px"
+        android:text="@string/to_map_menu"
+        android:id="@+id/buttonToMap"
+        android:tag="map"
+        android:onClick="changeActivity"
+        android:layout_below="@+id/address"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
