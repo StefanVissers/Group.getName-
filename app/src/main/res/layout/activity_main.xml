@@ -8,18 +8,20 @@
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
     android:paddingTop="0dp"
-    android:background="#3AA8C1"
+    android:background="@drawable/erasmus2_blurred_logo"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:src="@drawable/header"
-        android:scaleType = "fitXY"
-        android:layout_above="@+id/buttonToChartMenu"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="28dp" />
+    <!--android:background="#3AA8C1"-->
+
+    <!--<ImageView-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="fill_parent"-->
+        <!--android:src="@drawable/header"-->
+        <!--android:scaleType = "fitXY"-->
+        <!--android:layout_above="@+id/buttonToChartMenu"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_marginBottom="28dp" />-->
 
     <ImageButton
         android:layout_width="100dp"
@@ -47,7 +49,9 @@
         android:layout_alignRight="@+id/buttonToChartMenu"
         android:layout_alignEnd="@+id/buttonToChartMenu"
         android:gravity="center_horizontal"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF" />
 
     <ImageButton
         android:layout_width="100dp"
@@ -73,7 +77,9 @@
         android:layout_alignEnd="@id/buttonToCalenderMenu"
         android:layout_toStartOf="@id/buttonToCalenderMenu"
         android:layout_below="@+id/buttonToCalenderMenu"
-        android:layout_alignRight="@+id/buttonToCalenderMenu" />
+        android:layout_alignRight="@+id/buttonToCalenderMenu"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF" />
 
     <ImageButton
         android:layout_width="100dp"
@@ -101,7 +107,9 @@
         android:layout_alignRight="@+id/buttonToLocation"
         android:layout_alignEnd="@+id/buttonToLocation"
         android:gravity="center_horizontal"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF" />
 
     <ImageButton
         android:layout_width="100dp"
@@ -130,6 +138,8 @@
         android:layout_alignRight="@+id/buttonToMap"
         android:layout_alignEnd="@+id/buttonToMap"
         android:gravity="center_horizontal"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF" />
 
 </RelativeLayout>
