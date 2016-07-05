@@ -17,6 +17,8 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
@@ -32,7 +34,7 @@ public class MyLocation extends ActivityExtender implements GoogleApiClient.Conn
     LocationRequest mLocationRequest;
     GoogleApiClient mGoogleApiClient;
 
-    protected Location mLastLocation;
+    protected static Location mLastLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,16 @@ public class MyLocation extends ActivityExtender implements GoogleApiClient.Conn
         {
             Toast.makeText(this,"Security Exception",Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public static double getCurLat(){
+        double currentLatLng = mLastLocation.getLatitude();
+        return currentLatLng;
+    }
+
+    public static double getCurLong(){
+        double currentLongLng = mLastLocation.getLongitude();
+        return currentLongLng;
     }
 
     @Override
@@ -108,7 +120,6 @@ public class MyLocation extends ActivityExtender implements GoogleApiClient.Conn
 
     @Override
     protected void onStop() {
-        mGoogleApiClient.disconnect();
         super.onStop();
     }
 
