@@ -15,4 +15,5 @@ dependencies {
     //    apply from: "http://dl.bintray.com/content/shemnon/javafx-gradle/0.3.0/javafx.plugin"
     compile files('libs/sqlite-jdbc-3.8.11.2.jar')
     compile files('libs/jfxrt.jar')
+    compile project(':shared')
 }

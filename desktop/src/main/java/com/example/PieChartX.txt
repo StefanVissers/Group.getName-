@@ -21,14 +21,13 @@ public class PieChartX {
     //Draws the Pie Chart scene
 
     /**
-     *
      * @param chartInfo
      * @param splitScreen
      * @return
      */
     static VBox getScene(ChartInfo chartInfo, Boolean splitScreen) {
         VBox sceneView = new VBox();
-        sceneView.setPadding(new Insets(10,10,10,10));
+        sceneView.setPadding(new Insets(10, 10, 10, 10));
 
         final PieChart pieChart = new PieChart();
 
@@ -43,7 +42,7 @@ public class PieChartX {
         ResultSetMetaData resultSetMetaData;
         try {
             resultSetMetaData = resultSet.getMetaData();
-            if (pickAreaComboBox.getItems().size() == 0){
+            if (pickAreaComboBox.getItems().size() == 0) {
                 for (int i = 2; i < resultSetMetaData.getColumnCount() + 1; i++) {
                     pickAreaComboBox.getItems().add(resultSetMetaData.getColumnName(i).replaceAll("\n", ""));
                 }
@@ -51,7 +50,7 @@ public class PieChartX {
         } catch (SQLException | NullPointerException e) {
             e.printStackTrace();
         }
-        if(splitScreen) {
+        if (splitScreen) {
             pickAreaComboBox.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
@@ -70,28 +69,36 @@ public class PieChartX {
                     }
                 }
             });
-            pickAreaComboBox.setOnAction((q) -> {
-                ChartInfo oldChartInfo = new ChartInfo(chartInfo.getDbURL(), chartInfo.getDbUsername(), chartInfo.getDbPassword(), chartInfo.getDbQuery(), chartInfo.getRangeSelector());
-                chartInfo.setRangeSelector(pickAreaComboBox.getSelectionModel().getSelectedItem().toString());
-                VBox vbox = new VBox();
-                Text text = new Text();
-                text.setText("Compare the piecharts here.");
-                text.setFont(Font.font("null", FontWeight.MEDIUM, 40));
-                text.setWrappingWidth(Main.scene.getWidth());
-                vbox.getChildren().addAll(text, PieChartX.getScene(chartInfo, true), PieChartX.getScene(oldChartInfo, true));
-                if (Main.openInNewWindow) {
-                    Main.pieChart2Scene.setRoot(vbox);
-                } else {
-                    Main.borderPane.setCenter(vbox);
+
+            pickAreaComboBox.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    ChartInfo oldChartInfo = new ChartInfo(chartInfo.getDbURL(), chartInfo.getDbUsername(), chartInfo.getDbPassword(), chartInfo.getDbQuery(), chartInfo.getRangeSelector());
+                    chartInfo.setRangeSelector(pickAreaComboBox.getSelectionModel().getSelectedItem().toString());
+                    VBox vbox = new VBox();
+                    Text text = new Text();
+                    text.setText("Compare the piecharts here.");
+                    text.setFont(Font.font("null", FontWeight.MEDIUM, 40));
+                    text.setWrappingWidth(Main.scene.getWidth());
+                    vbox.getChildren().addAll(text, PieChartX.getScene(chartInfo, true), PieChartX.getScene(oldChartInfo, true));
+                    if (Main.openInNewWindow) {
+                        Main.pieChart2Scene.setRoot(vbox);
+                    } else {
+                        Main.borderPane.setCenter(vbox);
+                    }
                 }
             });
+
         } else {
-            pickAreaComboBox.setOnAction((q) -> {
-                chartInfo.setRangeSelector(pickAreaComboBox.getSelectionModel().getSelectedItem().toString());
-                if (Main.openInNewWindow) {
-                    Main.pieChartScene.setRoot(getScene(chartInfo, false));
-                } else {
-                    Main.borderPane.setCenter(getScene(chartInfo, false));
+            pickAreaComboBox.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    chartInfo.setRangeSelector(pickAreaComboBox.getSelectionModel().getSelectedItem().toString());
+                    if (Main.openInNewWindow) {
+                        Main.pieChartScene.setRoot(getScene(chartInfo, false));
+                    } else {
+                        Main.borderPane.setCenter(getScene(chartInfo, false));
+                    }
                 }
             });
         }
@@ -111,7 +118,7 @@ public class PieChartX {
         try {
             while (resultSet.next()) {
                 for (int i = 1; i < resultSet.getMetaData().getColumnCount(); i++) {
-                    int col = i+1;
+                    int col = i + 1;
                     String number = resultSet.getString(col);
                     if (number == null || number.equals("")) {
                         number = "0";
@@ -132,41 +139,6 @@ public class PieChartX {
 
         pieChart.setData(pieChartData);
         pieChart.setTitle("Crime in " + chartInfo.getRangeSelector());
-        sceneView.getChildren().add(pieChart);
-        return sceneView;
-    }
-
-    public static VBox getSubScene(String areaName) {
-        VBox sceneView = new VBox();
-        sceneView.setPrefSize(Main.width, Main.height);
-        PieChart pieChart = new PieChart();
-        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
-
-        String areaSafeName = null;
-        if (areaName.contains(" ")) { areaSafeName = "{" + areaName + "}"; }
-        else { areaSafeName = areaName; }
-        ResultSet results = SQL.getDBResults("jdbc:mysql://127.0.0.1:3306/" + Main.DatabaseName, "root", "root", "select Crime, " + areaSafeName + " from all_crimes_transposed");
-
-        try {
-            while (results.next()) {
-                for(int i = 2; i<3; i++) {
-                    if(results.getString(i) != null) {
-                        Double doubleNum = Double.parseDouble(results.getString(i).replaceAll(",", "."));
-                        try {
-                            pieChartData.add(new PieChart.Data(results.getString("Crime"), doubleNum));
-                        } catch (NumberFormatException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            }
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        pieChart.setData(pieChartData);
-        pieChart.setTitle("Crime in " + areaName);
         sceneView.getChildren().add(pieChart);
         return sceneView;
     }
