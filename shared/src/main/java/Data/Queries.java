@@ -91,7 +91,7 @@ public class Queries {
                 "replace(Begindatum, ltrim(Begindatum, replace(Begindatum, '/', '' ) ), '') AS [maand], " +
                 "Count(Begindatum) AS [diefstallen] " +
                 "FROM fietsdiefstal " +
-                "Where Begindatum <> null or Begindatum <> \"\" " +
+                "Where (Begindatum <> null or Begindatum <> \"\") " +
                 "Group By jaar, maand " +
                 "Order By jaar, maand;",
                 "title: " +

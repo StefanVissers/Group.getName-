@@ -22,7 +22,7 @@ public class ChartMenuActivity extends ActivityExtender {
 
         LogHelper.logDebugMessage("CREATE", this);
 
-        setContentView(R.layout.activity_chartmenu);
+         setContentView(R.layout.activity_chartmenu);
 
         RelativeLayout layout = (RelativeLayout) findViewById(R.id.graphmenu);
     }

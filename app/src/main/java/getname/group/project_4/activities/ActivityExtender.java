@@ -104,7 +104,7 @@ public abstract class ActivityExtender extends AppCompatActivity {
             case LINECHART:
                 gotDestinationIntent = true;
                 lineChartFactory = new LineChartFactory();
-                lineChart = lineChartFactory.create(Queries.getLineStat1(2012, Queries.RelativeTime.CURRENT));
+                lineChart = lineChartFactory.create(Queries.getLineStat1());
                 intent = new Intent(this, lineChart.getClass());
                 intent.putExtra("ChartData", lineChart.getData().get(0));
                 break;
