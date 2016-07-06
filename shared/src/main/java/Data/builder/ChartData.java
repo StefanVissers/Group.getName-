@@ -67,7 +67,7 @@ public class ChartData implements Serializable {
             return this;
         }
 
-        public void setNestedFilter(String nestedFilter) {
+        public ChartDataBuilder setNestedFilter(String nestedFilter) {
             this.nestedFilter = nestedFilter;
 
             String OLDQuery = this.nestedQuery;
@@ -85,12 +85,13 @@ public class ChartData implements Serializable {
                     filteredQuery += unFilteredQuery.get(i) + " ";
                 }
             }
-
             nestedFQuery = filteredQuery;
+            return this;
         }
 
-        public void setNestedRelativeTime(Queries.RelativeTime nestedRelativeTime) {
+        public ChartDataBuilder setNestedRelativeTime(Queries.RelativeTime nestedRelativeTime) {
             this.nestedRelativeTime = nestedRelativeTime;
+            return this;
         }
 
         public void tryParse(String type, String value) {
