@@ -64,7 +64,12 @@ public class DatabaseReader {
         XYChart.Series series = new XYChart.Series();
         ResultSet resultSet;
         try {
-            resultSet = statement.executeQuery(chartData.getSql_query());
+            if(chartData.isFiltered()) {
+                resultSet = statement.executeQuery(chartData.getFiltered_query());
+            } else {
+                resultSet = statement.executeQuery(chartData.getSql_query());
+            }
+
             System.out.println("SQL Query: " + chartData.getSql_query());
             while (resultSet.next()) {
                 if(resultSet.getString(2).length() == 1) {
