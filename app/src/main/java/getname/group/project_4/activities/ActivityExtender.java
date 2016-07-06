@@ -78,7 +78,7 @@ public abstract class ActivityExtender extends AppCompatActivity {
             case GROUPEDBARCHART:
                 gotDestinationIntent = true;
                 groupedBarChartFactory = new GroupedBarChartFactory();
-                groupedBarChartActivity = groupedBarChartFactory.create(Queries.getGroupedBarStat1());
+                groupedBarChartActivity = groupedBarChartFactory.create(Queries.getGroupedBarStat1("Overschie"));
                 intent = new Intent(this, groupedBarChartActivity.getClass());
                 int cdAmount = 0;
                 for (int i = 0; i < groupedBarChartActivity.getData().size(); i++) {

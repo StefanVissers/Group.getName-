@@ -24,7 +24,7 @@ public class Queries {
                 "Aantal fietstrommels per wijk"};
     }
 
-    public static String[] getGroupedBarStat1() {
+    public static String[] getGroupedBarStat1(String wijk, int jaar) {
         return new String[] {
             "^START^1",
                 "sql: " +
@@ -34,11 +34,13 @@ public class Queries {
                     "FROM fietsdiefstal " +
                     "WHERE (Begindatum <> NULL OR Begindatum <> \"\")" +
                     "GROUP BY jaar, maand " +
-                    "ORDER BY jaar, maand",
+                    "ORDER BY jaar, maand ASC",
                 "title: " +
                     "Fietsdiefstallen",
                 "desc: " +
                     "Aantal fietsdiefstallen per maand",
+                "filter: " +
+                        "[Werkgebied] = '" + wijk.toUpperCase() + "' and Cast(jaar AS INTEGER) = " + jaar,
             "^END^1",
 
             "^START^2",
@@ -47,13 +49,18 @@ public class Queries {
                     "substr(ltrim(ltrim(Mutdatum, \"0123456789\"), \"-\"),3,-3) AS [maand], " +
                     "Count(*) AS cnt " +
                     "FROM fietstrommels " +
+                        "WHERE [Deelgem.] = '" + wijk + "' and Cast(jaar AS INTEGER) = " + jaar + " " +
                     "GROUP BY jaar, maand " +
                     "ORDER BY jaar, maand DESC",
                 "title: " +
                     "Fietstrommels",
                 "desc: " +
                     "Actieve fietstrommels per maand",
+                "filter: " +
+                        "[Deelgem.] = '" + wijk + "' and Cast(jaar AS INTEGER) = " + jaar,
             "^END^2"
+
+//                SELECT * FROM(select Werkgebied, Begindatum from fietsdiefstal where Werkgebied='Overschie' union select [Deelgem.], Mutdatum from fietstrommels)
         };
     }
 
