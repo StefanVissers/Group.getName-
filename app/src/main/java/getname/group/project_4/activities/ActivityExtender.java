@@ -78,7 +78,7 @@ public abstract class ActivityExtender extends AppCompatActivity {
             case GROUPEDBARCHART:
                 gotDestinationIntent = true;
                 groupedBarChartFactory = new GroupedBarChartFactory();
-                groupedBarChartActivity = groupedBarChartFactory.create(Queries.getGroupedBarStat1());
+                groupedBarChartActivity = groupedBarChartFactory.create(Queries.getGroupedBarStat1("Overschie", 2012));
                 intent = new Intent(this, groupedBarChartActivity.getClass());
                 int cdAmount = 0;
                 for (int i = 0; i < groupedBarChartActivity.getData().size(); i++) {
@@ -104,7 +104,7 @@ public abstract class ActivityExtender extends AppCompatActivity {
             case LINECHART:
                 gotDestinationIntent = true;
                 lineChartFactory = new LineChartFactory();
-                lineChart = lineChartFactory.create(Queries.getLineStat1(2012, Queries.RelativeTime.CURRENT));
+                lineChart = lineChartFactory.create(Queries.getLineStat1());
                 intent = new Intent(this, lineChart.getClass());
                 intent.putExtra("ChartData", lineChart.getData().get(0));
                 break;

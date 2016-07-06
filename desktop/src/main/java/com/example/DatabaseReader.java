@@ -52,6 +52,32 @@ public class DatabaseReader {
             resultSet = statement.executeQuery(chartData.getSql_query());
             while (resultSet.next()) {
                 series.getData().add(new XYChart.Data(resultSet.getString(1), resultSet.getInt(column+1)));
+                System.out.println("Data: " + chartData.getDesc() + " - " + resultSet.getString(1) + resultSet.getInt(column+1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return series;
+    }
+
+    public XYChart.Series getGroupedBarChartData(ChartData chartData, int column) {
+        XYChart.Series series = new XYChart.Series();
+        ResultSet resultSet;
+        try {
+            if(chartData.isFiltered()) {
+                resultSet = statement.executeQuery(chartData.getFiltered_query());
+            } else {
+                resultSet = statement.executeQuery(chartData.getSql_query());
+            }
+
+            System.out.println("SQL Query: " + chartData.getSql_query());
+            while (resultSet.next()) {
+                if(resultSet.getString(2).length() == 1) {
+                    series.getData().add(new XYChart.Data(resultSet.getString(1) + ", 0" + resultSet.getString(2), resultSet.getInt(column + 2)));
+                } else {
+                    series.getData().add(new XYChart.Data(resultSet.getString(1) + ", " + resultSet.getString(2), resultSet.getInt(column + 2)));
+                }
+                System.out.println("Data: " + chartData.getDesc() + " - Date " + resultSet.getString(1) + ", " + resultSet.getString(2) + " - Numbers: " + resultSet.getInt(column+2));
             }
         } catch (SQLException e) {
             e.printStackTrace();

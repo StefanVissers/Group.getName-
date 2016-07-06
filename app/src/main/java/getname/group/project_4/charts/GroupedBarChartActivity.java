@@ -109,8 +109,8 @@ public class GroupedBarChartActivity extends ActivityExtender implements Chart {
                                 databaseHelper.getCumulativeSum(chartDatas.get(1).getSql_query(), 2),
                                 "group2");
 
-            dataGroup1.setColors(ColorTemplate.COLORFUL_COLORS);
-            dataGroup2.setColors(ColorTemplate.JOYFUL_COLORS);
+            dataGroup1.setColors(new int[]{ColorTemplate.rgb("0000ff")});
+            dataGroup2.setColors(new int[]{ColorTemplate.rgb("ff0000")});
 
             dataGroups.add(dataGroup1);
             dataGroups.add(dataGroup2);

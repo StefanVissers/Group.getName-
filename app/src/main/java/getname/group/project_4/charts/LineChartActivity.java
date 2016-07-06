@@ -46,14 +46,8 @@ public class LineChartActivity extends ActivityExtender implements Chart {
 
         listView = (ListView) findViewById(R.id.listView);
 
-        String[] values = new String[] { "Android List View",
-                "Adapter implementation",
-                "Simple List View In Android",
-                "Create List View Android",
-                "Android Example",
-                "List View Source Code",
-                "List View Array Adapter",
-                "Android Example List View"
+        String[] values = new String[] {"2000", "2001", "2002", "2003", "2004", "2005", "2006",
+                "2007", "2008", "2009", "2010", "2011", "2012"
         };
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
@@ -72,14 +66,72 @@ public class LineChartActivity extends ActivityExtender implements Chart {
 
                 // ListView Clicked item index
                 int itemPosition     = position;
+                String filter = "";
 
                 // ListView Clicked item value
                 String  itemValue    = (String) listView.getItemAtPosition(position);
+
+                if (itemPosition == 0){
+                    // Filter 1
+                    filter = "Cast(jaar AS INTEGER) = 2000";
+                } else if (itemPosition == 1) {
+                    // Filter 2
+                    filter = "Cast(jaar AS INTEGER) = 2001";
+                } else if (itemPosition == 2) {
+                    // Filter 3
+                    filter = "Cast(jaar AS INTEGER) = 2002";
+                } else if (itemPosition == 3) {
+                    // Filter 4
+                    filter = "Cast(jaar AS INTEGER) = 2003";
+                } else if (itemPosition == 4) {
+                    // Filter 5
+                    filter = "Cast(jaar AS INTEGER) = 2004";
+                } else if (itemPosition == 5) {
+                    // Filter 6
+                    filter = "Cast(jaar AS INTEGER) = 2005";
+                } else if (itemPosition == 6) {
+                    // Filter 7
+                    filter = "Cast(jaar AS INTEGER) = 2006";
+                } else if (itemPosition == 7) {
+                    // Filter 8
+                    filter = "Cast(jaar AS INTEGER) = 2007";
+                } else if (itemPosition == 8) {
+                    // Filter 9
+                    filter = "Cast(jaar AS INTEGER) = 2008";
+                } else if (itemPosition == 9) {
+                    // Filter 10
+                    filter = "Cast(jaar AS INTEGER) = 2009";
+                } else if (itemPosition == 10) {
+                    // Filter 11
+                    filter = "Cast(jaar AS INTEGER) = 2010";
+                } else if (itemPosition == 11) {
+                    // Filter 12
+                    filter = "Cast(jaar AS INTEGER) = 2011";
+                } else if (itemPosition == 12) {
+                    // Filter 13
+                    filter = "Cast(jaar AS INTEGER) = 2012";
+                } else {
+                    // Error Message
+                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG);
+                }
 
                 // Show Alert
                 Toast.makeText(getApplicationContext(),
                         "Position :"+itemPosition+"  ListItem : " +itemValue , Toast.LENGTH_LONG)
                         .show();
+
+                ChartData.ChartDataBuilder builder =
+                        new ChartData.ChartDataBuilder(chartData.getSql_query())
+                                .setNestedTitle(chartData.getTitle())
+                                .setNestedDesc(chartData.getDesc())
+                                .setNestedColor(chartData.getColor())
+                                .setNestedRelativeTime(chartData.getRelativeTime())
+                                .setNestedFilter(filter)
+                        ;
+
+                getIntent().putExtra("ChartData", builder.createChartData());
+                recreate();
+
 
             }
 
@@ -91,9 +143,13 @@ public class LineChartActivity extends ActivityExtender implements Chart {
         try {
             databaseHelper.createDataBase();
             databaseHelper.openDataBase();
-            String str = chartData.getSql_query();
-            entries = databaseHelper.getEntryList(chartData.getSql_query(), 2);
-            labels = databaseHelper.getEntryListLabels(chartData.getSql_query(), 0);
+            if (chartData.isFiltered()) {
+                entries = databaseHelper.getEntryList(chartData.getFiltered_query(), 2);
+                labels = databaseHelper.getEntryListLabels(chartData.getFiltered_query(), 0);
+            } else {
+                entries = databaseHelper.getEntryList(chartData.getSql_query(), 2);
+                labels = databaseHelper.getEntryListLabels(chartData.getSql_query(), 0);
+            }
             description = chartData.getDesc();
             title = chartData.getTitle();
         } catch (Exception e) {
@@ -107,6 +163,8 @@ public class LineChartActivity extends ActivityExtender implements Chart {
         lineChart.setDescription(description);
         dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
     }
+
+
 
     @Override
     public void addData(ChartData cd) {

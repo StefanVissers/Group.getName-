@@ -1,7 +1,5 @@
 package Data.builder;
 
-import com.sun.istack.internal.Nullable;
-
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
@@ -18,7 +16,7 @@ public class ChartData implements Serializable {
 
     ChartData(final String sql_query, final String title,
               final String desc, final String color,
-              @Nullable final String filtered_query,
+              final String filtered_query,
               final Queries.RelativeTime relativeTime) {
         this.sql_query = sql_query;
         this.filtered_query = filtered_query;
@@ -35,7 +33,7 @@ public class ChartData implements Serializable {
         return filtered_query;
     }
     public boolean isFiltered() {
-        return filtered_query == null;
+        return filtered_query != null;
     }
     public String getTitle() {
         return title;

@@ -44,6 +44,9 @@ public class Main extends Application {
     public static Stage barChart1Stage;
     public static Scene barChart1Scene;
 
+    public static Stage barChart2Stage;
+    public static Scene barChart2Scene;
+
     public static Stage stackBarChart1Stage;
     public static Scene stackBarChart1Scene;
 
@@ -101,13 +104,11 @@ public class Main extends Application {
         MenuItem stat1 = new MenuItem("5 meest gestolen fietsenkleuren");
         MenuItem stat2 = new MenuItem("5 meest gestolen fietsenmerken");
         MenuItem stat3 = new MenuItem("Gestolen fietsen per maand");
-        MenuItem stat4 = new MenuItem("Question 3: ?");
-        MenuItem stat5 = new MenuItem("Question 4: ?");
-        MenuItem stat6 = new MenuItem("Wijken met de meeste trommels");
-        MenuItem stat7 = new MenuItem("Question 6: ?");
+        MenuItem stat4 = new MenuItem("Wijken met de meeste trommels");
+        MenuItem stat5 = new MenuItem("Verhouding diefstal/trommels");
 
         general.getItems().addAll(help, preferences, about, quit);
-        statistics.getItems().addAll(start, stat1,stat2,stat3,stat4,stat5,stat6,stat7);
+        statistics.getItems().addAll(start, stat1,stat2,stat3,stat4,stat5);
         menuBar.getMenus().addAll(general, statistics);
         borderPane.setTop(menuBar);
         borderPane.setCenter(General.getStartScene());
@@ -154,7 +155,7 @@ public class Main extends Application {
                 VBox vBox = new PieChart().getScene(Queries.getPieStat1());
                 if(openInNewWindow) {
                     pieChart1Stage = new Stage();
-                    pieChart1Stage.setTitle("Pie Chart");
+                    pieChart1Stage.setTitle("Pie Chart 1");
                     pieChart1Scene = new Scene(vBox, width, height);
                     pieChart1Scene.setRoot(vBox);
                     pieChart1Stage.setScene(pieChart1Scene);
@@ -172,7 +173,7 @@ public class Main extends Application {
                 VBox vBox = new PieChart().getScene(Queries.getPieStat2());
                 if(openInNewWindow) {
                     pieChart2Stage = new Stage();
-                    pieChart2Stage.setTitle("Pie Chart");
+                    pieChart2Stage.setTitle("Pie Chart 2");
                     pieChart2Scene = new Scene(vBox, width, height);
                     pieChart2Scene.setRoot(vBox);
                     pieChart2Stage.setScene(pieChart2Scene);
@@ -205,22 +206,17 @@ public class Main extends Application {
         stat4.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                VBox vbox = new VBox();
-                Text text = new Text();
-                text.setText("Compare the piecharts here.");
-                text.setFont(Font.font("null", FontWeight.MEDIUM, 40));
-                text.setWrappingWidth(Main.scene.getWidth());
-//                vbox.getChildren().addAll(text, PieChartX.getScene(chartInfo, true), PieChartX.getScene(chartInfo, true));
+                VBox vBox = BarChart.getScene(Queries.getBarStat1());
                 if(openInNewWindow) {
-                    pieChart2Stage = new Stage();
-                    pieChart2Stage.setTitle("Area Chart 2");
-                    pieChart2Scene = new Scene(vbox, width, height);
-//                    pieChart2Scene.setRoot(PieChartX.getScene(chartInfo, true));
-                    pieChart2Stage.setScene(pieChart2Scene);
-                    pieChart2Stage.show();
+                    barChart1Stage = new Stage();
+                    barChart1Stage.setTitle("BarChart 1");
+                    barChart1Scene = new Scene(vBox);
+                    barChart1Scene.setRoot(vBox);
+                    barChart1Stage.setScene(barChart1Scene);
+                    barChart1Stage.show();
                 }
                 else {
-                    borderPane.setCenter(vbox);
+                    borderPane.setCenter(vBox);
                 }
             }
         });
@@ -228,34 +224,17 @@ public class Main extends Application {
         stat5.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                VBox vBox = GroupedBarChart.getScene(Queries.getGroupedBarStat1("Overschie", 2012));
                 if(openInNewWindow) {
-                    stackBarChart1Stage = new Stage();
-                    stackBarChart1Stage.setTitle("Stacked Bar Chart");
-//                    stackBarChartScene = new Scene(StackBarChart1.getScene("buurtprobleem fietsendiefstal", false), width, height);
-//                    stackBarChartScene.setRoot(StackBarChart1.getScene("buurtprobleem fietsendiefstal", false));
-                    stackBarChart1Stage.setScene(stackBarChart1Scene);
-                    stackBarChart1Stage.show();
+                    barChart2Stage = new Stage();
+                    barChart2Stage.setTitle("BarChart 2");
+                    barChart2Scene = new Scene(vBox);
+                    barChart2Scene.setRoot(vBox);
+                    barChart2Stage.setScene(barChart2Scene);
+                    barChart2Stage.show();
                 }
                 else {
-//                    borderPane.setCenter(StackBarChart1.getScene("buurtprobleem fietsendiefstal", false));
-                }
-            }
-        });
-
-        stat6.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                VBox vBox = BarChart.getScene(Queries.getBarStat1());
-                if(openInNewWindow) {
-                    barChart1Stage = new Stage();
-                    barChart1Stage.setTitle("BarChart");
-                    barChart1Scene = new Scene(vBox);
-                    barChart1Scene.setRoot(vBox);
-                    barChart1Stage.setScene(barChart1Scene);
-                    barChart1Stage.show();
-                }
-                else {
-                    borderPane.setCenter(BarChart.getScene(Queries.getBarStat1()));
+                    borderPane.setCenter(vBox);
                 }
             }
         });
