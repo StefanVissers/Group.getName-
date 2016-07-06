@@ -1,5 +1,7 @@
 package Data.builder;
 
+import com.sun.istack.internal.Nullable;
+
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
@@ -8,6 +10,7 @@ import Data.Queries;
 
 public class ChartData implements Serializable {
     private final String sql_query;
+    private final String filtered_query;
     private final String desc;
     private final String title;
     private final String color;
@@ -15,8 +18,10 @@ public class ChartData implements Serializable {
 
     ChartData(final String sql_query, final String title,
               final String desc, final String color,
+              @Nullable final String filtered_query,
               final Queries.RelativeTime relativeTime) {
         this.sql_query = sql_query;
+        this.filtered_query = filtered_query;
         this.title = title;
         this.desc = desc;
         this.color = color;
@@ -25,6 +30,12 @@ public class ChartData implements Serializable {
 
     public String getSql_query() {
         return sql_query;
+    }
+    public String getFiltered_query() {
+        return filtered_query;
+    }
+    public boolean isFiltered() {
+        return filtered_query == null;
     }
     public String getTitle() {
         return title;
@@ -109,9 +120,10 @@ public class ChartData implements Serializable {
         }
 
         public ChartData createChartData() {
-            return nestedFQuery == null ?
-                    new ChartData(nestedQuery,nestedTitle,nestedDesc,nestedColor,nestedRelativeTime) :
-                    new ChartData(nestedFQuery,nestedTitle,nestedDesc,nestedColor,nestedRelativeTime);
+//            return nestedFQuery == null ?
+//                    new ChartData(nestedQuery,nestedTitle,nestedDesc,nestedColor,nestedRelativeTime) :
+//                    new ChartData(nestedFQuery,nestedTitle,nestedDesc,nestedColor,nestedRelativeTime);
+            return new ChartData(nestedQuery,nestedTitle,nestedDesc,nestedColor,nestedFQuery,nestedRelativeTime);
         }
     }
 }
