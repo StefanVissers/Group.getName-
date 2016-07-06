@@ -3,6 +3,7 @@ package getname.group.project_4.charts.factory;
 import Data.Queries;
 import getname.group.project_4.charts.BarChartActivity;
 import Data.builder.ChartData;
+import getname.group.project_4.debug.LogHelper;
 
 
 public class BarChartFactory implements Factory<BarChartActivity> {
@@ -17,24 +18,14 @@ public class BarChartFactory implements Factory<BarChartActivity> {
                 builder = new ChartData.ChartDataBuilder(sArray[1]);
             }
         }
+
         if (builder == null) {
             throw new NullPointerException("No Query found");
         }
+
         for (String s : args) {
-            String[] sArray = s.split(": ");
-            String type = sArray[0];
-            String value = sArray[1];
-            if (type.equalsIgnoreCase("title")) {
-                builder.setNestedTitle(value);
-            } else if (type.equalsIgnoreCase("desc")) {
-                builder.setNestedDesc(value);
-            } else if (type.equalsIgnoreCase("color")) {
-                builder.setNestedColor(value);
-            } else if (type.equalsIgnoreCase("filter")) {
-                builder.setNestedFilter(value);
-            } else if (type.equalsIgnoreCase("reltime")) {
-                builder.setNestedRelativeTime(Queries.RelativeTime.valueOf(value));
-            }
+            String[] splitted = s.split(": ");
+            builder.tryParse(splitted[0], splitted[1]);
         }
         barChart.addData(builder.createChartData());
         return barChart;

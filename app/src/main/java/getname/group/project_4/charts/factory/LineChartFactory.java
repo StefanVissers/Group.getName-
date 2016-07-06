@@ -20,20 +20,8 @@ public class LineChartFactory implements Factory<LineChartActivity> {
             throw new NullPointerException("No Query found");
         }
         for (String s : args) {
-            String[] sArray = s.split(": ");
-            String type = sArray[0];
-            String value = sArray[1];
-            if (type.equalsIgnoreCase("title")) {
-                builder.setNestedTitle(value);
-            } else if (type.equalsIgnoreCase("desc")) {
-                builder.setNestedDesc(value);
-            } else if (type.equalsIgnoreCase("color")) {
-                builder.setNestedColor(value);
-            } else if (type.equalsIgnoreCase("filter")) {
-                builder.setNestedFilter(value);
-            } else if (type.equalsIgnoreCase("reltime")) {
-                builder.setNestedRelativeTime(Queries.RelativeTime.valueOf(value));
-            }
+            String[] splitted = s.split(": ");
+            builder.tryParse(splitted[0], splitted[1]);
         }
         lineChart.addData(builder.createChartData());
         return lineChart;
