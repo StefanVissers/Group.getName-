@@ -224,7 +224,7 @@ public class Main extends Application {
         stat5.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                VBox vBox = GroupedBarChart.getScene(Queries.getGroupedBarStat1("Overschie", 2012));
+                VBox vBox = GroupedBarChart.getScene(Queries.getGroupedBarStat1("OVERSCHIE", "Overschie", 2012));
                 if(openInNewWindow) {
                     barChart2Stage = new Stage();
                     barChart2Stage.setTitle("BarChart 2");

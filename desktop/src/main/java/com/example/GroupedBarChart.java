@@ -1,14 +1,18 @@
 package com.example;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import Data.Queries;
 import Data.builder.ChartData;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.chart.*;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
 
 /**
@@ -29,8 +33,36 @@ public class GroupedBarChart {
         sceneView.setPrefSize(Main.width, Main.height);
         barChart = new javafx.scene.chart.BarChart(XAxis, YAxis);
         List<ChartData> chartDatas = new ArrayList<>();
-
         ChartData.ChartDataBuilder builder = null;
+
+        final ComboBox<String> pickYearComboBox = new ComboBox<>();
+        pickYearComboBox.setMinWidth(200);
+        pickYearComboBox.setPromptText("Select a year");
+        pickYearComboBox.setEditable(false);
+
+        final ComboBox<String> pickArea1ComboBox = new DatabaseReader().getPickAreaComboBox(Queries.getFietsdiefstalAreas());
+        pickArea1ComboBox.setMinWidth(200);
+        pickArea1ComboBox.setPromptText("Select an area");
+        pickArea1ComboBox.setEditable(false);
+
+        final ComboBox<String> pickArea2ComboBox = new DatabaseReader().getPickAreaComboBox(Queries.getFietstrommelsAreas());
+        pickArea2ComboBox.setMinWidth(200);
+        pickArea2ComboBox.setPromptText("Select an area");
+        pickArea2ComboBox.setEditable(false);
+
+        pickYearComboBox.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                System.out.println("Selected year: " + pickYearComboBox.getSelectionModel().getSelectedItem().toString());
+            }
+        });
+
+        pickArea1ComboBox.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                System.out.println("Selected area: " + pickArea1ComboBox.getSelectionModel().getSelectedItem().toString());
+            }
+        });
 
         int cdCount = 1;
         boolean inObject = false, ranOnce = false, parsing = false;
@@ -77,7 +109,7 @@ public class GroupedBarChart {
         series2.setName(chartDatas.get(1).getTitle());
         barChart.getData().addAll(series1, series2);
         barChart.setTitle(chartDatas.get(0).getDesc());
-        sceneView.getChildren().add(barChart);
+        sceneView.getChildren().addAll(pickArea1ComboBox, pickArea2ComboBox, pickYearComboBox, barChart);
         return sceneView;
     }
 }

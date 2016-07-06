@@ -24,7 +24,7 @@ public class Queries {
                 "Aantal fietstrommels per wijk"};
     }
 
-    public static String[] getGroupedBarStat1(String wijk, int jaar) {
+    public static String[] getGroupedBarStat1(String wijk1, String wijk2, int jaar) {
         return new String[] {
             "^START^1",
                 "sql: " +
@@ -40,7 +40,7 @@ public class Queries {
                 "desc: " +
                     "Aantal fietsdiefstallen per maand",
                 "filter: " +
-                        "[Werkgebied] = '" + wijk.toUpperCase() + "' and Cast(jaar AS INTEGER) = " + jaar,
+                        "[Werkgebied] = '" + wijk1 + "' and Cast(jaar AS INTEGER) = " + jaar,
             "^END^1",
 
             "^START^2",
@@ -49,7 +49,7 @@ public class Queries {
                     "substr(ltrim(ltrim(Mutdatum, \"0123456789\"), \"-\"),3,-3) AS [maand], " +
                     "Count(*) AS cnt " +
                     "FROM fietstrommels " +
-                        "WHERE [Deelgem.] = '" + wijk + "' and Cast(jaar AS INTEGER) = " + jaar + " " +
+                        "WHERE [Deelgem.] = '" + wijk2 + "' and Cast(jaar AS INTEGER) = " + jaar + " " +
                     "GROUP BY jaar, maand " +
                     "ORDER BY jaar, maand DESC",
                 "title: " +
@@ -57,7 +57,7 @@ public class Queries {
                 "desc: " +
                     "Actieve fietstrommels per maand",
                 "filter: " +
-                        "[Deelgem.] = '" + wijk + "' and Cast(jaar AS INTEGER) = " + jaar,
+                        "[Deelgem.] = '" + wijk2 + "' and Cast(jaar AS INTEGER) = " + jaar,
             "^END^2"
 
 //                SELECT * FROM(select Werkgebied, Begindatum from fietsdiefstal where Werkgebied='Overschie' union select [Deelgem.], Mutdatum from fietstrommels)
@@ -136,6 +136,14 @@ public class Queries {
                 "[Y-Coord.] AS Y " +
                 "FROM fietstrommels"
         };
+    }
+
+    public static String getFietsdiefstalAreas() {
+         return "SELECT DISTINCT [Werkgebied] from fietsdiefstal";
+    }
+
+    public static String getFietstrommelsAreas() {
+        return "SELECT DISTINCT [Deelgem.] from fietstrommels";
     }
 
     public enum RelativeTime {

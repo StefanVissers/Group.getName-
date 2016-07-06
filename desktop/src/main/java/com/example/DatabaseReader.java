@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -97,5 +98,22 @@ public class DatabaseReader {
             e.printStackTrace();
         }
         return series;
+    }
+
+    public ComboBox<String> getPickAreaComboBox(String query) {
+        final ComboBox<String> pickArea1ComboBox = new ComboBox<>();
+        ResultSet resultSet;
+        try {
+            resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                System.out.println("Area: " + resultSet.getString(1));
+                if(resultSet.getString(1) != "") {
+                    pickArea1ComboBox.getItems().add(resultSet.getString(1));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return pickArea1ComboBox;
     }
 }
