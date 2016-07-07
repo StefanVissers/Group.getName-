@@ -7,15 +7,16 @@ package com.example;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.control.*;
-import javafx.scene.image.Image;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-import java.io.File;
 
 public class General {
     public static String backgroundImageFileString;
@@ -40,8 +41,6 @@ public class General {
         if(Main.scene != null) { startTextSub.setWrappingWidth(startText.getWrappingWidth()); }
         else { startTextSub.setWrappingWidth(Main.width); }
         startTextSub.setTextAlignment(TextAlignment.CENTER);
-
-//        startView.setBackground(getBackground(startView.getWidth(), startView.getHeight()));
         startView.getChildren().addAll(startText, startTextSub);
         return startView;
     }
@@ -61,8 +60,6 @@ public class General {
         if(Main.scene != null) { sceneTextSub.setWrappingWidth(sceneText.getWrappingWidth()); }
         else { sceneTextSub.setWrappingWidth(Main.width); }
         sceneTextSub.setTextAlignment(TextAlignment.CENTER);
-
-//        sceneView.setBackground(getBackground(sceneView.getWidth(), sceneView.getHeight()));
         sceneView.getChildren().addAll(sceneText, sceneTextSub);
         return sceneView;
     }
@@ -137,7 +134,6 @@ public class General {
             }
         });
 
-//        sceneView.setBackground(getBackground(sceneView.getWidth(), sceneView.getHeight()));
         sceneView.getChildren().addAll(sceneText, staticMapBox, openInNewWindowBox, backgroundImageComboBox, ChangeDataBaseHeader, ChangeDatabaseField, ConfirmDBChange);
         return sceneView;
     }
@@ -158,31 +154,7 @@ public class General {
         else { sceneTextSub.setWrappingWidth(Main.width); }
         sceneTextSub.setTextAlignment(TextAlignment.CENTER);
 
-//        sceneView.setBackground(getBackground(sceneView.getWidth(), sceneView.getHeight()));
         sceneView.getChildren().addAll(sceneText, sceneTextSub);
         return sceneView;
     }
-
-    //Returns the Quit-confirmation dialog
-//    public static Alert getQuitAlertBox() {
-//        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-//        alert.setTitle("Confirm Quit");
-//        alert.setHeaderText("You're about to quit the application.");
-//        alert.setContentText("Are you sure you want to quit?");
-//
-//        Optional<ButtonType> result = alert.showAndWait();
-////        if (result.get() == ButtonType.OK){
-////            System.exit(0);
-////        } else {
-////            alert.close();
-////        }
-//        return alert;
-//    }
-
-    //Returns the background for images
-//    public static Background getBackground(Double sceneWidth, Double sceneHeight) {
-//        File backgroundImageFile = new File("Backgrounds/" + backgroundImageFileString);
-//        BackgroundImage backgroundImage = new BackgroundImage(new Image(backgroundImageFile.toURI().toString(), sceneWidth, sceneHeight, false, true), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
-//        return new Background(backgroundImage);
-//    }
 }

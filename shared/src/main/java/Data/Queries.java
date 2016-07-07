@@ -20,7 +20,7 @@ public class Queries {
                 "desc: " +
                 "Aantal fietstrommels per wijk"};
     }
-    // Gets grouped barchart data from the db via a query
+    // Gets grouped barchart data from the db via a query 
     public static String[] getGroupedBarStat1() {
         return new String[] {
             "^START^1",
