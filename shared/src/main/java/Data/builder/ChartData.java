@@ -98,11 +98,6 @@ public class ChartData implements Serializable {
             return this;
         }
 
-        public ChartDataBuilder setNestedRelativeTime(Queries.RelativeTime nestedRelativeTime) {
-            this.nestedRelativeTime = nestedRelativeTime;
-            return this;
-        }
-
         public void tryParse(String type, String value) {
             if (type.equalsIgnoreCase("title")) {
                 this.setNestedTitle(value);
@@ -112,8 +107,6 @@ public class ChartData implements Serializable {
                 this.setNestedColor(value);
             } else if (type.equalsIgnoreCase("filter")) {
                 this.setNestedFilter(value);
-            } else if (type.equalsIgnoreCase("reltime")) {
-                this.setNestedRelativeTime(Queries.RelativeTime.valueOf(value));
             }
         }
 
