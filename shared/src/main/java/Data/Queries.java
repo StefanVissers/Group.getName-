@@ -145,6 +145,17 @@ public class Queries {
         return "SELECT distinct replace(Begindatum, rtrim(Begindatum, replace(Begindatum, '/', '' ) ), '') AS [jaar] from fietsdiefstal Order by jaar desc";
     }
 
+    public static String getFietstrommelsCount(String area, String year, String month) {
+        return "select sum(cnt) as count from (\n" +
+                "SELECT replace(Mutdatum, rtrim(Mutdatum, replace(Mutdatum, '-', '' ) ), '') AS [jaar], \n" +
+                "substr(ltrim(ltrim(Mutdatum, \"0123456789\"), \"-\"),3,-3) AS [maand], \n" +
+                "Count(*) AS cnt, [Deelgem.]\n" +
+                "FROM fietstrommels \n" +
+                "Where ((jaar = '" + year +"' and maand < '" + month +"') or (jaar < '" + year + "')) and [Deelgem.] = '" + area +"'\n" +
+                "GROUP BY jaar, maand \n" +
+                "ORDER BY jaar, maand DESC)";
+    }
+
     public enum RelativeTime {
         BEFORE,
         CURRENT,

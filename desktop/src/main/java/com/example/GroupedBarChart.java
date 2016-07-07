@@ -129,11 +129,10 @@ public class GroupedBarChart {
 
         XAxis.setLabel("Maand");
         YAxis.setLabel("Aantal fietstrommels/fietsdiefstallen");
-        XYChart.Series series1 = new DatabaseReader().getGroupedBarChartData(chartDatas.get(0), 1, null, null, null);
-        XYChart.Series series2 = new DatabaseReader().getGroupedBarChartData(chartDatas.get(1), 1, null, null, null);
+        XYChart.Series series1 = new DatabaseReader().getGroupedBarChartData(chartDatas.get(0), 1);
+        XYChart.Series series2 = new DatabaseReader().getGroupedBarChartData(chartDatas.get(1), 1);
         series1.setName(chartDatas.get(0).getTitle());
         series2.setName(chartDatas.get(1).getTitle());
-//        barChart.getData().addAll(series1, series2);
         barChart.getData().add(series1);
         barChart.getData().add(series2);
         barChart.setTitle(chartDatas.get(0).getDesc());
