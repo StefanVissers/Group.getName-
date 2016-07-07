@@ -2,9 +2,9 @@ package getname.group.project_4.charts;
 
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
@@ -16,8 +16,12 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
+import Data.Node.Empty;
+import Data.Node.Node;
+import Data.Node.NodeList;
 import getname.group.project_4.R;
 import getname.group.project_4.SQL.DatabaseHelper;
+import getname.group.project_4.SQL.Dates;
 import getname.group.project_4.activities.ActivityExtender;
 import Data.builder.ChartData;
 import getname.group.project_4.debug.LogHelper;
@@ -35,52 +39,6 @@ public class GroupedBarChartActivity extends ActivityExtender implements Chart {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_groupedbarchart);
-//
-//        ID = counter++;
-//        LogHelper.logDebugMessage("CREATE", this);
-//
-//        Intent intent = getIntent();
-//
-//        barchart = ((BarChart) findViewById(R.id.chart));
-//
-//        List<BarEntry> group1 = new ArrayList<>();
-//        group1.add(new BarEntry(2f,0));
-//        group1.add(new BarEntry(10f,1));
-//        group1.add(new BarEntry(14f,2));
-//        group1.add(new BarEntry(4f,3));
-//        group1.add(new BarEntry(15f,4));
-//
-//        BarDataSet group1DataSet = new BarDataSet(group1, "group1");
-//        group1DataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-//
-//        List<BarEntry> group2 = new ArrayList<>();
-//        group2.add(new BarEntry(21f,0));
-//        group2.add(new BarEntry(4f,1));
-//        group2.add(new BarEntry(7f,2));
-//        group2.add(new BarEntry(18f,3));
-//        group2.add(new BarEntry(2f,4));
-//
-//        BarDataSet group2DataSet = new BarDataSet(group2, "group 2");
-//        group2DataSet.setColors(ColorTemplate.JOYFUL_COLORS);
-//
-//        List<IBarDataSet> dataSets = new ArrayList<>();
-//        dataSets.add(group1DataSet);
-//        dataSets.add(group2DataSet);
-//
-//        List<String> labels = new ArrayList<>();
-//        labels.add("January");
-//        labels.add("February");
-//        labels.add("March");
-//        labels.add("April");
-//        labels.add("May");
-//
-//        BarData data = new BarData(labels, dataSets);
-//
-//        System.out.println("foo");
-//
-//        barchart.setData(data);
-//        barchart.animateY(3000);
 
         setContentView(R.layout.activity_groupedbarchart);
 
@@ -95,38 +53,27 @@ public class GroupedBarChartActivity extends ActivityExtender implements Chart {
         }
 
         DatabaseHelper databaseHelper;
-        databaseHelper = new DatabaseHelper(getApplicationContext());
+        databaseHelper = new DatabaseHelper(this);
         try {
             databaseHelper.createDataBase();
             databaseHelper.openDataBase();
 
-            ArrayList<BarEntry> barentries1 = databaseHelper.getBarEntryList(chartDatas.get(0).getSql_query(), 1);
+            List<BarEntry> group1 = new ArrayList<>();
+            group1.addAll(filterEntries(databaseHelper,0, false));
+            List<BarEntry> group2 = new ArrayList<>();
+            group2.addAll(filterEntries(databaseHelper,1, true));
 
-            BarDataSet dataGroup1 = new BarDataSet(
-                                databaseHelper.getBarEntryList(chartDatas.get(0).getSql_query(), 2),
-                                "group1");
-            BarDataSet dataGroup2 = new BarDataSet(
-                                databaseHelper.getCumulativeSum(chartDatas.get(1).getSql_query(), 2),
-                                "group2");
+            BarDataSet group1Set = new BarDataSet(group1, chartDatas.get(0).getTitle());
+            BarDataSet group2Set = new BarDataSet(group2, chartDatas.get(1).getTitle());
 
-            dataGroup1.setColors(new int[]{ColorTemplate.rgb("0000ff")});
-            dataGroup2.setColors(new int[]{ColorTemplate.rgb("ff0000")});
+            group1Set.setColors(ColorTemplate.JOYFUL_COLORS);
+            group2Set.setColors(ColorTemplate.COLORFUL_COLORS);
 
-            dataGroups.add(dataGroup1);
-            dataGroups.add(dataGroup2);
+            dataGroups.add(group1Set);
+            dataGroups.add(group2Set);
 
-            ArrayList<String> unProcessedYears = databaseHelper.getEntryListLabels(chartDatas.get(0).getSql_query(), 0);
-            ArrayList<String> unProcessedMonths = databaseHelper.getEntryListLabels(chartDatas.get(0).getSql_query(), 1);
-            if (unProcessedMonths.size() == unProcessedYears.size()) {
-                for (int i = 0; i < unProcessedMonths.size(); i++) {
-                    String month = unProcessedMonths.get(i);
-                    String year = unProcessedYears.get(i);
-                    if (month.length() == 1) {
-                        month = "0" + month;
-                    }
-                    labels.add(month + "/" + year);
-                }
-            }
+            // TODO: Add all months to labels
+            labels.addAll(Dates.AllMonths(null));
 
             description = chartDatas.get(0).getDesc();
             title = chartDatas.get(0).getTitle();
@@ -140,6 +87,117 @@ public class GroupedBarChartActivity extends ActivityExtender implements Chart {
         barchart.setVisibleXRangeMaximum(2);
         barchart.animateXY(3000, 3000);
 
+    }
+
+    private ArrayList<BarEntry> filterEntries(DatabaseHelper databaseHelper, int table_index, boolean is_cumulative) {
+        ArrayList<String> inputYearList;
+        ArrayList<String> inputMonthList;
+        ArrayList<BarEntry> inputValueList;
+        ChartData chartData = chartDatas.get(table_index);
+        ArrayList<BarEntry> filteredEntries = new ArrayList<>();
+
+        if (chartDatas.get(table_index).isFiltered()) {
+            inputYearList = databaseHelper.getEntryListLabels(chartData.getFiltered_query(), 0);
+            inputMonthList = databaseHelper.getEntryListLabels(chartData.getFiltered_query(), 1);
+            inputValueList =  databaseHelper.getBarEntryList(chartData.getFiltered_query(), 2);
+        } else {
+            inputYearList = databaseHelper.getEntryListLabels(chartData.getSql_query(), 0);
+            inputMonthList = databaseHelper.getEntryListLabels(chartData.getSql_query(), 1);
+            inputValueList = databaseHelper.getBarEntryList(chartData.getSql_query(), 2);
+        }
+
+        // Putting years, months and values in Nodes in an ArrayList
+        List<NodeList> inputNodes = new ArrayList<>();
+        int index = 0;
+        while (true) {
+            if (index >= inputValueList.size()) {
+                break;
+            }
+
+            if (inputMonthList.get(index).length() == 1) {
+                inputMonthList.set(index, "0" + inputMonthList.get(index));
+            }
+
+            inputNodes.add(new Node<>(inputYearList.get(index), "Year",
+                            new Node<>(inputMonthList.get(index), "MonthNR",
+                            new Node<>(inputValueList.get(index), "Value",
+                            new Empty()))));
+            index++;
+        }
+
+        // Getting a list of years and their months
+        List<NodeList> datesList = Dates.MonthsAsNumberPerYear();
+
+        ArrayList<BarEntry> outputData = new ArrayList<>();
+
+        // CHECKING YEAR AND MONTH
+        int inputNodesIndex = 0;
+        int dateNodesIndex = 0;
+        int nodeOffset = 0;
+
+        boolean matchedInputYear = false;
+        boolean matchedInputMonth = false;
+        while (true) {
+            if (inputNodesIndex >= inputNodes.size()) {
+                if (dateNodesIndex >= datesList.size()) {
+                    break;
+                }
+
+                outputData.add(new BarEntry(0f, dateNodesIndex));
+                dateNodesIndex++;
+                continue;
+            }
+
+            NodeList dateNode = datesList.get(dateNodesIndex);
+            NodeList inputNode = inputNodes.get(inputNodesIndex);
+
+            for (int i = 0; i < nodeOffset; i++) {
+                dateNode = dateNode.Tail();
+                inputNode = inputNode.Tail();
+            }
+
+            if (index == 144) {
+                LogHelper.logDebugMessage("Kappa", "Ross");
+            }
+
+            if (!matchedInputYear) {
+                // Match year
+                if (((String)dateNode.Value()).equals((String)inputNode.Value())) {
+                    matchedInputYear = true;
+                    nodeOffset = 1;
+                } else if (!(dateNodesIndex == 0) && is_cumulative) {
+                    outputData.add(dateNodesIndex, new BarEntry(outputData.get(dateNodesIndex-1).getVal(), dateNodesIndex));
+                    dateNodesIndex++;
+                } else {
+                    outputData.add(dateNodesIndex, new BarEntry(0f, dateNodesIndex));
+                    dateNodesIndex++;
+                }
+            } else if (matchedInputYear && !matchedInputMonth) {
+                // Match Month
+                if (((String)dateNode.Value()).equals((String)inputNode.Value())) {
+                    matchedInputMonth = true;
+                    // Move node to value in tail
+                    nodeOffset = 2;
+                } else if (!(dateNodesIndex == 0) && is_cumulative) {
+                    outputData.add(dateNodesIndex, new BarEntry(outputData.get(dateNodesIndex-1).getVal(), dateNodesIndex));
+                    dateNodesIndex++;
+                } else {
+                    outputData.add(dateNodesIndex, new BarEntry(0f, dateNodesIndex));
+                    dateNodesIndex++;
+                }
+            } else if (matchedInputYear && matchedInputMonth) {
+                outputData.add(dateNodesIndex, new BarEntry(((BarEntry) inputNode.Value()).getVal(),dateNodesIndex));
+                LogHelper.logDebugMessage("filterDates", "Matched Entry Position: " + dateNodesIndex + " Value: " + ((BarEntry) inputNode.Value()).getVal());
+                inputNodesIndex++;
+                dateNodesIndex++;
+                matchedInputYear = false; matchedInputMonth = false;
+                nodeOffset = 0;
+            } else {
+                LogHelper.logDebugMessage("filterDates", "Unexpected Error");
+            }
+        }
+
+        return outputData;
     }
 
     @Override
