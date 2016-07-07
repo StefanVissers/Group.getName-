@@ -1,6 +1,5 @@
 package getname.group.project_4.Modules;
 
-
 import com.google.android.gms.maps.model.LatLng;
 import java.util.List;
 import javax.xml.datatype.Duration;

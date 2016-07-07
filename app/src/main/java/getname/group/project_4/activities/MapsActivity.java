@@ -2,8 +2,8 @@ package getname.group.project_4.activities;
 
 import android.app.ProgressDialog;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -52,6 +52,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         btnFindPath = (Button) findViewById(R.id.btnFindPath);
         etOrigin = (EditText) findViewById(R.id.etOrigin);
         etDestination = (EditText) findViewById(R.id.etDestination);
+
         btnFindPath.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,19 +63,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        LatLng latlngloc = new LatLng(MyLocation.getCurLat(),MyLocation.getCurLong());
-
         mMap = googleMap;
 
         // This is where you are.
+        LatLng latlngloc = new LatLng(MyLocation.getCurLat(),MyLocation.getCurLong());
         float zoomlevel = 16.0f;
+
         mMap.addMarker(new MarkerOptions().position(latlngloc).title("You are here"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlngloc, zoomlevel));
+
 
         DatabaseHelper dbhelper = new DatabaseHelper(this);
 
         try {
-            // Add all bike containers
+            // Add all bike containers to the map
             dbhelper.createDataBase();
             dbhelper.openDataBase();
 
@@ -95,12 +97,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             for (int i = 0; i < points.size(); i++) {
                 mMap.addMarker(new MarkerOptions().position(points.get(i)).title("ik ben een fietstrommel"));
             }
+        } catch (Exception e) {
 
-        } catch (Exception e)
-        {
         }
-    }
 
+
+    }
     private void sendRequest() {
         String origin = etOrigin.getText().toString();
         String destination = etDestination.getText().toString();

@@ -1,12 +1,10 @@
 package getname.group.project_4.activities;
 
 import android.Manifest;
-import android.content.ContentValues;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.view.View;
@@ -19,7 +17,6 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.model.LatLng;
 
 import java.io.IOException;
 import java.util.List;
@@ -46,8 +43,6 @@ public class MyLocation extends ActivityExtender implements GoogleApiClient.Conn
 
         mLatitudeText = (TextView) findViewById(R.id.loclat);
         mLongitudeText = (TextView)  findViewById(R.id.loclong);
-
-        //mLastLocation.distanceTo();
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -89,10 +84,10 @@ public class MyLocation extends ActivityExtender implements GoogleApiClient.Conn
                 LogHelper.logDebugMessage("LOCATION","connect/got last location");
             }
         }
-            catch(SecurityException ex)
-            {
-                Toast.makeText(this,"Security Exception",Toast.LENGTH_SHORT).show();
-            }
+        catch(SecurityException ex)
+        {
+            Toast.makeText(this,"Security Exception",Toast.LENGTH_SHORT).show();
+        }
         if (mLastLocation != null){
             mLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
             mLongitudeText.setText(String.valueOf(mLastLocation.getLongitude()));
@@ -149,7 +144,7 @@ public class MyLocation extends ActivityExtender implements GoogleApiClient.Conn
         LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
     }
 
-    public String getLocation(View view) {
+    public String getLocation() {
         // Gets your location.
         if (!(mLastLocation == null)) {
             Geocoder geocoder = new Geocoder(this, Locale.getDefault());
@@ -158,11 +153,7 @@ public class MyLocation extends ActivityExtender implements GoogleApiClient.Conn
                 String gotAddressLine = addresses.get(0).getAddressLine(0);
                 String gotCity = addresses.get(0).getLocality();
                 String gotPostalCode = addresses.get(0).getPostalCode();
-                Double gotLatitude = addresses.get(0).getLatitude();
-                String gotLatitudestr = gotLatitude.toString();
-                Double gotLongitude = addresses.get(0).getLongitude();
-                String gotLongitudestr = gotLongitude.toString();
-                String sAddress = gotAddressLine + "\n" + gotCity + "\n"+ gotPostalCode + "\n" + "Latitude: " + gotLatitudestr + "\n" + "Longitude: " + gotLongitudestr;
+                String sAddress = gotAddressLine + "\n" + gotCity + "\n"+ gotPostalCode;
                 LogHelper.logDebugMessage("GETLOCATION", sAddress);
                 return sAddress;
 
@@ -175,7 +166,7 @@ public class MyLocation extends ActivityExtender implements GoogleApiClient.Conn
     }
 
     public void savePlainTextNote(View view) {
-        String address = getLocation(view);
+        String address = getLocation();
         Intent intent = EvernoteIntent.createNewNote()
                 .setTitle("Location")
                 .addTags("Location")
