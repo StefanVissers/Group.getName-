@@ -24,13 +24,13 @@ public class Queries {
                 "Aantal fietstrommels per wijk"};
     }
 
-    public static String[] getGroupedBarStat1(String wijk1, String wijk2, int jaar) {
+    public static String[] getGroupedBarStat1() {
         return new String[] {
             "^START^1",
                 "sql: " +
                     "SELECT REPLACE(Begindatum, RTRIM(Begindatum, REPLACE(Begindatum, '/', '' ) ), '') AS [jaar], " +
                     "REPLACE(Begindatum, LTRIM(Begindatum, REPLACE(Begindatum, '/', '' ) ), '') AS [maand], " +
-                    "COUNT(Begindatum) AS [diefstallen] " +
+                    "COUNT(Begindatum) AS [diefstallen], [Werkgebied] " +
                     "FROM fietsdiefstal " +
                     "WHERE (Begindatum <> NULL OR Begindatum <> \"\")" +
                     "GROUP BY jaar, maand " +
@@ -39,25 +39,20 @@ public class Queries {
                     "Fietsdiefstallen",
                 "desc: " +
                     "Aantal fietsdiefstallen per maand",
-                "filter: " +
-                        "[Werkgebied] = '" + wijk1 + "' and Cast(jaar AS INTEGER) = " + jaar,
             "^END^1",
 
             "^START^2",
                 "sql: " +
                     "SELECT replace(Mutdatum, rtrim(Mutdatum, replace(Mutdatum, '-', '' ) ), '') AS [jaar], " +
                     "substr(ltrim(ltrim(Mutdatum, \"0123456789\"), \"-\"),3,-3) AS [maand], " +
-                    "Count(*) AS cnt " +
+                    "Count(*) AS cnt, [Deelgem.] " +
                     "FROM fietstrommels " +
-                        "WHERE [Deelgem.] = '" + wijk2 + "' and Cast(jaar AS INTEGER) = " + jaar + " " +
                     "GROUP BY jaar, maand " +
                     "ORDER BY jaar, maand DESC",
                 "title: " +
                     "Fietstrommels",
                 "desc: " +
                     "Actieve fietstrommels per maand",
-                "filter: " +
-                        "[Deelgem.] = '" + wijk2 + "' and Cast(jaar AS INTEGER) = " + jaar,
             "^END^2"
 
 //                SELECT * FROM(select Werkgebied, Begindatum from fietsdiefstal where Werkgebied='Overschie' union select [Deelgem.], Mutdatum from fietstrommels)
@@ -144,6 +139,10 @@ public class Queries {
 
     public static String getFietstrommelsAreas() {
         return "SELECT DISTINCT [Deelgem.] from fietstrommels";
+    }
+
+    public static String getFietsdiefstalYears() {
+        return "SELECT distinct replace(Begindatum, rtrim(Begindatum, replace(Begindatum, '/', '' ) ), '') AS [jaar] from fietsdiefstal Order by jaar desc";
     }
 
     public enum RelativeTime {
