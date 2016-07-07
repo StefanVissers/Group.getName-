@@ -35,7 +35,7 @@ public class LogHelper {
      * @param context
      * @param message
      */
-    public static void logDebugMessage(String context, String message) {
+    public static void logErrorMessage(String context, String message) {
         String[] logString = new String[] {
                 "["+context.toUpperCase()+"]",
                 message
@@ -50,7 +50,7 @@ public class LogHelper {
      * @param message
      * @param logType
      */
-    public static void logDebugMessage(String context, String message, int logType) {
+    public static void logErrorMessage(String context, String message, int logType) {
         String[] logString = new String[] {
                 "["+context.toUpperCase()+"]",
                 message
@@ -65,10 +65,10 @@ public class LogHelper {
      * @param context
      * @param activityInstance
      */
-    public static void logDebugMessage(String context, ActivityExtender activityInstance) {
+    public static void logErrorMessage(String context, ActivityExtender activityInstance) {
         String[] logString = new String[] {
                 "["+context.toUpperCase()+"]",
-                activityInstance.getClass().getSimpleName() + " " + activityInstance.getID()
+                activityInstance.getClass().getSimpleName()
         };
 
         printLog(logString[0], logString[1], Log.ERROR);
@@ -80,10 +80,10 @@ public class LogHelper {
      * @param activityInstance
      * @param logType
      */
-    public static void logDebugMessage(String context, ActivityExtender activityInstance, int logType) {
+    public static void logErrorMessage(String context, ActivityExtender activityInstance, int logType) {
         String[] logString = new String[] {
                 "["+context.toUpperCase()+"]",
-                activityInstance.getClass().getSimpleName() + " " + activityInstance.getID()
+                activityInstance.getClass().getSimpleName()
         };
 
         printLog(logString[0], logString[1], logType);

@@ -20,7 +20,6 @@ import Data.builder.ChartData;
 import getname.group.project_4.debug.LogHelper;
 
 public class BarChartActivity extends ActivityExtender implements Chart {
-    private static int counter = 0;
     private BarChart barchart;
     ArrayList<BarEntry> entries;
     ArrayList<String> labels;
@@ -32,9 +31,6 @@ public class BarChartActivity extends ActivityExtender implements Chart {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_barchart);
-
-        ID = counter++;
-        LogHelper.logDebugMessage("CREATE", this);
 
         Intent intent = getIntent();
         barchart = (BarChart) findViewById(R.id.chart);
@@ -70,7 +66,6 @@ public class BarChartActivity extends ActivityExtender implements Chart {
     @Override
     public void addData(ChartData cd) {
         this.chartData = cd;
-        LogHelper.logDebugMessage("ADD_DATA", this);
     }
 
     public List<ChartData> getData() {

@@ -26,15 +26,13 @@ import getname.group.project_4.debug.LogHelper;
 
 public class MyLocation extends ActivityExtender implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener{
     // Finds your location.
-    private static int counter = 0;
 
     protected TextView mLatitudeText;
     protected TextView mLongitudeText;
+    protected static Location mLastLocation;
 
     LocationRequest mLocationRequest;
     GoogleApiClient mGoogleApiClient;
-
-    protected static Location mLastLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,13 +52,24 @@ public class MyLocation extends ActivityExtender implements GoogleApiClient.Conn
             Location newLoc = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
             if (newLoc!=null) {
                 mLastLocation = newLoc;
-                LogHelper.logDebugMessage("LOCATION","create/got last location");
             }
         }
         catch(SecurityException sx)
         {
             Toast.makeText(this,"Security Exception",Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    protected void onStart() {
+        // Connect to the google maps api.
+        mGoogleApiClient.connect();
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 
     public static double getCurLat(){
@@ -81,7 +90,6 @@ public class MyLocation extends ActivityExtender implements GoogleApiClient.Conn
             Location newLoc = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
             if (newLoc!=null) {
                 mLastLocation = newLoc;
-                LogHelper.logDebugMessage("LOCATION","connect/got last location");
             }
         }
         catch(SecurityException ex)
@@ -110,18 +118,6 @@ public class MyLocation extends ActivityExtender implements GoogleApiClient.Conn
         {
             Toast.makeText(this,"Security Exception",Toast.LENGTH_SHORT).show();
         }
-    }
-
-    @Override
-    protected void onStart() {
-        // Connect to the google maps api.
-        mGoogleApiClient.connect();
-        super.onStart();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
     }
 
     @Override
@@ -154,7 +150,6 @@ public class MyLocation extends ActivityExtender implements GoogleApiClient.Conn
                 String gotCity = addresses.get(0).getLocality();
                 String gotPostalCode = addresses.get(0).getPostalCode();
                 String sAddress = gotAddressLine + "\n" + gotCity + "\n"+ gotPostalCode;
-                LogHelper.logDebugMessage("GETLOCATION", sAddress);
                 return sAddress;
 
             } catch (IOException e)

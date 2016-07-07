@@ -6,7 +6,6 @@ import getname.group.project_4.activities.ActivityExtender;
 import getname.group.project_4.debug.LogHelper;
 
 public class MainActivity extends ActivityExtender {
-    private static int counter = 0;
 
     // Main activity, Main menu.
 
@@ -18,21 +17,17 @@ public class MainActivity extends ActivityExtender {
             finish();
         }
 
-        ID = counter++;
-        LogHelper.logDebugMessage("CREATE", this);
         setContentView(R.layout.activity_main);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        LogHelper.logDebugMessage("RESUME", this);
         setContentView(R.layout.activity_main);
     }
 
     @Override
     public void onBackPressed() {
-       LogHelper.logDebugMessage("BACK_PRESS", this);
 
         View v = new View(this);
         //  Kill the app.
@@ -43,8 +38,6 @@ public class MainActivity extends ActivityExtender {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        LogHelper.logDebugMessage("DESTROY", this);
-        counter = 0;
     }
 }
 

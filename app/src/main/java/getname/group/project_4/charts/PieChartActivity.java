@@ -34,7 +34,6 @@ public class PieChartActivity extends ActivityExtender implements Chart {
         setContentView(R.layout.activity_piechart);
 
         Intent intent = getIntent();
-        LogHelper.logDebugMessage("CREATE", "piechart");
         pieChart = (PieChart) findViewById(R.id.chart);
 
         chartData = (ChartData) getIntent().getSerializableExtra("ChartData");
@@ -68,7 +67,6 @@ public class PieChartActivity extends ActivityExtender implements Chart {
     @Override
     public void addData(ChartData cd) {
         this.chartData = cd;
-        LogHelper.logDebugMessage("ADD_DATA", this);
     }
 
     @Override

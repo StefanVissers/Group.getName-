@@ -15,15 +15,10 @@ import getname.group.project_4.R;
 import getname.group.project_4.debug.LogHelper;
 
 public class CalendarActivity extends ActivityExtender {
-    private static int counter = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // debug message
-        ID = counter;
-        LogHelper.logDebugMessage("CREATE", this);
 
         // set activity to activity_calendar
         setContentView(R.layout.activity_calendar);

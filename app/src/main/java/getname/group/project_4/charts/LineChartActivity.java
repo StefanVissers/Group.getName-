@@ -40,7 +40,6 @@ public class LineChartActivity extends ActivityExtender implements Chart {
         setContentView(R.layout.activity_linechart);
 
         Intent intent = getIntent();
-        LogHelper.logDebugMessage("CREATE", this);
         lineChart = (LineChart) findViewById(R.id.chart);
         chartData = (ChartData) getIntent().getSerializableExtra("ChartData");
 
@@ -158,7 +157,6 @@ public class LineChartActivity extends ActivityExtender implements Chart {
     @Override
     public void addData(ChartData cd) {
         this.chartData = cd;
-        LogHelper.logDebugMessage("ADD_DATA", this);
     }
 
     @Override

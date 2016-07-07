@@ -4,7 +4,6 @@ package getname.group.project_4.charts;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
@@ -168,10 +167,10 @@ public class GroupedBarChartActivity extends ActivityExtender implements Chart {
                 NodeList inputNode = null;
                 try {
                     dateNode = datesList.get(dateNodesIndex);
-                } catch (IndexOutOfBoundsException e) { LogHelper.logDebugMessage("filterEntries", "Stuck on index " + dateNodesIndex); }
+                } catch (IndexOutOfBoundsException e) { LogHelper.logErrorMessage("filterEntries", "Stuck on index " + dateNodesIndex); }
                 try {
                     inputNode = inputNodes.get(inputNodesIndex);
-                } catch (IndexOutOfBoundsException e) { LogHelper.logDebugMessage("filterEntries", "Stuck on index " + inputNodesIndex); }
+                } catch (IndexOutOfBoundsException e) { LogHelper.logErrorMessage("filterEntries", "Stuck on index " + inputNodesIndex); }
 
                 if (dateNode == null || inputNode == null) {
                     return outputData;
@@ -240,7 +239,6 @@ public class GroupedBarChartActivity extends ActivityExtender implements Chart {
     @Override
     public void addData(ChartData cd) {
         this.chartDatas.add(cd);
-        LogHelper.logDebugMessage("ADD_DATA", this);
     }
 
     public List<ChartData> getData() {

@@ -1,10 +1,8 @@
 package getname.group.project_4.charts.factory;
 
-import java.nio.charset.MalformedInputException;
 import java.util.ArrayList;
 import java.util.List;
 
-import Data.Queries;
 import getname.group.project_4.charts.GroupedBarChartActivity;
 import Data.builder.ChartData;
 import getname.group.project_4.debug.LogHelper;
@@ -46,7 +44,7 @@ public class GroupedBarChartFactory implements Factory<GroupedBarChartActivity> 
                 }
             } else {
                 if (!ranOnce) {
-                    LogHelper.logDebugMessage("GBC_FACTORY", "malformed input, every object for chartdata must start with ^START^<NUMBER> and end with ^END^<SAMENUMBER>");
+                    LogHelper.logErrorMessage("GBC_FACTORY", "malformed input, every object for chartdata must start with ^START^<NUMBER> and end with ^END^<SAMENUMBER>");
                 }
                 else {
                     break;

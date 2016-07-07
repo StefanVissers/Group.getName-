@@ -25,12 +25,6 @@ import getname.group.project_4.charts.factory.PieChartFactory;
 
 
 public abstract class ActivityExtender extends AppCompatActivity {
-    protected int ID;
-
-    public int getID() {
-        return ID;
-    }
-
     /**
      * Finds new Activity according to tag attached to view and switches to it.
      * @param view
@@ -48,8 +42,6 @@ public abstract class ActivityExtender extends AppCompatActivity {
         GroupedBarChartActivity groupedBarChartActivity;
         PieChartActivity pieChart;
         LineChartActivity lineChart;
-
-
 
         /**
          * tag is an array of Strings, which represent values used with the view
@@ -114,13 +106,12 @@ public abstract class ActivityExtender extends AppCompatActivity {
                 intent.setAction(Intent.ACTION_EDIT);
                 break;
             case MAP:
-                gotDestinationIntent =true;
+                gotDestinationIntent = true;
                 setContentView(R.layout.activity_maps);
                 intent = new Intent(this,MapsActivity.class);
                 break;
             case KILLAPP:
-                gotDestinationIntent = true;
-                intent = getIntent();
+                intent = new Intent(this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("EXIT", true);
             case LOCATION:
@@ -131,10 +122,7 @@ public abstract class ActivityExtender extends AppCompatActivity {
         }
 
 
-        if (!gotDestinationIntent) {
-            Log.d("[Main.changeActivity()]", "Didn't get destination intent");
-        } else {
-            Log.d("[Main.changeActivity()]", "Got destination intent" + intent.toString());
+        if (gotDestinationIntent) {
             startActivity(intent);
         }
     }

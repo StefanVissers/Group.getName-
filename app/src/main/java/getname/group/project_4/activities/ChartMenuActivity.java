@@ -11,16 +11,11 @@ import getname.group.project_4.SQL.DatabaseHelper;
 import getname.group.project_4.debug.LogHelper;
 
 public class ChartMenuActivity extends ActivityExtender {
-    private static int counter = 0;
 
     // Chart menu.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        ID = counter;
-
-        LogHelper.logDebugMessage("CREATE", this);
 
         setContentView(R.layout.activity_chartmenu);
 
