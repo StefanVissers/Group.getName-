@@ -112,6 +112,7 @@ public class GroupedBarChart {
             }
         }
 
+        
         XAxis.setLabel("Maand");
         YAxis.setLabel("Aantal fietstrommels/fietsdiefstallen");
         XYChart.Series series1 = new DatabaseReader().getGroupedBarChartData(chartDatas.get(0), 1);

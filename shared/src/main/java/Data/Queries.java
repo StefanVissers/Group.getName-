@@ -56,6 +56,7 @@ public class Queries {
 //                SELECT * FROM(select Werkgebied, Begindatum from fietsdiefstal where Werkgebied='Overschie' union select [Deelgem.], Mutdatum from fietstrommels)
         };
     }
+
     // Gets piechart data from the db via a query
     public static String[] getPieStat1() {
         return new String[] {"sql: " +
