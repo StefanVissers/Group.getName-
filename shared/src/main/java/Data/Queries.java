@@ -27,7 +27,7 @@ public class Queries {
                 "sql: " +
                     "SELECT Cast(REPLACE(Begindatum, RTRIM(Begindatum, REPLACE(Begindatum, '/', '' ) ), '') AS Integer) AS [jaar], " +
                     "Cast(REPLACE(Begindatum, LTRIM(Begindatum, REPLACE(Begindatum, '/', '' ) ), '') AS Integer) AS [maand], " +
-                    "COUNT(Begindatum) AS [diefstallen] " +
+                    "COUNT(Begindatum) AS [diefstallen], [Werkgebied] " +
                     "FROM fietsdiefstal " +
                     "WHERE (Begindatum <> NULL OR Begindatum <> \"\")" +
                     "GROUP BY jaar, maand " +
@@ -42,7 +42,7 @@ public class Queries {
                 "sql: " +
                     "SELECT Cast(replace(Mutdatum, rtrim(Mutdatum, replace(Mutdatum, '-', '' ) ), '') AS Integer) AS [jaar], " +
                     "Cast(substr(ltrim(ltrim(Mutdatum, \"0123456789\"), \"-\"),3,-3) AS Integer) AS [maand], " +
-                    "Count(*) AS cnt " +
+                    "Count(*) AS cnt, [Deelgem.] " +
                     "FROM fietstrommels " +
                     "WHERE (Mutdatum <> null OR Mutdatum <> \"\") " +
                     "GROUP BY jaar, maand " +

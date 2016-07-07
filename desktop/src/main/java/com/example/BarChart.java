@@ -49,8 +49,6 @@ public class BarChart {
                 builder.setNestedColor(value);
             } else if (type.equalsIgnoreCase("filter")) {
                 builder.setNestedFilter(value);
-            } else if (type.equalsIgnoreCase("reltime")) {
-                builder.setNestedRelativeTime(Queries.RelativeTime.valueOf(value));
             }
         }
 
