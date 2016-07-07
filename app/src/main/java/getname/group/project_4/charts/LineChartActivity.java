@@ -46,7 +46,7 @@ public class LineChartActivity extends ActivityExtender implements Chart {
 
         listView = (ListView) findViewById(R.id.listView);
 
-        String[] values = new String[] {"2000", "2001", "2002", "2003", "2004", "2005", "2006",
+        String[] values = new String[] {"2001", "2005", "2006",
                 "2007", "2008", "2009", "2010", "2011", "2012"
         };
 
@@ -73,42 +73,30 @@ public class LineChartActivity extends ActivityExtender implements Chart {
 
                 if (itemPosition == 0){
                     // Filter 1
-                    filter = "Cast(jaar AS INTEGER) = 2000";
+                    filter = "Cast(jaar AS INTEGER) = 2001";
                 } else if (itemPosition == 1) {
                     // Filter 2
-                    filter = "Cast(jaar AS INTEGER) = 2001";
+                    filter = "Cast(jaar AS INTEGER) = 2005";
                 } else if (itemPosition == 2) {
                     // Filter 3
-                    filter = "Cast(jaar AS INTEGER) = 2002";
+                    filter = "Cast(jaar AS INTEGER) = 2006";
                 } else if (itemPosition == 3) {
                     // Filter 4
-                    filter = "Cast(jaar AS INTEGER) = 2003";
+                    filter = "Cast(jaar AS INTEGER) = 2007";
                 } else if (itemPosition == 4) {
                     // Filter 5
-                    filter = "Cast(jaar AS INTEGER) = 2004";
+                    filter = "Cast(jaar AS INTEGER) = 2008";
                 } else if (itemPosition == 5) {
                     // Filter 6
-                    filter = "Cast(jaar AS INTEGER) = 2005";
+                    filter = "Cast(jaar AS INTEGER) = 2009";
                 } else if (itemPosition == 6) {
                     // Filter 7
-                    filter = "Cast(jaar AS INTEGER) = 2006";
+                    filter = "Cast(jaar AS INTEGER) = 2010";
                 } else if (itemPosition == 7) {
                     // Filter 8
-                    filter = "Cast(jaar AS INTEGER) = 2007";
+                    filter = "Cast(jaar AS INTEGER) = 2011";
                 } else if (itemPosition == 8) {
                     // Filter 9
-                    filter = "Cast(jaar AS INTEGER) = 2008";
-                } else if (itemPosition == 9) {
-                    // Filter 10
-                    filter = "Cast(jaar AS INTEGER) = 2009";
-                } else if (itemPosition == 10) {
-                    // Filter 11
-                    filter = "Cast(jaar AS INTEGER) = 2010";
-                } else if (itemPosition == 11) {
-                    // Filter 12
-                    filter = "Cast(jaar AS INTEGER) = 2011";
-                } else if (itemPosition == 12) {
-                    // Filter 13
                     filter = "Cast(jaar AS INTEGER) = 2012";
                 } else {
                     // Error Message
