@@ -38,7 +38,7 @@ public class Queries {
                 "title: " +
                     "Fietsdiefstallen",
                 "desc: " +
-                    "Aantal fietsdiefstallen per maand",
+                    "Aantal fietsdiefstallen in vergelijking met geinstalleerde fietstrommels per wijk",
             "^END^1",
 
             "^START^2",
