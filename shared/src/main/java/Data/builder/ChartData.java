@@ -12,18 +12,15 @@ public class ChartData implements Serializable {
     private final String desc;
     private final String title;
     private final String color;
-    private final Queries.RelativeTime relativeTime;
 
     ChartData(final String sql_query, final String title,
               final String desc, final String color,
-              final String filtered_query,
-              final Queries.RelativeTime relativeTime) {
+              final String filtered_query) {
         this.sql_query = sql_query;
         this.filtered_query = filtered_query;
         this.title = title;
         this.desc = desc;
         this.color = color;
-        this.relativeTime = relativeTime;
     }
 
     public String getSql_query() {
@@ -44,9 +41,6 @@ public class ChartData implements Serializable {
     public String getColor() {
         return color;
     }
-    public Queries.RelativeTime getRelativeTime() {
-        return relativeTime;
-    }
 
     public static class ChartDataBuilder {
         private String nestedQuery;
@@ -55,7 +49,6 @@ public class ChartData implements Serializable {
         private String nestedTitle = "";
         private String nestedDesc = "";
         private String nestedColor = "#000000";
-        private Queries.RelativeTime nestedRelativeTime = null;
 
         public ChartDataBuilder(final String newQuery) {
             nestedQuery = newQuery;
@@ -111,7 +104,7 @@ public class ChartData implements Serializable {
         }
 
         public ChartData createChartData() {
-            return new ChartData(nestedQuery,nestedTitle,nestedDesc,nestedColor,nestedFQuery,nestedRelativeTime);
+            return new ChartData(nestedQuery,nestedTitle,nestedDesc,nestedColor,nestedFQuery);
         }
     }
 }
