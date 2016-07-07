@@ -13,11 +13,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.List;
 
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.DataSet;
 import com.github.mikephil.charting.data.Entry;
+
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -149,7 +148,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 number = cursor.getInt(column);
                 list.add(new Entry(number, counter));
                 counter++;
-                Log.i("Query number ", number + "");
             } while (cursor.moveToNext());
             cursor.close();
             return list;
@@ -174,7 +172,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 number = cursor.getFloat(column);
                 list.add(new Entry(number, counter));
                 counter++;
-                Log.i("Query number ", number + "");
             } while (cursor.moveToNext());
             cursor.close();
             return list;
@@ -200,7 +197,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 number = cursor.getInt(column);
                 list.add(new BarEntry(number, counter));
                 counter++;
-                Log.i("Query number ", number + "");
             } while (cursor.moveToNext());
             cursor.close();
             return list;
@@ -213,7 +209,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public ArrayList<String> getEntryListLabels(String query, int column) {
         SQLiteDatabase database = this.getWritableDatabase();
         Cursor cursor;
-        ArrayList<String> list = new ArrayList<>();;
+        ArrayList<String> list = new ArrayList<>();
 
         try {
             cursor = database.rawQuery(query, null);
@@ -224,7 +220,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             do {
                 text = cursor.getString(column);
                 list.add(text);
-                Log.i("Query text ", text);
             } while (cursor.moveToNext());
             cursor.close();
             return list;
@@ -250,7 +245,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 total += cursor.getInt(column);
                 list.add(new BarEntry( (float) total, counter));
                 counter++;
-                Log.i("Query total ", "" + total);
             }
             cursor.close();
             return list;

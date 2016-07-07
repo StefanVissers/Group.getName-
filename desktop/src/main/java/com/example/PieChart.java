@@ -1,11 +1,7 @@
 package com.example;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import Data.Queries;
 import Data.builder.ChartData;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.layout.VBox;

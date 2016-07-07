@@ -3,19 +3,20 @@ package com.example;
 /**
  * Created by floris-jan on 23-06-16.
  */
-import java.sql.*;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import Data.Queries;
 import Data.builder.ChartData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.ComboBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 
 public class DatabaseReader {
     static final String DB_URL = "jdbc:sqlite:shared/libs/dataSource.db";
@@ -104,29 +105,6 @@ public class DatabaseReader {
                     System.out.println("Not " + wijk + " - " + GroupedBarChart.wijk1 + " or " + GroupedBarChart.wijk2);
                     addData(series, resultSet, column, GroupedBarChart.wijk2, chartData.getSql_query());
                 }
-
-//                Filtering on year
-
-//                String rString = resultSet.getString(1);
-//                if(GroupedBarChart.jaar == null) {
-//                    GroupedBarChart.jaar = "2012";
-//                }
-//
-//                if (rString.contains(GroupedBarChart.jaar)) {
-//                    System.out.println(GroupedBarChart.jaar + " - " + rString);
-//                    if (resultSet.getString(2).length() == 1) {
-//                        series.getData().add(new XYChart.Data(resultSet.getString(1) + ", 0" + resultSet.getString(2), resultSet.getInt(column + 2)));
-//                    } else {
-//                        series.getData().add(new XYChart.Data(resultSet.getString(1) + ", " + resultSet.getString(2), resultSet.getInt(column + 2)));
-//                    }
-//                } else {
-//                    System.out.println("not " + GroupedBarChart.jaar + " - " + rString);
-//                }
-//                series.getData().add(new XYChart.Data(resultSet.getString(1) + ", 0" + resultSet.getString(2), resultSet.getInt(column + 2)));
-//                i++;
-//                series.getData().add(new XYChart.Data("Hello", i));
-//                series.getData().add(new XYChart.Data("Goodbye", resultSet.getInt(column+2)));
-//                System.out.println("Data: " + chartData.getDesc() + " - Date " + resultSet.getString(1) + ", " + resultSet.getString(2) + " - Numbers: " + resultSet.getInt(column+2) + " - Area: " + resultSet.getString(4));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -154,20 +132,6 @@ public class DatabaseReader {
                 } else {
                     series.getData().add(new XYChart.Data(resultSet.getString(1) + ", " + resultSet.getString(2), resultSet.getInt(column + 2)));
                 }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return series;
-    }
-
-    public XYChart.Series getLineChartData(ChartData chartData, int column) {
-        XYChart.Series series = new XYChart.Series();
-        ResultSet resultSet;
-        try {
-            resultSet = statement.executeQuery(chartData.getSql_query());
-            while (resultSet.next()) {
-                series.getData().add(new XYChart.Data(resultSet.getInt(1), resultSet.getInt(column+1)));
             }
         } catch (SQLException e) {
             e.printStackTrace();

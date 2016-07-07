@@ -1,17 +1,16 @@
 package com.example;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import Data.Queries;
 import Data.builder.ChartData;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.scene.chart.*;
-import javafx.scene.chart.PieChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -39,14 +38,6 @@ public class GroupedBarChart {
         List<ChartData> chartDatas = new ArrayList<>();
         ChartData.ChartDataBuilder builder = null;
 
-//        final ComboBox<String> pickYearComboBox = new DatabaseReader().getPickComboBox(Queries.getFietsdiefstalYears());
-//        if(jaar != null) {
-//            pickYearComboBox.getSelectionModel().select(jaar);
-//        }
-//        pickYearComboBox.setMinWidth(300);
-//        pickYearComboBox.setPromptText("Select a year");
-//        pickYearComboBox.setEditable(false);
-
         Text text1 = new Text("Wijk voor fietstrommels:");
 
         final ComboBox<String> pickArea1ComboBox = new DatabaseReader().getPickComboBox(Queries.getFietsdiefstalAreas());
@@ -65,16 +56,6 @@ public class GroupedBarChart {
         pickArea2ComboBox.setMinWidth(300);
         pickArea2ComboBox.setPromptText("Select an area");
         pickArea2ComboBox.setEditable(false);
-
-//        pickYearComboBox.setOnAction(new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent actionEvent) {
-//                System.out.println("Selected year: " + pickYearComboBox.getSelectionModel().getSelectedItem().toString());
-//                jaar = pickYearComboBox.getSelectionModel().getSelectedItem().toString();
-//                System.out.println("This.jaar: " + jaar);
-//                Main.borderPane.setCenter(getScene(Queries.getGroupedBarStat1()));
-//            }
-//        });
 
         pickArea1ComboBox.setOnAction(new EventHandler<ActionEvent>() {
             @Override
