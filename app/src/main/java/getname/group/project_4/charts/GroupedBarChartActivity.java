@@ -4,6 +4,11 @@ package getname.group.project_4.charts;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
@@ -18,6 +23,7 @@ import java.util.List;
 import Data.Node.Empty;
 import Data.Node.Node;
 import Data.Node.NodeList;
+import Data.Queries;
 import getname.group.project_4.R;
 import getname.group.project_4.SQL.DatabaseHelper;
 import getname.group.project_4.SQL.Dates;
@@ -26,13 +32,18 @@ import Data.builder.ChartData;
 import getname.group.project_4.debug.LogHelper;
 
 public class GroupedBarChartActivity extends ActivityExtender implements Chart {
+    private static int counter = 0;
     private BarChart barchart;
     ArrayList<IBarDataSet> dataGroups = new ArrayList<>();
     ArrayList<String> labels = new ArrayList<>();
     String title;
     String description;
     List<ChartData> chartDatas = new ArrayList<>();
+    ListView listView1;
+    ListView listView2;
     int filterYear = 2008;
+    String filterWijk1;
+    String filterWijk2;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,15 +51,73 @@ public class GroupedBarChartActivity extends ActivityExtender implements Chart {
 
         setContentView(R.layout.activity_groupedbarchart);
 
+        ID = counter++;
+        LogHelper.logDebugMessage("CREATE", this);
+
         Intent intent = getIntent();
         barchart = (BarChart) findViewById(R.id.chart);
+        DatabaseHelper databaseHelper;
+        databaseHelper = new DatabaseHelper(this);
+
+        listView1 = (ListView) findViewById(R.id.listView1);
+        listView2 = (ListView) findViewById(R.id.listView2);
+
+        try {
+            databaseHelper.createDataBase();
+            databaseHelper.openDataBase();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        String[] values1 = databaseHelper.getPickAreaList(Queries.getFietsdiefstalAreas());
+        String[] values2 = databaseHelper.getPickAreaList(Queries.getFietstrommelsAreas());
+
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, android.R.id.text1, values1);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, android.R.id.text1, values2);
+
+
+        // Assign adapter to ListView
+        listView1.setAdapter(adapter1);
+        listView2.setAdapter(adapter2);
+
+        listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                filterWijk1 = listView1.getItemAtPosition(position).toString();
+                ChartData chartData = chartDatas.get(0);
+                ChartData.ChartDataBuilder builder =
+                        new ChartData.ChartDataBuilder(chartData.getSql_query())
+                                .setNestedTitle(chartData.getTitle())
+                                .setNestedDesc(chartData.getDesc())
+                                .setNestedColor(chartData.getColor())
+                                .setNestedFilter("[Werkgebied] = '" + filterWijk1 + "'");
+
+                getIntent().putExtra("ChartData" + 0, builder.createChartData());
+                recreate();
+            }
+        });
+
+        listView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                filterWijk2 = listView2.getItemAtPosition(position).toString();
+                ChartData chartData = chartDatas.get(1);
+                ChartData.ChartDataBuilder builder =
+                        new ChartData.ChartDataBuilder(chartData.getSql_query())
+                                .setNestedTitle(chartData.getTitle())
+                                .setNestedDesc(chartData.getDesc())
+                                .setNestedColor(chartData.getColor())
+                                .setNestedFilter("[Deelgem.] = '" + filterWijk2 + "'");
+                getIntent().putExtra("ChartData" + 1, builder.createChartData());
+                recreate();
+            }
+        });
 
         for (int i = 0; i < getIntent().getIntExtra("cdAmount", -1); i++) {
             chartDatas.add( (ChartData) getIntent().getSerializableExtra("ChartData" + i));
         }
 
-        DatabaseHelper databaseHelper;
-        databaseHelper = new DatabaseHelper(this);
         try {
             databaseHelper.createDataBase();
             databaseHelper.openDataBase();
@@ -121,7 +190,7 @@ public class GroupedBarChartActivity extends ActivityExtender implements Chart {
             }
 
             if (Integer.parseInt(inputYearList.get(index)) < filterYear) {
-                // Function does not handle data before the filteryear
+                // Function does not handle data before the year 2000
                 index++;
                 adjusted = true;
                 continue;
@@ -167,10 +236,10 @@ public class GroupedBarChartActivity extends ActivityExtender implements Chart {
                 NodeList inputNode = null;
                 try {
                     dateNode = datesList.get(dateNodesIndex);
-                } catch (IndexOutOfBoundsException e) { LogHelper.logErrorMessage("filterEntries", "Stuck on index " + dateNodesIndex); }
+                } catch (IndexOutOfBoundsException e) { LogHelper.logDebugMessage("filterEntries", "Stuck on index " + dateNodesIndex); }
                 try {
                     inputNode = inputNodes.get(inputNodesIndex);
-                } catch (IndexOutOfBoundsException e) { LogHelper.logErrorMessage("filterEntries", "Stuck on index " + inputNodesIndex); }
+                } catch (IndexOutOfBoundsException e) { LogHelper.logDebugMessage("filterEntries", "Stuck on index " + inputNodesIndex); }
 
                 if (dateNode == null || inputNode == null) {
                     return outputData;
@@ -197,7 +266,7 @@ public class GroupedBarChartActivity extends ActivityExtender implements Chart {
                         outputData.add(dateNodesIndex, new BarEntry(cumulativeOffset + 0f, dateNodesIndex));
                         dateNodesIndex++;
                     }
-                } else if (!matchedInputMonth) {
+                } else if (matchedInputYear && !matchedInputMonth) {
                     // Match Month
                     if (((String) dateNode.Value()).equals((String) inputNode.Value())) {
                         matchedInputMonth = true;
@@ -239,6 +308,7 @@ public class GroupedBarChartActivity extends ActivityExtender implements Chart {
     @Override
     public void addData(ChartData cd) {
         this.chartDatas.add(cd);
+        LogHelper.logDebugMessage("ADD_DATA", this);
     }
 
     public List<ChartData> getData() {

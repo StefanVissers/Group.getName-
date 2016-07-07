@@ -254,6 +254,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    public String[] getPickAreaList(String query) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        Cursor cursor;
+        int i = 0;
+        try {
+            cursor = database.rawQuery(query, null);
+            if(cursor == null) return null;
+            Log.e("Length: ", cursor.getCount() + "");
+            String[] strings = new String[cursor.getCount()];
+
+            while (cursor.moveToNext()) {
+                if(cursor.getString(0) != null) {
+                    strings[i] = cursor.getString(0);
+                    Log.e("String: ", cursor.getString(0));
+                    i++;
+                }
+            }
+            Log.e("Final length: ", i + "");
+            cursor.close();
+            return strings;
+        } catch (Exception e) {
+            Log.e("Exception", e.getMessage());
+            return null;
+        }
+    }
+
     public Cursor getCursor(String query) {
         SQLiteDatabase database = this.getWritableDatabase();
         Cursor cursor;

@@ -44,6 +44,7 @@ public class Queries {
                     "Cast(substr(ltrim(ltrim(Mutdatum, \"0123456789\"), \"-\"),3,-3) AS Integer) AS [maand], " +
                     "Count(*) AS cnt " +
                     "FROM fietstrommels " +
+                    "WHERE (Mutdatum <> null OR Mutdatum <> \"\") " +
                     "GROUP BY jaar, maand " +
                     "ORDER BY jaar, maand ASC",
                 "title: " +
