@@ -148,7 +148,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 number = cursor.getInt(column);
                 list.add(new Entry(number, counter));
                 counter++;
-                Log.i("Query number ", number + "");
             } while (cursor.moveToNext());
             cursor.close();
             return list;
@@ -173,7 +172,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 number = cursor.getFloat(column);
                 list.add(new Entry(number, counter));
                 counter++;
-                Log.i("Query number ", number + "");
             } while (cursor.moveToNext());
             cursor.close();
             return list;
@@ -199,7 +197,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 number = cursor.getInt(column);
                 list.add(new BarEntry(number, counter));
                 counter++;
-                Log.i("Query number ", number + "");
             } while (cursor.moveToNext());
             cursor.close();
             return list;
@@ -223,7 +220,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             do {
                 text = cursor.getString(column);
                 list.add(text);
-                Log.i("Query text ", text);
             } while (cursor.moveToNext());
             cursor.close();
             return list;
@@ -249,7 +245,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 total += cursor.getInt(column);
                 list.add(new BarEntry( (float) total, counter));
                 counter++;
-                Log.i("Query total ", "" + total);
             }
             cursor.close();
             return list;
