@@ -118,9 +118,6 @@ public class ChartData implements Serializable {
         }
 
         public ChartData createChartData() {
-//            return nestedFQuery == null ?
-//                    new ChartData(nestedQuery,nestedTitle,nestedDesc,nestedColor,nestedRelativeTime) :
-//                    new ChartData(nestedFQuery,nestedTitle,nestedDesc,nestedColor,nestedRelativeTime);
             return new ChartData(nestedQuery,nestedTitle,nestedDesc,nestedColor,nestedFQuery,nestedRelativeTime);
         }
     }
