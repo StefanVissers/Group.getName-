@@ -10,6 +10,7 @@ import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,14 +60,13 @@ public class BarChartActivity extends ActivityExtender implements Chart {
 
         BarDataSet dataSet = new BarDataSet(entries, description);
         dataSet.setValueTextSize(20);
+        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
 
         BarData data = new BarData(labels, dataSet);
         barchart.setData(data);
         barchart.setDescription(description);
         barchart.setVisibleXRangeMaximum(2);
         barchart.animateXY(3000, 3000);
-
-//        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
     }
 
     @Override

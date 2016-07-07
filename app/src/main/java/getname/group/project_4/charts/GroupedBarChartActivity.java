@@ -34,7 +34,6 @@ import getname.group.project_4.debug.LogHelper;
 public class GroupedBarChartActivity extends ActivityExtender implements Chart {
     private static int counter = 0;
     private BarChart barchart;
-    ArrayList<BarEntry> entries = new ArrayList<>();
     ArrayList<IBarDataSet> dataGroups = new ArrayList<>();
     ArrayList<String> labels = new ArrayList<>();
     String title;
@@ -42,7 +41,7 @@ public class GroupedBarChartActivity extends ActivityExtender implements Chart {
     List<ChartData> chartDatas = new ArrayList<>();
     ListView listView1;
     ListView listView2;
-    int filterYear = 2000;
+    int filterYear = 2008;
     String filterWijk1;
     String filterWijk2;
 
@@ -137,7 +136,7 @@ public class GroupedBarChartActivity extends ActivityExtender implements Chart {
             dataGroups.add(group1Set);
             dataGroups.add(group2Set);
 
-            labels.addAll(Dates.AllMonths(null));
+            labels.addAll(Dates.AllMonths(filterYear));
 
             description = chartDatas.get(0).getDesc();
             title = chartDatas.get(0).getTitle();
@@ -158,7 +157,6 @@ public class GroupedBarChartActivity extends ActivityExtender implements Chart {
         ArrayList<String> inputMonthList;
         ArrayList<BarEntry> inputValueList;
         ChartData chartData = chartDatas.get(table_index);
-        ArrayList<BarEntry> filteredEntries = new ArrayList<>();
 
         if (chartDatas.get(table_index).isFiltered()) {
             if (is_cumulative) {
@@ -191,7 +189,7 @@ public class GroupedBarChartActivity extends ActivityExtender implements Chart {
                 break;
             }
 
-            if (Integer.parseInt(inputYearList.get(index)) < 2000) {
+            if (Integer.parseInt(inputYearList.get(index)) < filterYear) {
                 // Function does not handle data before the year 2000
                 index++;
                 adjusted = true;
@@ -215,7 +213,7 @@ public class GroupedBarChartActivity extends ActivityExtender implements Chart {
         }
 
         // Getting a list of years and their months
-        List<NodeList> datesList = Dates.MonthsAsNumberPerYear();
+        List<NodeList> datesList = Dates.MonthsAsNumberPerYear(filterYear);
 
         ArrayList<BarEntry> outputData = new ArrayList<>();
 

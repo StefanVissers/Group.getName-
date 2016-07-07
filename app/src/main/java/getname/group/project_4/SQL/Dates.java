@@ -29,11 +29,11 @@ public class Dates {
             "November", "December"
     };
 
-    public static List<String> AllMonths(String filterYear) {
+    public static List<String> AllMonths(int filterYear) {
         List<String> years_months = new ArrayList<>();
 
         for (String Year : Years) {
-            if (filterYear == null || Year.equals(filterYear)) {
+            if (Integer.parseInt(Year) >= filterYear) {
                 for (String Month : MonthsAsNumber) {
                     years_months.add(Year + ", " + Month);
                 }
@@ -43,12 +43,14 @@ public class Dates {
         return years_months;
     }
 
-    public static List<NodeList> MonthsAsNumberPerYear() {
+    public static List<NodeList> MonthsAsNumberPerYear(int filteryear) {
         List<NodeList> nodes = new ArrayList<>();
 
-        for (String year : Years) {
-            for (int i = 0; i < MonthsAsNumber.length; i++) {
-                nodes.add(new Node<String>(year,"Year", new Node<String>(MonthsAsNumber[i], "MonthNR", new Node<String>(MonthsAsNumber[i], "MonthName", new Empty()))));
+        for (String Year : Years) {
+            if (Integer.parseInt(Year) >= filteryear) {
+                for (int i = 0; i < MonthsAsNumber.length; i++) {
+                    nodes.add(new Node<String>(Year, "Year", new Node<String>(MonthsAsNumber[i], "MonthNR", new Node<String>(MonthsAsNumber[i], "MonthName", new Empty()))));
+                }
             }
         }
         return nodes;
