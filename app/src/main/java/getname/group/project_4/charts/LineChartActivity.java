@@ -113,7 +113,6 @@ public class LineChartActivity extends ActivityExtender implements Chart {
                                 .setNestedTitle(chartData.getTitle())
                                 .setNestedDesc(chartData.getDesc())
                                 .setNestedColor(chartData.getColor())
-                                .setNestedRelativeTime(chartData.getRelativeTime())
                                 .setNestedFilter(filter)
                         ;
 
