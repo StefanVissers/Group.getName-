@@ -20,14 +20,14 @@ public class Queries {
                 "desc: " +
                 "Aantal fietstrommels per wijk"};
     }
-    // Gets grouped barchart data from the db via a query 
+    // Gets grouped barchart data from the db via a query
     public static String[] getGroupedBarStat1() {
         return new String[] {
             "^START^1",
                 "sql: " +
-                    "SELECT REPLACE(Begindatum, RTRIM(Begindatum, REPLACE(Begindatum, '/', '' ) ), '') AS [jaar], " +
-                    "REPLACE(Begindatum, LTRIM(Begindatum, REPLACE(Begindatum, '/', '' ) ), '') AS [maand], " +
-                    "COUNT(Begindatum) AS [diefstallen], [Werkgebied] " +
+                    "SELECT Cast(REPLACE(Begindatum, RTRIM(Begindatum, REPLACE(Begindatum, '/', '' ) ), '') AS Integer) AS [jaar], " +
+                    "Cast(REPLACE(Begindatum, LTRIM(Begindatum, REPLACE(Begindatum, '/', '' ) ), '') AS Integer) AS [maand], " +
+                    "COUNT(Begindatum) AS [diefstallen] " +
                     "FROM fietsdiefstal " +
                     "WHERE (Begindatum <> NULL OR Begindatum <> \"\")" +
                     "GROUP BY jaar, maand " +
@@ -40,12 +40,12 @@ public class Queries {
 
             "^START^2",
                 "sql: " +
-                    "SELECT replace(Mutdatum, rtrim(Mutdatum, replace(Mutdatum, '-', '' ) ), '') AS [jaar], " +
-                    "substr(ltrim(ltrim(Mutdatum, \"0123456789\"), \"-\"),3,-3) AS [maand], " +
-                    "Count(*) AS cnt, [Deelgem.] " +
+                    "SELECT Cast(replace(Mutdatum, rtrim(Mutdatum, replace(Mutdatum, '-', '' ) ), '') AS Integer) AS [jaar], " +
+                    "Cast(substr(ltrim(ltrim(Mutdatum, \"0123456789\"), \"-\"),3,-3) AS Integer) AS [maand], " +
+                    "Count(*) AS cnt " +
                     "FROM fietstrommels " +
                     "GROUP BY jaar, maand " +
-                    "ORDER BY jaar, maand DESC",
+                    "ORDER BY jaar, maand ASC",
                 "title: " +
                     "Fietstrommels",
                 "desc: " +

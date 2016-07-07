@@ -74,18 +74,18 @@ public abstract class ActivityExtender extends AppCompatActivity {
                 intent = new Intent(this, barChart.getClass());
                 intent.putExtra("ChartData", barChart.getData().get(0));
                 break;
-//            case GROUPEDBARCHART:
-//                gotDestinationIntent = true;
-//                groupedBarChartFactory = new GroupedBarChartFactory();
-//                groupedBarChartActivity = groupedBarChartFactory.create(Queries.getGroupedBarStat1("Overschie", 2012));
-//                intent = new Intent(this, groupedBarChartActivity.getClass());
-//                int cdAmount = 0;
-//                for (int i = 0; i < groupedBarChartActivity.getData().size(); i++) {
-//                    intent.putExtra("ChartData" + i, groupedBarChartActivity.getData().get(i));
-//                    cdAmount++;
-//                }
-//                intent.putExtra("cdAmount", cdAmount);
-//                break;
+            case GROUPEDBARCHART:
+                gotDestinationIntent = true;
+                groupedBarChartFactory = new GroupedBarChartFactory();
+                groupedBarChartActivity = groupedBarChartFactory.create(Queries.getGroupedBarStat1());
+                intent = new Intent(this, groupedBarChartActivity.getClass());
+                int cdAmount = 0;
+                for (int i = 0; i < groupedBarChartActivity.getData().size(); i++) {
+                    intent.putExtra("ChartData" + i, groupedBarChartActivity.getData().get(i));
+                    cdAmount++;
+                }
+                intent.putExtra("cdAmount", cdAmount);
+                break;
             case PIECHART1:
                 gotDestinationIntent = true;
                 pieChartFactory = new PieChartFactory();

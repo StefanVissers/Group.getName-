@@ -59,9 +59,9 @@ public class GroupedBarChartActivity extends ActivityExtender implements Chart {
             databaseHelper.openDataBase();
 
             List<BarEntry> group1 = new ArrayList<>();
-            group1.addAll(filterEntries(databaseHelper,0, false));
+            group1.addAll(filterEntries(databaseHelper, 0, false));
             List<BarEntry> group2 = new ArrayList<>();
-            group2.addAll(filterEntries(databaseHelper,1, true));
+            group2.addAll(filterEntries(databaseHelper, 1, true));
 
             BarDataSet group1Set = new BarDataSet(group1, chartDatas.get(0).getTitle());
             BarDataSet group2Set = new BarDataSet(group2, chartDatas.get(1).getTitle());
@@ -97,21 +97,46 @@ public class GroupedBarChartActivity extends ActivityExtender implements Chart {
         ArrayList<BarEntry> filteredEntries = new ArrayList<>();
 
         if (chartDatas.get(table_index).isFiltered()) {
-            inputYearList = databaseHelper.getEntryListLabels(chartData.getFiltered_query(), 0);
-            inputMonthList = databaseHelper.getEntryListLabels(chartData.getFiltered_query(), 1);
-            inputValueList =  databaseHelper.getBarEntryList(chartData.getFiltered_query(), 2);
+            if (is_cumulative) {
+                inputYearList = databaseHelper.getEntryListLabels(chartData.getFiltered_query(), 0);
+                inputMonthList = databaseHelper.getEntryListLabels(chartData.getFiltered_query(), 1);
+                inputValueList = databaseHelper.getCumulativeSum(chartData.getFiltered_query(), 2);
+            } else {
+                inputYearList = databaseHelper.getEntryListLabels(chartData.getFiltered_query(), 0);
+                inputMonthList = databaseHelper.getEntryListLabels(chartData.getFiltered_query(), 1);
+                inputValueList = databaseHelper.getBarEntryList(chartData.getFiltered_query(), 2);
+            }
         } else {
-            inputYearList = databaseHelper.getEntryListLabels(chartData.getSql_query(), 0);
-            inputMonthList = databaseHelper.getEntryListLabels(chartData.getSql_query(), 1);
-            inputValueList = databaseHelper.getBarEntryList(chartData.getSql_query(), 2);
+            if (is_cumulative) {
+                inputYearList = databaseHelper.getEntryListLabels(chartData.getSql_query(), 0);
+                inputMonthList = databaseHelper.getEntryListLabels(chartData.getSql_query(), 1);
+                inputValueList = databaseHelper.getCumulativeSum(chartData.getSql_query(), 2);
+            } else {
+                inputYearList = databaseHelper.getEntryListLabels(chartData.getSql_query(), 0);
+                inputMonthList = databaseHelper.getEntryListLabels(chartData.getSql_query(), 1);
+                inputValueList = databaseHelper.getBarEntryList(chartData.getSql_query(), 2);
+            }
         }
 
         // Putting years, months and values in Nodes in an ArrayList
         List<NodeList> inputNodes = new ArrayList<>();
         int index = 0;
+        boolean adjusted = false;
         while (true) {
             if (index >= inputValueList.size()) {
                 break;
+            }
+
+            if (Integer.parseInt(inputYearList.get(index)) < 2000) {
+                // Function does not handle data before the year 2000
+                index++;
+                adjusted = true;
+                continue;
+            }
+
+            if (is_cumulative && adjusted) {
+                index--;
+                adjusted = false;
             }
 
             if (inputMonthList.get(index).length() == 1) {
@@ -130,74 +155,92 @@ public class GroupedBarChartActivity extends ActivityExtender implements Chart {
 
         ArrayList<BarEntry> outputData = new ArrayList<>();
 
-        // CHECKING YEAR AND MONTH
+        // Checking year and Month. Filling output.
         int inputNodesIndex = 0;
         int dateNodesIndex = 0;
         int nodeOffset = 0;
-
+        float cumulativeOffset = is_cumulative ? ((BarEntry) inputNodes.get(0).Tail().Tail().Value()).getVal() : 0;
         boolean matchedInputYear = false;
         boolean matchedInputMonth = false;
+        boolean matchedInputs = false;
+
         while (true) {
-            if (inputNodesIndex >= inputNodes.size()) {
-                if (dateNodesIndex >= datesList.size()) {
-                    break;
+            if (!matchedInputs && inputNodesIndex >= inputNodes.size()-1) {
+                matchedInputs = true;
+            }
+
+            if (!matchedInputs) {
+                NodeList dateNode = null;
+                NodeList inputNode = null;
+                try {
+                    dateNode = datesList.get(dateNodesIndex);
+                } catch (IndexOutOfBoundsException e) { LogHelper.logDebugMessage("filterEntries", "Stuck on index " + dateNodesIndex); }
+                try {
+                    inputNode = inputNodes.get(inputNodesIndex);
+                } catch (IndexOutOfBoundsException e) { LogHelper.logDebugMessage("filterEntries", "Stuck on index " + inputNodesIndex); }
+
+                if (dateNode == null || inputNode == null) {
+                    return outputData;
                 }
 
-                outputData.add(new BarEntry(0f, dateNodesIndex));
-                dateNodesIndex++;
-                continue;
-            }
+                for (int i = 0; i < nodeOffset; i++) {
+                    dateNode = dateNode.Tail();
+                    inputNode = inputNode.Tail();
+                }
 
-            NodeList dateNode = datesList.get(dateNodesIndex);
-            NodeList inputNode = inputNodes.get(inputNodesIndex);
-
-            for (int i = 0; i < nodeOffset; i++) {
-                dateNode = dateNode.Tail();
-                inputNode = inputNode.Tail();
-            }
-
-            if (index == 144) {
-                LogHelper.logDebugMessage("Kappa", "Ross");
-            }
-
-            if (!matchedInputYear) {
-                // Match year
-                if (((String)dateNode.Value()).equals((String)inputNode.Value())) {
-                    matchedInputYear = true;
-                    nodeOffset = 1;
-                } else if (!(dateNodesIndex == 0) && is_cumulative) {
-                    outputData.add(dateNodesIndex, new BarEntry(outputData.get(dateNodesIndex-1).getVal(), dateNodesIndex));
-                    dateNodesIndex++;
+                if (!matchedInputYear) {
+                    // Match year
+                    if (((String) dateNode.Value()).equals((String) inputNode.Value())) {
+                        matchedInputYear = true;
+                        nodeOffset = 1;
+                    } else if (is_cumulative) {
+                        if (dateNodesIndex == 0) {
+                            outputData.add(dateNodesIndex, new BarEntry(cumulativeOffset + 0f, dateNodesIndex));
+                        } else {
+                            outputData.add(dateNodesIndex, new BarEntry(outputData.get(dateNodesIndex - 1).getVal(), dateNodesIndex));
+                        }
+                        dateNodesIndex++;
+                    } else {
+                        outputData.add(dateNodesIndex, new BarEntry(cumulativeOffset + 0f, dateNodesIndex));
+                        dateNodesIndex++;
+                    }
+                } else if (matchedInputYear && !matchedInputMonth) {
+                    // Match Month
+                    if (((String) dateNode.Value()).equals((String) inputNode.Value())) {
+                        matchedInputMonth = true;
+                        // Move node to value in tail
+                        nodeOffset = 2;
+                    } else if (is_cumulative) {
+                        if (dateNodesIndex == 0) {
+                            outputData.add(dateNodesIndex, new BarEntry(cumulativeOffset + 0f, dateNodesIndex));
+                        } else {
+                            outputData.add(dateNodesIndex, new BarEntry(outputData.get(dateNodesIndex - 1).getVal(), dateNodesIndex));
+                        }
+                        dateNodesIndex++;
+                    } else {
+                        // Index == 0
+                        outputData.add(dateNodesIndex, new BarEntry(cumulativeOffset + 0f, dateNodesIndex));
+                        dateNodesIndex++;
+                    }
                 } else {
-                    outputData.add(dateNodesIndex, new BarEntry(0f, dateNodesIndex));
+                    outputData.add(dateNodesIndex, new BarEntry(((BarEntry) inputNode.Value()).getVal(), dateNodesIndex));
+                    inputNodesIndex++;
                     dateNodesIndex++;
+                    matchedInputYear = false;
+                    matchedInputMonth = false;
+                    nodeOffset = 0;
                 }
-            } else if (matchedInputYear && !matchedInputMonth) {
-                // Match Month
-                if (((String)dateNode.Value()).equals((String)inputNode.Value())) {
-                    matchedInputMonth = true;
-                    // Move node to value in tail
-                    nodeOffset = 2;
-                } else if (!(dateNodesIndex == 0) && is_cumulative) {
-                    outputData.add(dateNodesIndex, new BarEntry(outputData.get(dateNodesIndex-1).getVal(), dateNodesIndex));
-                    dateNodesIndex++;
+            } else if (outputData.size() < datesList.size()) {
+                if (is_cumulative) {
+                    outputData.add(dateNodesIndex, new BarEntry(outputData.get(dateNodesIndex - 1).getVal(), dateNodesIndex));
                 } else {
-                    outputData.add(dateNodesIndex, new BarEntry(0f, dateNodesIndex));
-                    dateNodesIndex++;
+                    outputData.add(dateNodesIndex, new BarEntry(cumulativeOffset + 0f, dateNodesIndex));
                 }
-            } else if (matchedInputYear && matchedInputMonth) {
-                outputData.add(dateNodesIndex, new BarEntry(((BarEntry) inputNode.Value()).getVal(),dateNodesIndex));
-                LogHelper.logDebugMessage("filterDates", "Matched Entry Position: " + dateNodesIndex + " Value: " + ((BarEntry) inputNode.Value()).getVal());
-                inputNodesIndex++;
                 dateNodesIndex++;
-                matchedInputYear = false; matchedInputMonth = false;
-                nodeOffset = 0;
             } else {
-                LogHelper.logDebugMessage("filterDates", "Unexpected Error");
+                return outputData;
             }
         }
-
-        return outputData;
     }
 
     @Override
