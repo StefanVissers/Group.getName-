@@ -27,23 +27,19 @@ import Data.builder.ChartData;
 import getname.group.project_4.debug.LogHelper;
 
 public class GroupedBarChartActivity extends ActivityExtender implements Chart {
-    private static int counter = 0;
     private BarChart barchart;
-    ArrayList<BarEntry> entries = new ArrayList<>();
     ArrayList<IBarDataSet> dataGroups = new ArrayList<>();
     ArrayList<String> labels = new ArrayList<>();
     String title;
     String description;
     List<ChartData> chartDatas = new ArrayList<>();
+    int filterYear = 2008;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_groupedbarchart);
-
-        ID = counter++;
-        LogHelper.logDebugMessage("CREATE", this);
 
         Intent intent = getIntent();
         barchart = (BarChart) findViewById(R.id.chart);
@@ -72,8 +68,7 @@ public class GroupedBarChartActivity extends ActivityExtender implements Chart {
             dataGroups.add(group1Set);
             dataGroups.add(group2Set);
 
-            // TODO: Add all months to labels
-            labels.addAll(Dates.AllMonths(null));
+            labels.addAll(Dates.AllMonths(filterYear));
 
             description = chartDatas.get(0).getDesc();
             title = chartDatas.get(0).getTitle();
@@ -94,7 +89,6 @@ public class GroupedBarChartActivity extends ActivityExtender implements Chart {
         ArrayList<String> inputMonthList;
         ArrayList<BarEntry> inputValueList;
         ChartData chartData = chartDatas.get(table_index);
-        ArrayList<BarEntry> filteredEntries = new ArrayList<>();
 
         if (chartDatas.get(table_index).isFiltered()) {
             if (is_cumulative) {
@@ -127,8 +121,8 @@ public class GroupedBarChartActivity extends ActivityExtender implements Chart {
                 break;
             }
 
-            if (Integer.parseInt(inputYearList.get(index)) < 2000) {
-                // Function does not handle data before the year 2000
+            if (Integer.parseInt(inputYearList.get(index)) < filterYear) {
+                // Function does not handle data before the filteryear
                 index++;
                 adjusted = true;
                 continue;
@@ -151,7 +145,7 @@ public class GroupedBarChartActivity extends ActivityExtender implements Chart {
         }
 
         // Getting a list of years and their months
-        List<NodeList> datesList = Dates.MonthsAsNumberPerYear();
+        List<NodeList> datesList = Dates.MonthsAsNumberPerYear(filterYear);
 
         ArrayList<BarEntry> outputData = new ArrayList<>();
 
@@ -204,7 +198,7 @@ public class GroupedBarChartActivity extends ActivityExtender implements Chart {
                         outputData.add(dateNodesIndex, new BarEntry(cumulativeOffset + 0f, dateNodesIndex));
                         dateNodesIndex++;
                     }
-                } else if (matchedInputYear && !matchedInputMonth) {
+                } else if (!matchedInputMonth) {
                     // Match Month
                     if (((String) dateNode.Value()).equals((String) inputNode.Value())) {
                         matchedInputMonth = true;
