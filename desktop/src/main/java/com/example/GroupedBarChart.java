@@ -14,6 +14,7 @@ import javafx.scene.chart.*;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 /**
  * Created by floris-jan on 04-07-16.
@@ -38,13 +39,15 @@ public class GroupedBarChart {
         List<ChartData> chartDatas = new ArrayList<>();
         ChartData.ChartDataBuilder builder = null;
 
-        final ComboBox<String> pickYearComboBox = new DatabaseReader().getPickComboBox(Queries.getFietsdiefstalYears());
-        if(jaar != null) {
-            pickYearComboBox.getSelectionModel().select(jaar);
-        }
-        pickYearComboBox.setMinWidth(300);
-        pickYearComboBox.setPromptText("Select a year");
-        pickYearComboBox.setEditable(false);
+//        final ComboBox<String> pickYearComboBox = new DatabaseReader().getPickComboBox(Queries.getFietsdiefstalYears());
+//        if(jaar != null) {
+//            pickYearComboBox.getSelectionModel().select(jaar);
+//        }
+//        pickYearComboBox.setMinWidth(300);
+//        pickYearComboBox.setPromptText("Select a year");
+//        pickYearComboBox.setEditable(false);
+
+        Text text1 = new Text("Wijk voor fietstrommels:");
 
         final ComboBox<String> pickArea1ComboBox = new DatabaseReader().getPickComboBox(Queries.getFietsdiefstalAreas());
         if(wijk1 != null) {
@@ -54,6 +57,7 @@ public class GroupedBarChart {
         pickArea1ComboBox.setPromptText("Select an area");
         pickArea1ComboBox.setEditable(false);
 
+        Text text2 = new Text("Wijk voor fietsdiefstal:");
         final ComboBox<String> pickArea2ComboBox = new DatabaseReader().getPickComboBox(Queries.getFietstrommelsAreas());
         if(wijk2 != null) {
             pickArea2ComboBox.getSelectionModel().select(wijk2);
@@ -62,15 +66,15 @@ public class GroupedBarChart {
         pickArea2ComboBox.setPromptText("Select an area");
         pickArea2ComboBox.setEditable(false);
 
-        pickYearComboBox.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                System.out.println("Selected year: " + pickYearComboBox.getSelectionModel().getSelectedItem().toString());
-                jaar = pickYearComboBox.getSelectionModel().getSelectedItem().toString();
-                System.out.println("This.jaar: " + jaar);
-                Main.borderPane.setCenter(getScene(Queries.getGroupedBarStat1()));
-            }
-        });
+//        pickYearComboBox.setOnAction(new EventHandler<ActionEvent>() {
+//            @Override
+//            public void handle(ActionEvent actionEvent) {
+//                System.out.println("Selected year: " + pickYearComboBox.getSelectionModel().getSelectedItem().toString());
+//                jaar = pickYearComboBox.getSelectionModel().getSelectedItem().toString();
+//                System.out.println("This.jaar: " + jaar);
+//                Main.borderPane.setCenter(getScene(Queries.getGroupedBarStat1()));
+//            }
+//        });
 
         pickArea1ComboBox.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -129,15 +133,14 @@ public class GroupedBarChart {
 
         XAxis.setLabel("Maand");
         YAxis.setLabel("Aantal fietstrommels/fietsdiefstallen");
-        XYChart.Series series1 = new DatabaseReader().getGroupedBarChartData(chartDatas.get(0), 1, null, null, null);
-        XYChart.Series series2 = new DatabaseReader().getGroupedBarChartData(chartDatas.get(1), 1, null, null, null);
+        XYChart.Series series1 = new DatabaseReader().getGroupedBarChartData(chartDatas.get(0), 1);
+        XYChart.Series series2 = new DatabaseReader().getGroupedBarChartData(chartDatas.get(1), 1);
         series1.setName(chartDatas.get(0).getTitle());
         series2.setName(chartDatas.get(1).getTitle());
-//        barChart.getData().addAll(series1, series2);
         barChart.getData().add(series1);
         barChart.getData().add(series2);
         barChart.setTitle(chartDatas.get(0).getDesc());
-        sceneView.getChildren().addAll(pickArea1ComboBox, pickArea2ComboBox, pickYearComboBox, barChart);
+        sceneView.getChildren().addAll(text1, pickArea1ComboBox, text2, pickArea2ComboBox, barChart);
         return sceneView;
     }
 }
