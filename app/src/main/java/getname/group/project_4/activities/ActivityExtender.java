@@ -38,7 +38,6 @@ public abstract class ActivityExtender extends AppCompatActivity {
     public void changeActivity(View view) {
         Intent intent = new Intent();
         boolean gotDestinationIntent = false;
-//        Queries queries = new Data.Queries();
 
         BarChartFactory barChartFactory;
         GroupedBarChartFactory groupedBarChartFactory;
@@ -140,6 +139,8 @@ public abstract class ActivityExtender extends AppCompatActivity {
         }
     }
 
+
+    // All the activities as Enum.
 
     public enum Activities {
         MAIN,

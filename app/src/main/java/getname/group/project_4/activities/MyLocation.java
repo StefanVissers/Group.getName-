@@ -27,6 +27,7 @@ import getname.group.project_4.R;
 import getname.group.project_4.debug.LogHelper;
 
 public class MyLocation extends ActivityExtender implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener{
+    // Finds your location.
     private static int counter = 0;
 
     protected TextView mLatitudeText;
@@ -115,6 +116,7 @@ public class MyLocation extends ActivityExtender implements GoogleApiClient.Conn
 
     @Override
     protected void onStart() {
+        // Connect to the google maps api.
         mGoogleApiClient.connect();
         super.onStart();
     }
@@ -145,6 +147,7 @@ public class MyLocation extends ActivityExtender implements GoogleApiClient.Conn
     }
 
     public String getLocation(View view) {
+        // Gets your location.
         if (!(mLastLocation == null)) {
             Geocoder geocoder = new Geocoder(this, Locale.getDefault());
             try {

@@ -13,7 +13,7 @@ import getname.group.project_4.debug.LogHelper;
 public class ChartMenuActivity extends ActivityExtender {
     private static int counter = 0;
 
-
+    // Chart menu.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +22,7 @@ public class ChartMenuActivity extends ActivityExtender {
 
         LogHelper.logDebugMessage("CREATE", this);
 
-         setContentView(R.layout.activity_chartmenu);
+        setContentView(R.layout.activity_chartmenu);
 
         RelativeLayout layout = (RelativeLayout) findViewById(R.id.graphmenu);
     }

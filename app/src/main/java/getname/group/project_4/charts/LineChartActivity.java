@@ -140,6 +140,8 @@ public class LineChartActivity extends ActivityExtender implements Chart {
 
         DatabaseHelper databaseHelper;
         databaseHelper = new DatabaseHelper(getApplicationContext());
+
+        // Gets data from the database.
         try {
             databaseHelper.createDataBase();
             databaseHelper.openDataBase();

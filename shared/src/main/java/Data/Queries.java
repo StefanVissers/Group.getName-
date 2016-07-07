@@ -4,12 +4,9 @@ package Data;
 
 import java.util.NoSuchElementException;
 
-/**
- * Created by floris-jan on 01-07-16.
- */
 public class Queries {
     private Queries() {}
-
+    // Gets barchart data from the db via a query
     public static String[] getBarStat1() {
         return new String[] { "sql: " +
                 "Select [Deelgem.], Count(*) as cnt " +
@@ -23,7 +20,7 @@ public class Queries {
                 "desc: " +
                 "Aantal fietstrommels per wijk"};
     }
-
+    // Gets grouped barchart data from the db via a query
     public static String[] getGroupedBarStat1() {
         return new String[] {
             "^START^1",
@@ -58,7 +55,7 @@ public class Queries {
 //                SELECT * FROM(select Werkgebied, Begindatum from fietsdiefstal where Werkgebied='Overschie' union select [Deelgem.], Mutdatum from fietstrommels)
         };
     }
-
+    // Gets piechart data from the db via a query
     public static String[] getPieStat1() {
         return new String[] {"sql: " +
                 "select [kleur], Count(*) as cnt " +
@@ -72,7 +69,7 @@ public class Queries {
                 "desc: " +
                 "Gestolen fietsen per kleur"};
     }
-
+    // Gets piechart data from the db via a query
     public static String[] getPieStat2() {
         return new String[] { "sql: " +
                 "select [merk], Count(*) as cnt " +
@@ -86,7 +83,7 @@ public class Queries {
                 "desc: " +
                 "Gestolen fietsen per merk"};
     }
-
+    // Gets linechart data from the db via a query
     public static String[] getLineStat1() {
         return new String[] { "sql: " +
                 "SELECT replace(Begindatum, rtrim(Begindatum, replace(Begindatum, '/', '' ) ), '') AS [jaar], " +
@@ -124,7 +121,7 @@ public class Queries {
                 "reltime: " +
                 relativeTime.toString()};
     }
-
+    // Gets the coordinates of the bikecontainers from the db via a query
     public static String[] getFietstrommelsCoord(){
         return new String[]{"sql: " +
                 "SELECT [X-Coord.] AS X," +
@@ -132,15 +129,15 @@ public class Queries {
                 "FROM fietstrommels"
         };
     }
-
+    // Gets the different areas from the db via a query
     public static String getFietsdiefstalAreas() {
          return "SELECT DISTINCT [Werkgebied] from fietsdiefstal";
     }
-
+    // Gets the different areas from the db via a query
     public static String getFietstrommelsAreas() {
         return "SELECT DISTINCT [Deelgem.] from fietstrommels";
     }
-
+    // Gets the years that are in the db via a query.
     public static String getFietsdiefstalYears() {
         return "SELECT distinct replace(Begindatum, rtrim(Begindatum, replace(Begindatum, '/', '' ) ), '') AS [jaar] from fietsdiefstal Order by jaar desc";
     }

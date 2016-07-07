@@ -78,6 +78,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mMap = googleMap;
 
+        // This is where you are.
         float zoomlevel = 16.0f;
         mMap.addMarker(new MarkerOptions().position(latlngloc).title("You are here"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlngloc, zoomlevel));
@@ -86,6 +87,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         DatabaseHelper dbhelper = new DatabaseHelper(this);
 
         try {
+            // Add all bike containers
             dbhelper.createDataBase();
             dbhelper.openDataBase();
 

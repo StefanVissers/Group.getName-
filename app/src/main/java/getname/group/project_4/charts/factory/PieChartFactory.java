@@ -6,6 +6,7 @@ import getname.group.project_4.charts.PieChartActivity;
 
 
 public class PieChartFactory implements Factory<PieChartActivity> {
+    // Creates piecharts.
     @Override
     public PieChartActivity create(String... args) {
         PieChartActivity pieChart = new PieChartActivity();
