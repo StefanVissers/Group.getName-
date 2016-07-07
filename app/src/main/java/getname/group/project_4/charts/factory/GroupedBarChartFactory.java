@@ -10,6 +10,7 @@ import Data.builder.ChartData;
 import getname.group.project_4.debug.LogHelper;
 
 public class GroupedBarChartFactory implements Factory<GroupedBarChartActivity> {
+    // Creates grouped barcharts.
     @Override
     public GroupedBarChartActivity create(String... args) {
         List<ChartData> cds = new ArrayList<>();

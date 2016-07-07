@@ -5,6 +5,7 @@ import getname.group.project_4.charts.LineChartActivity;
 import Data.builder.ChartData;
 
 public class LineChartFactory implements Factory<LineChartActivity> {
+    // Creates linecharts
     @Override
     public LineChartActivity create(String... args) {
         LineChartActivity lineChart = new LineChartActivity();
