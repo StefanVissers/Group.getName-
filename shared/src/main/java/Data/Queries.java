@@ -63,7 +63,7 @@ public class Queries {
                 "where [kleur]<>\"\" " +
                 "Group By [kleur] " +
                 "Order By cnt Desc " +
-                "limit 7",
+                "limit 5",
                 "title: " +
                 "Fietskleur",
                 "desc: " +
