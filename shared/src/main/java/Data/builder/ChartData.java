@@ -50,8 +50,8 @@ public class ChartData implements Serializable {
         private String nestedDesc = "";
         private String nestedColor = "#000000";
 
-        public ChartDataBuilder(final String newQuery) {
-            nestedQuery = newQuery;
+        public ChartDataBuilder(final String nestedQuery) {
+            this.nestedQuery = nestedQuery;
         }
 
         public ChartDataBuilder setNestedTitle(String nestedTitle) {

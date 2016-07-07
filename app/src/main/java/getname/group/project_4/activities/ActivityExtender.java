@@ -19,6 +19,7 @@ import getname.group.project_4.charts.LineChartActivity;
 import getname.group.project_4.charts.PieChartActivity;
 import getname.group.project_4.R;
 import getname.group.project_4.charts.factory.BarChartFactory;
+import getname.group.project_4.charts.factory.Factory;
 import getname.group.project_4.charts.factory.GroupedBarChartFactory;
 import getname.group.project_4.charts.factory.LineChartFactory;
 import getname.group.project_4.charts.factory.PieChartFactory;
@@ -32,16 +33,7 @@ public abstract class ActivityExtender extends AppCompatActivity {
     public void changeActivity(View view) {
         Intent intent = new Intent();
         boolean gotDestinationIntent = false;
-
-        BarChartFactory barChartFactory;
-        GroupedBarChartFactory groupedBarChartFactory;
-        PieChartFactory pieChartFactory;
-        LineChartFactory lineChartFactory;
-
-        BarChartActivity barChart;
-        GroupedBarChartActivity groupedBarChartActivity;
-        PieChartActivity pieChart;
-        LineChartActivity lineChart;
+        Factory factory;
 
         /**
          * tag is an array of Strings, which represent values used with the view
@@ -61,43 +53,43 @@ public abstract class ActivityExtender extends AppCompatActivity {
                 break;
             case BARCHART:
                 gotDestinationIntent = true;
-                barChartFactory = new BarChartFactory();
-                barChart = barChartFactory.create(Queries.getBarStat1());
-                intent = new Intent(this, barChart.getClass());
-                intent.putExtra("ChartData", barChart.getData().get(0));
+                factory = new BarChartFactory();
+                BarChartActivity BCactivity = (BarChartActivity) factory.create(Queries.getBarStat1());
+                intent = new Intent(this, BCactivity.getClass());
+                intent.putExtra("ChartData", BCactivity.getData().get(0));
                 break;
             case GROUPEDBARCHART:
                 gotDestinationIntent = true;
-                groupedBarChartFactory = new GroupedBarChartFactory();
-                groupedBarChartActivity = groupedBarChartFactory.create(Queries.getGroupedBarStat1());
-                intent = new Intent(this, groupedBarChartActivity.getClass());
+                factory = new GroupedBarChartFactory();
+                GroupedBarChartActivity GBCactivity = (GroupedBarChartActivity) factory.create(Queries.getGroupedBarStat1());
+                intent = new Intent(this, GBCactivity.getClass());
                 int cdAmount = 0;
-                for (int i = 0; i < groupedBarChartActivity.getData().size(); i++) {
-                    intent.putExtra("ChartData" + i, groupedBarChartActivity.getData().get(i));
+                for (int i = 0; i < GBCactivity.getData().size(); i++) {
+                    intent.putExtra("ChartData" + i, GBCactivity.getData().get(i));
                     cdAmount++;
                 }
                 intent.putExtra("cdAmount", cdAmount);
                 break;
             case PIECHART1:
                 gotDestinationIntent = true;
-                pieChartFactory = new PieChartFactory();
-                pieChart = pieChartFactory.create(Queries.getPieStat1());
-                intent = new Intent(this, pieChart.getClass());
-                intent.putExtra("ChartData", pieChart.getData().get(0));
+                factory = new PieChartFactory();
+                PieChartActivity PC1activity = (PieChartActivity) factory.create(Queries.getPieStat1());
+                intent = new Intent(this, PC1activity.getClass());
+                intent.putExtra("ChartData", PC1activity.getData().get(0));
                 break;
             case PIECHART2:
                 gotDestinationIntent = true;
-                pieChartFactory = new PieChartFactory();
-                pieChart = pieChartFactory.create(Queries.getPieStat2());
-                intent = new Intent(this, pieChart.getClass());
-                intent.putExtra("ChartData", pieChart.getData().get(0));
+                factory = new PieChartFactory();
+                PieChartActivity PC2activity = (PieChartActivity) factory.create(Queries.getPieStat2());
+                intent = new Intent(this, PC2activity.getClass());
+                intent.putExtra("ChartData", PC2activity.getData().get(0));
                 break;
             case LINECHART:
                 gotDestinationIntent = true;
-                lineChartFactory = new LineChartFactory();
-                lineChart = lineChartFactory.create(Queries.getLineStat1());
-                intent = new Intent(this, lineChart.getClass());
-                intent.putExtra("ChartData", lineChart.getData().get(0));
+                factory = new LineChartFactory();
+                LineChartActivity LCactivity = (LineChartActivity) factory.create(Queries.getLineStat1());
+                intent = new Intent(this, LCactivity.getClass());
+                intent.putExtra("ChartData", LCactivity.getData().get(0));
                 break;
             case CALENDAR:
                 gotDestinationIntent = true;

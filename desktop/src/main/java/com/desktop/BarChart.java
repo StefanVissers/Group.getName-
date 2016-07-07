@@ -1,6 +1,5 @@
-package com.example;
+package com.desktop;
 
-import Data.Queries;
 import Data.builder.ChartData;
 import javafx.geometry.Insets;
 import javafx.scene.chart.CategoryAxis;

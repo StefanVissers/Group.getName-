@@ -1,4 +1,4 @@
-package com.example;
+package com.desktop;
 
 /**
  * Created by floris-jan on 23-06-16.

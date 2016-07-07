@@ -1,29 +1,30 @@
-package com.example;
+package com.desktop;
 
-import Data.Queries;
 import Data.builder.ChartData;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.layout.VBox;
 
 /**
  * Created by floris-jan on 04-07-16.
  */
-public class PieChart {
+public class LineChart {
 
-    VBox sceneView;
-    javafx.scene.chart.PieChart pieChart;
+    static VBox sceneView;
+    static javafx.scene.chart.LineChart lineChart;
+    static CategoryAxis XAxis;
+    static NumberAxis YAxis;
 
-    public PieChart() {
+    public static VBox getScene(String... args) {
         sceneView = new VBox();
-        pieChart = new javafx.scene.chart.PieChart();
-    }
-
-    public VBox getScene(String... args) {
+        XAxis = new CategoryAxis();
+        YAxis = new NumberAxis();
         sceneView.setPadding(new Insets(10, 10, 10, 10));
         sceneView.setPrefSize(Main.width, Main.height);
+        lineChart = new javafx.scene.chart.LineChart(XAxis, YAxis);
 
-        ChartData cd;
         ChartData.ChartDataBuilder builder = null;
         for (String s : args) {
             if (s.startsWith("sql:")) {
@@ -49,11 +50,13 @@ public class PieChart {
             }
         }
 
-        ObservableList<javafx.scene.chart.PieChart.Data> list = new DatabaseReader().getPieChartData(builder.createChartData(), 1);
-
-        pieChart.setData(list);
-        pieChart.setTitle(builder.createChartData().getDesc());
-        sceneView.getChildren().add(pieChart);
+        XAxis.setLabel("Jaar");
+        YAxis.setLabel("Gestolen fietsen");
+        XYChart.Series series = new DatabaseReader().getBarChartData(builder.createChartData(), 2);
+        series.setName(builder.createChartData().getTitle());
+        lineChart.getData().add(series);
+        lineChart.setTitle(builder.createChartData().getDesc());
+        sceneView.getChildren().add(lineChart);
         return sceneView;
     }
 }

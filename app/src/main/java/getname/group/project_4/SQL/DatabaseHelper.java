@@ -57,18 +57,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * Check if the database is exist on device or not
      * @return
      */
-//    private boolean checkDataBase() {
-//        SQLiteDatabase tempDB = null;
-//        try {
-//            String myPath = DB_PATH + DB_NAME;
-//            tempDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
-//        } catch (SQLiteException e) {
-//            Log.e("tle99 - check", e.getMessage());
-//        }
-//        if (tempDB != null)
-//            tempDB.close();
-//        return tempDB != null ? true : false;
-//    }
 
     private boolean checkDataBase() {
         File databasePath = context.getDatabasePath(DB_NAME);
