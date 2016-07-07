@@ -127,20 +127,4 @@ public class Queries {
                 "ORDER BY jaar, maand DESC)";
     }
 
-    public enum RelativeTime {
-        BEFORE,
-        CURRENT,
-        AFTER;
-
-        @Override
-        public String toString() {
-            switch (this) {
-                case BEFORE: return "BEFORE";
-                case CURRENT: return "CURRENT";
-                case AFTER: return "AFTER";
-                default: throw new NoSuchElementException();
-            }
-        }
-
-    }
 }
