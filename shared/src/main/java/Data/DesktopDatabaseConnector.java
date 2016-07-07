@@ -29,14 +29,7 @@ public class DesktopDatabaseConnector implements DatabaseDirectConnector {
             String sql = query;
 
             return stmt.executeQuery(sql);
-            //STEP 5: Extract data from result set
-//            while(rs.next()){
-//                //Retrieve by column name
-//                System.out.println(rs.getString(where));
-//            }
-//            rs.close();
-//
-//            stmt.executeUpdate(sql);
+
         }catch(SQLException se){
             //Handle errors for JDBC
             se.printStackTrace();

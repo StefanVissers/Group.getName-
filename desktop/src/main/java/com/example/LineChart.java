@@ -26,7 +26,6 @@ public class LineChart {
         sceneView.setPrefSize(Main.width, Main.height);
         lineChart = new javafx.scene.chart.LineChart(XAxis, YAxis);
 
-        ChartData cd;
         ChartData.ChartDataBuilder builder = null;
         for (String s : args) {
             if (s.startsWith("sql:")) {

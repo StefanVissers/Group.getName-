@@ -3,7 +3,7 @@ package Data;
 import java.sql.Array;
 import java.sql.ResultSet;
 
-public class DatabaseReader implements DatabaseConnector {
+public class ReaderConnector implements DatabaseConnector {
 
     DatabaseAdapter databaseAdapter;
 

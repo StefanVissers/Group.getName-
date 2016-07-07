@@ -1,13 +1,10 @@
 package getname.group.project_4.Modules;
 
 import android.os.AsyncTask;
-
 import com.google.android.gms.maps.model.LatLng;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -48,6 +45,7 @@ public class DirectionFinder {
 
         @Override
         protected String doInBackground(String... params) {
+            // creating an URl link
             String link = params[0];
             try {
                 URL url = new URL(link);
@@ -91,6 +89,7 @@ public class DirectionFinder {
             JSONObject jsonRoute = jsonRoutes.getJSONObject(i);
             Route route = new Route();
 
+            //Get information from the JSON file
             JSONObject overview_polylineJson = jsonRoute.getJSONObject("overview_polyline");
             JSONArray jsonLegs = jsonRoute.getJSONArray("legs");
             JSONObject jsonLeg = jsonLegs.getJSONObject(0);

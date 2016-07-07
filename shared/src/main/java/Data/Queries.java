@@ -99,28 +99,6 @@ public class Queries {
                 "Gestolen fietsen per maand"};
     }
 
-    public static String[] getLineStat1(int year, RelativeTime relativeTime) {
-        String filter = relativeTime == RelativeTime.BEFORE ? " < " + year :
-                        relativeTime == RelativeTime.CURRENT ? " = " + year :
-                        relativeTime == RelativeTime.AFTER ? " > " + year : null;
-
-        return new String[] { "sql: " +
-                "SELECT replace(Begindatum, rtrim(Begindatum, replace(Begindatum, '/', '' ) ), '') AS [jaar], " +
-                "replace(Begindatum, ltrim(Begindatum, replace(Begindatum, '/', '' ) ), '') AS [maand], " +
-                "Count(Begindatum) AS [diefstallen] " +
-                "FROM fietsdiefstal " +
-                "Where (Begindatum <> null or Begindatum <> \"\") " +
-                "Group By jaar, maand " +
-                "Order By jaar, maand;",
-                "title: " +
-                "Fietsdiefstal",
-                "desc: " +
-                "Gestolen fietsen per maand",
-                "filter: " +
-                "Cast(jaar AS INTEGER)" + filter,
-                "reltime: " +
-                relativeTime.toString()};
-    }
     // Gets the coordinates of the bikecontainers from the db via a query
     public static String[] getFietstrommelsCoord(){
         return new String[]{"sql: " +
@@ -137,10 +115,6 @@ public class Queries {
     public static String getFietstrommelsAreas() {
         return "SELECT DISTINCT [Deelgem.] from fietstrommels";
     }
-    // Gets the years that are in the db via a query.
-    public static String getFietsdiefstalYears() {
-        return "SELECT distinct replace(Begindatum, rtrim(Begindatum, replace(Begindatum, '/', '' ) ), '') AS [jaar] from fietsdiefstal Order by jaar desc";
-    }
 
     public static String getFietstrommelsCount(String area, String year, String month) {
         return "select sum(cnt) as count from (\n" +
@@ -153,20 +127,4 @@ public class Queries {
                 "ORDER BY jaar, maand DESC)";
     }
 
-    public enum RelativeTime {
-        BEFORE,
-        CURRENT,
-        AFTER;
-
-        @Override
-        public String toString() {
-            switch (this) {
-                case BEFORE: return "BEFORE";
-                case CURRENT: return "CURRENT";
-                case AFTER: return "AFTER";
-                default: throw new NoSuchElementException();
-            }
-        }
-
-    }
 }

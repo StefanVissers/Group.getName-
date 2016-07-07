@@ -2,10 +2,10 @@ package Data;
 
 import java.sql.ResultSet;
 
-public class Main {
+public class MainConnector {
 
     public static void main(String[] args) {
-        DatabaseReader databaseReader = new DatabaseReader();
+        ReaderConnector databaseReader = new ReaderConnector();
 
 
         try {
