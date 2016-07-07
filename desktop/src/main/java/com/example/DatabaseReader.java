@@ -75,48 +75,47 @@ public class DatabaseReader {
             while (resultSet.next()) {
                 System.out.println("String 4: " + resultSet.getString(4) + " wijk1: " + GroupedBarChart.wijk1 + " wijk2: " + GroupedBarChart.wijk2);
                 String wijk = resultSet.getString(4);
-//                if(GroupedBarChart.wijk1 != null || GroupedBarChart.wijk2 != null) {
-//                    System.out.println("!Null " + wijk + " - " + GroupedBarChart.wijk1 + " or " + GroupedBarChart.wijk2);
-//                    if(GroupedBarChart.wijk1 == null) {
-//                        GroupedBarChart.wijk1 = "!";
-//                    } else if(GroupedBarChart.wijk2 == null) {
-//                        GroupedBarChart.wijk2 = "!";
-//                    }
-//                    if(resultSet.getString(4) != null) {
-//                        if (resultSet.getString(4).contains(GroupedBarChart.wijk1) || resultSet.getString(4).contains(GroupedBarChart.wijk2)) {
-//                            System.out.println(wijk + " - " + GroupedBarChart.wijk1 + " or " + GroupedBarChart.wijk2);
-////                            if (resultSet.getString(2).length() == 1) {
-////                                series.getData().add(new XYChart.Data(resultSet.getString(1) + ", 0" + resultSet.getString(2), resultSet.getInt(column + 2)));
-////                            } else {
-////                                series.getData().add(new XYChart.Data(resultSet.getString(1) + ", " + resultSet.getString(2), resultSet.getInt(column + 2)));
-////                            }
-//                            series.getData().add(new XYChart.Data(wijk1, 100));
-//                        }
-//                    }
-//                } else {
-//                    System.out.println("Not " + wijk + " - " + GroupedBarChart.wijk1 + " or " + GroupedBarChart.wijk2);
-//                    if (resultSet.getString(2).length() == 1) {
-//                        series.getData().add(new XYChart.Data(resultSet.getString(1) + ", 0" + resultSet.getString(2), resultSet.getInt(column + 2)));
-//                    } else {
-//                        series.getData().add(new XYChart.Data(resultSet.getString(1) + ", " + resultSet.getString(2), resultSet.getInt(column + 2)));
-//                    }
-//                }
-
-                String rString = resultSet.getString(1);
-                if(GroupedBarChart.jaar == null) {
-                    GroupedBarChart.jaar = "2012";
-                }
-
-                if (rString.contains(GroupedBarChart.jaar)) {
-                    System.out.println(GroupedBarChart.jaar + " - " + rString);
+                if(GroupedBarChart.wijk1 != null || GroupedBarChart.wijk2 != null) {
+                    System.out.println("!Null " + wijk + " - " + GroupedBarChart.wijk1 + " or " + GroupedBarChart.wijk2);
+                    if(GroupedBarChart.wijk1 == null) {
+                        GroupedBarChart.wijk1 = "!";
+                    } else if(GroupedBarChart.wijk2 == null) {
+                        GroupedBarChart.wijk2 = "!";
+                    }
+                    if(resultSet.getString(4) != null) {
+                        if (resultSet.getString(4).contains(GroupedBarChart.wijk1) || resultSet.getString(4).contains(GroupedBarChart.wijk2)) {
+                            System.out.println(wijk + " - " + GroupedBarChart.wijk1 + " or " + GroupedBarChart.wijk2);
+                            if (resultSet.getString(2).length() == 1) {
+                                series.getData().add(new XYChart.Data(resultSet.getString(1) + ", 0" + resultSet.getString(2), resultSet.getInt(column + 2)));
+                            } else {
+                                series.getData().add(new XYChart.Data(resultSet.getString(1) + ", " + resultSet.getString(2), resultSet.getInt(column + 2)));
+                            }
+                        }
+                    }
+                } else {
+                    System.out.println("Not " + wijk + " - " + GroupedBarChart.wijk1 + " or " + GroupedBarChart.wijk2);
                     if (resultSet.getString(2).length() == 1) {
                         series.getData().add(new XYChart.Data(resultSet.getString(1) + ", 0" + resultSet.getString(2), resultSet.getInt(column + 2)));
                     } else {
                         series.getData().add(new XYChart.Data(resultSet.getString(1) + ", " + resultSet.getString(2), resultSet.getInt(column + 2)));
                     }
-                } else {
-                    System.out.println("not " + GroupedBarChart.jaar + " - " + rString);
                 }
+
+//                String rString = resultSet.getString(1);
+//                if(GroupedBarChart.jaar == null) {
+//                    GroupedBarChart.jaar = "2012";
+//                }
+//
+//                if (rString.contains(GroupedBarChart.jaar)) {
+//                    System.out.println(GroupedBarChart.jaar + " - " + rString);
+//                    if (resultSet.getString(2).length() == 1) {
+//                        series.getData().add(new XYChart.Data(resultSet.getString(1) + ", 0" + resultSet.getString(2), resultSet.getInt(column + 2)));
+//                    } else {
+//                        series.getData().add(new XYChart.Data(resultSet.getString(1) + ", " + resultSet.getString(2), resultSet.getInt(column + 2)));
+//                    }
+//                } else {
+//                    System.out.println("not " + GroupedBarChart.jaar + " - " + rString);
+//                }
 //                series.getData().add(new XYChart.Data(resultSet.getString(1) + ", 0" + resultSet.getString(2), resultSet.getInt(column + 2)));
 //                i++;
 //                series.getData().add(new XYChart.Data("Hello", i));
@@ -127,7 +126,7 @@ public class DatabaseReader {
             e.printStackTrace();
         }
         if(series.getData().isEmpty()) {
-            System.out.println("SERIES IS EMPTY !!!");
+            System.out.println("Series is empty.");
             series.getData().add(new XYChart.Data(" ", 0));
         }
         return series;
