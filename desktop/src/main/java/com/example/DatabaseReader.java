@@ -72,7 +72,7 @@ public class DatabaseReader {
             }
             System.out.println("SQL Query: " + chartData.getSql_query());
             while (resultSet.next()) {
-                System.out.println("String 4: " + resultSet.getString(0) + " wijk1: " + GroupedBarChart.wijk1 + " wijk2: " + GroupedBarChart.wijk2);
+                System.out.println("String 4: " + resultSet.getString(4) + " wijk1: " + GroupedBarChart.wijk1 + " wijk2: " + GroupedBarChart.wijk2);
                 String wijk = resultSet.getString(4);
                 if(GroupedBarChart.wijk1 != null || GroupedBarChart.wijk2 != null) {
                     System.out.println("!Null " + wijk + " - " + GroupedBarChart.wijk1 + " or " + GroupedBarChart.wijk2);
@@ -140,7 +140,8 @@ public class DatabaseReader {
 
     public XYChart.Series addData(XYChart.Series series, ResultSet resultSet, int column, String wijk, String query) {
         try {
-            ResultSet resultSet1 = statement.executeQuery(Queries.getFietstrommelsCount(wijk, resultSet.getString(1), resultSet.getString(2)));
+            Statement statement2 = connection.createStatement();
+            ResultSet resultSet1 = statement2.executeQuery(Queries.getFietstrommelsCount(wijk, resultSet.getString(1), resultSet.getString(2)));
             if(query.contains("fietstrommels")) {
                 if (resultSet.getString(2).length() == 1) {
                     series.getData().add(new XYChart.Data(resultSet.getString(1) + ", 0" + resultSet.getString(2), resultSet1.getInt(1)));
