@@ -7,6 +7,7 @@ import getname.group.project_4.debug.LogHelper;
 
 
 public class BarChartFactory implements Factory<BarChartActivity> {
+    // Creates barcharts.
     @Override
     public BarChartActivity create(String... args) {
         ChartData cd;

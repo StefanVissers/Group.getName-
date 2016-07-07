@@ -8,7 +8,7 @@ import getname.group.project_4.debug.LogHelper;
 public class MainActivity extends ActivityExtender {
     private static int counter = 0;
 
-
+    // Main activity, Main menu.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

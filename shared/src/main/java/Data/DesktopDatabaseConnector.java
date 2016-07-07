@@ -7,9 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/**
- * Created by floris-jan on 27-06-16.
- */
 public class DesktopDatabaseConnector implements DatabaseDirectConnector {
 
     static final String databaseLocation = "jdbc:sqlite:shared/libs/";

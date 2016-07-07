@@ -1,22 +1,15 @@
 package getname.group.project_4.activities;
 
-import android.Manifest;
 import android.app.ProgressDialog;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.location.Location;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.github.mikephil.charting.data.Entry;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.server.converter.StringToIntConverter;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -30,16 +23,12 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
-import Data.Main;
 import Data.Queries;
-import Data.builder.ChartData;
-import getname.group.project_4.MainActivity;
 import getname.group.project_4.Modules.DirectionFinder;
 import getname.group.project_4.Modules.DirectionFinderListener;
 import getname.group.project_4.Modules.Route;
 import getname.group.project_4.R;
 import getname.group.project_4.SQL.DatabaseHelper;
-import getname.group.project_4.debug.LogHelper;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, DirectionFinderListener {
     private Button btnFindPath;
@@ -63,7 +52,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         btnFindPath = (Button) findViewById(R.id.btnFindPath);
         etOrigin = (EditText) findViewById(R.id.etOrigin);
         etDestination = (EditText) findViewById(R.id.etDestination);
-
         btnFindPath.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,14 +66,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mMap = googleMap;
 
+        // This is where you are.
         float zoomlevel = 16.0f;
         mMap.addMarker(new MarkerOptions().position(latlngloc).title("You are here"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlngloc, zoomlevel));
 
-
         DatabaseHelper dbhelper = new DatabaseHelper(this);
 
         try {
+            // Add all bike containers
             dbhelper.createDataBase();
             dbhelper.openDataBase();
 
@@ -106,12 +95,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             for (int i = 0; i < points.size(); i++) {
                 mMap.addMarker(new MarkerOptions().position(points.get(i)).title("ik ben een fietstrommel"));
             }
-        } catch (Exception e) {
 
+        } catch (Exception e)
+        {
         }
-
-
     }
+
     private void sendRequest() {
         String origin = etOrigin.getText().toString();
         String destination = etDestination.getText().toString();
@@ -164,7 +153,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         for (Route route : routes) {
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(route.startLocation, 16));
-//            ((TextView) findViewById(R.id.tvDuration)).setText(route.duration.text);
             ((TextView) findViewById(R.id.tvDistance)).setText(route.distance.text);
 
             originMarkers.add(mMap.addMarker(new MarkerOptions()
