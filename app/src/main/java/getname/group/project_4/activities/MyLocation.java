@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.view.View;
@@ -45,6 +46,8 @@ public class MyLocation extends ActivityExtender implements GoogleApiClient.Conn
 
         mLatitudeText = (TextView) findViewById(R.id.loclat);
         mLongitudeText = (TextView)  findViewById(R.id.loclong);
+
+        //mLastLocation.distanceTo();
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -155,7 +158,11 @@ public class MyLocation extends ActivityExtender implements GoogleApiClient.Conn
                 String gotAddressLine = addresses.get(0).getAddressLine(0);
                 String gotCity = addresses.get(0).getLocality();
                 String gotPostalCode = addresses.get(0).getPostalCode();
-                String sAddress = gotAddressLine + "\n" + gotCity + "\n"+ gotPostalCode;
+                Double gotLatitude = addresses.get(0).getLatitude();
+                String gotLatitudestr = gotLatitude.toString();
+                Double gotLongitude = addresses.get(0).getLongitude();
+                String gotLongitudestr = gotLongitude.toString();
+                String sAddress = gotAddressLine + "\n" + gotCity + "\n"+ gotPostalCode + "\n" + "Latitude: " + gotLatitudestr + "\n" + "Longitude: " + gotLongitudestr;
                 LogHelper.logDebugMessage("GETLOCATION", sAddress);
                 return sAddress;
 
